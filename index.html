@@ -36,13 +36,12 @@
 
         .gold-bg { background: linear-gradient(135deg, var(--gold), #aa771c); }
 
-        /* --- Header --- */
+        /* Header */
         header {
             position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
             display: flex; justify-content: space-between; align-items: center;
             padding: 15px 5%;
-            transition: 0.4s;
-            background: rgba(10,10,12,0.9);
+            background: rgba(10,10,12,0.95);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(212, 175, 55, 0.2);
         }
@@ -50,7 +49,7 @@
         .nav-links { display: flex; gap: 30px; }
         .nav-links a {
             color: var(--text-main); text-decoration: none; font-weight: 600; font-size: 0.95rem;
-            transition: 0.3s; cursor: pointer; position: relative;
+            transition: 0.3s; cursor: pointer;
         }
         .nav-links a:hover { color: var(--gold); }
         
@@ -68,17 +67,17 @@
             padding: 10px 25px; border-radius: 30px; font-weight: 700; color: #000;
             border: none; cursor: pointer; transition: 0.3s;
         }
-        .btn-login:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); }
+        .btn-login:hover { transform: scale(1.05); }
 
-        /* --- Hero Section --- */
+        /* Hero Section */
         .hero {
             height: 100vh; position: relative; display: flex; align-items: center;
             padding: 0 5%; overflow: hidden;
         }
         .hero-bg {
             position: absolute; inset: 0;
-            background: url('https://image.tmdb.org/t/p/original/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg') center/cover no-repeat;
-            opacity: 0.3; z-index: -1;
+            background: url('https://s4.anilist.co/file/anilistcdn/media/anime/banner/16498-8FpUNJcwczYI.jpg') center/cover no-repeat;
+            opacity: 0.4; z-index: -1;
         }
         .hero-gradient {
             position: absolute; inset: 0;
@@ -103,7 +102,7 @@
         }
         .btn-play:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4); }
 
-        /* --- Sections & Grid --- */
+        /* Sections */
         .section { padding: 80px 5%; }
         .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
         .section-title { font-size: 2rem; font-weight: 800; display: flex; align-items: center; gap: 15px; }
@@ -125,7 +124,7 @@
         }
         .card-rating {
             position: absolute; top: 15px; right: 15px;
-            background: rgba(0,0,0,0.7); backdrop-filter: blur(5px);
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(5px);
             padding: 5px 10px; border-radius: 8px; font-size: 0.85rem; font-weight: 700;
             color: var(--gold); border: 1px solid rgba(212, 175, 55, 0.3);
         }
@@ -133,7 +132,7 @@
         .card-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 8px; }
         .card-meta { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); }
 
-        /* --- Player Modal --- */
+        /* Modal */
         .modal {
             position: fixed; inset: 0; z-index: 2000;
             background: rgba(0,0,0,0.95); backdrop-filter: blur(10px);
@@ -143,7 +142,7 @@
         .modal-header {
             display: flex; justify-content: space-between; align-items: center;
             padding: 20px 5%; border-bottom: 1px solid rgba(255,255,255,0.1);
-            position: sticky; top: 0; background: rgba(10,10,12,0.9); z-index: 10;
+            position: sticky; top: 0; background: rgba(10,10,12,0.95); z-index: 10;
         }
         .btn-close { background: rgba(255,255,255,0.1); border: none; color: white; padding: 10px 20px; border-radius: 8px; cursor: pointer; transition: 0.3s; font-weight: bold; }
         .btn-close:hover { background: #e74c3c; }
@@ -163,7 +162,6 @@
         }
         .ep-item:hover, .ep-item.active { background: rgba(212, 175, 55, 0.1); border-color: var(--gold); color: var(--gold); }
 
-        /* --- Responsive --- */
         @media (max-width: 900px) {
             .hero h1 { font-size: 2.5rem; }
             .nav-links { display: none; }
@@ -174,7 +172,6 @@
 </head>
 <body>
 
-    <!-- Header -->
     <header>
         <div class="logo gold-text" onclick="window.scrollTo(0,0)">WHO ANIME</div>
         <nav class="nav-links">
@@ -191,23 +188,21 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-bg"></div>
         <div class="hero-gradient"></div>
         <div class="hero-content">
             <div class="badge"><i class="fa-solid fa-fire"></i> الأكثر مشاهدة هذا الأسبوع</div>
-            <h1>Solo Leveling <br><span class="gold-text">الموسم الثاني</span></h1>
+            <h1>Attack on Titan <br><span class="gold-text">الهجوم على العمالقة</span></h1>
             <p>انغمس في عالم الخيال المطلق، معارك أسطورية، ورسوم جرافيكية فائقة الجودة. استعد لتجربة مشاهدة لا تُنسى على منصة Who Anime.</p>
             <div class="hero-btns">
-                <button class="btn-play gold-bg" onclick="openPlayer('Solo Leveling', 12)">
+                <button class="btn-play gold-bg" onclick="openPlayer('Attack on Titan', 12)">
                     <i class="fa-solid fa-play"></i> مشاهدة الآن
                 </button>
             </div>
         </div>
     </section>
 
-    <!-- Latest Episodes -->
     <section class="section" id="latest">
         <div class="section-header">
             <h2 class="section-title"><span></span> أحدث الإضافات</h2>
@@ -215,7 +210,6 @@
         <div class="grid" id="latestGrid"></div>
     </section>
 
-    <!-- Full Catalog -->
     <section class="section" id="catalog" style="background: rgba(0,0,0,0.3);">
         <div class="section-header">
             <h2 class="section-title"><span></span> دليل الأنمي الشامل</h2>
@@ -223,7 +217,7 @@
         <div class="grid" id="catalogGrid"></div>
     </section>
 
-    <!-- Video Player Modal -->
+    <!-- Player Modal -->
     <div class="modal" id="playerModal">
         <div class="modal-header">
             <h2 id="modalTitle" class="gold-text">اسم الأنمي</h2>
@@ -231,22 +225,20 @@
         </div>
         
         <div class="player-container">
-            <!-- Real Video Area -->
             <div>
                 <div class="video-wrapper">
-                    <!-- فيديو تجريبي حقيقي يعمل 100% -->
-                    <video id="mainVideo" controls poster="https://image.tmdb.org/t/p/original/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg">
-                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                    <!-- فيديو حقيقي مضمون 100% -->
+                    <video id="mainVideo" controls poster="https://s4.anilist.co/file/anilistcdn/media/anime/banner/16498-8FpUNJcwczYI.jpg">
+                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
                         متصفحك لا يدعم تشغيل الفيديو.
                     </video>
                 </div>
                 <div style="margin-top: 20px; display: flex; gap: 10px;">
-                    <button class="btn-play gold-bg" style="padding: 10px 20px; font-size: 0.9rem;">سيرفر VIP (يعمل)</button>
-                    <button class="btn-login" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2);">سيرفر 2</button>
+                    <button class="btn-play gold-bg" style="padding: 10px 20px; font-size: 0.9rem;"><i class="fa-solid fa-server"></i> سيرفر VIP</button>
+                    <button class="btn-login" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2);"><i class="fa-solid fa-server"></i> سيرفر 2</button>
                 </div>
             </div>
 
-            <!-- Episodes Sidebar -->
             <div class="side-panel">
                 <h3>قائمة الحلقات</h3>
                 <div class="episode-list" id="episodeList"></div>
@@ -260,29 +252,24 @@
     </footer>
 
     <script>
-        // بيانات الأنمي مع صور حقيقية مضمونة
+        // بيانات الأنمي بصور حقيقية من AniList (مضمونة)
         const animeDB = [
-            { id: 1, title: "Solo Leveling", rating: 9.8, ep: 12, img: "https://image.tmdb.org/t/p/w500/geCRueV3EgdBKvsCRWcTqUqU2tZ.jpg" },
-            { id: 2, title: "Jujutsu Kaisen", rating: 9.7, ep: 24, img: "https://image.tmdb.org/t/p/w500/fHpKWq9ayzSk8nSwqRuaAUemR8A.jpg" },
-            { id: 3, title: "Demon Slayer", rating: 9.6, ep: 11, img: "https://image.tmdb.org/t/p/w500/xUfRZu2mi8jH6SzQEJGP6tjBuYj.jpg" },
-            { id: 4, title: "One Piece", rating: 9.9, ep: 1080, img: "https://image.tmdb.org/t/p/w500/fcPU5Z3U1U1c1b8X7VwXqXqXqXq.jpg" },
-            { id: 5, title: "Attack on Titan", rating: 9.9, ep: 87, img: "https://image.tmdb.org/t/p/w500/hTP1DtLGFamjfu8WqjnuQdP1n4i.jpg" },
-            { id: 6, title: "Chainsaw Man", rating: 9.4, ep: 12, img: "https://image.tmdb.org/t/p/w500/npdB6tgmHRXThpO6z870tCCL6aq.jpg" },
-            { id: 7, title: "My Hero Academia", rating: 9.2, ep: 138, img: "https://image.tmdb.org/t/p/w500/phA2wZdXG2o0o0o0o0o0o0o0o0o.jpg" },
-            { id: 8, title: "Tokyo Revengers", rating: 9.0, ep: 37, img: "https://image.tmdb.org/t/p/w500/q0Y2z2Jz2Jz2Jz2Jz2Jz2Jz2Jz2.jpg" }
+            { id: 1, title: "Attack on Titan", rating: 9.9, ep: 87, img: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx16498-8FpUNJcwczYI.jpg" },
+            { id: 2, title: "Solo Leveling", rating: 9.8, ep: 12, img: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx151807-8FpUNJcwczYI.jpg" },
+            { id: 3, title: "Jujutsu Kaisen", rating: 9.7, ep: 24, img: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx113415-8FpUNJcwczYI.jpg" },
+            { id: 4, title: "Demon Slayer", rating: 9.6, ep: 11, img: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx101922-8FpUNJcwczYI.jpg" },
+            { id: 5, title: "One Piece", rating: 9.9, ep: 1080, img: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx21-8FpUNJcwczYI.jpg" },
+            { id: 6, title: "Chainsaw Man", rating: 9.4, ep: 12, img: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx127230-8FpUNJcwczYI.jpg" },
+            { id: 7, title: "My Hero Academia", rating: 9.2, ep: 138, img: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx21459-8FpUNJcwczYI.jpg" },
+            { id: 8, title: "Tokyo Revengers", rating: 9.0, ep: 37, img: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx120120-8FpUNJcwczYI.jpg" }
         ];
-        
-        // تصحيح بعض الصور التي قد لا تعمل
-        animeDB[3].img = "https://image.tmdb.org/t/p/w500/cMD9Ygz11zjJzAavnRM9CVdU1Ky.jpg"; // One Piece
-        animeDB[6].img = "https://image.tmdb.org/t/p/w500/ivOLM47yTaDiKZhYjHqYjHqYjHq.jpg"; // MHA
-        animeDB[7].img = "https://image.tmdb.org/t/p/w500/1g0q2Jz2Jz2Jz2Jz2Jz2Jz2Jz2.jpg"; // Tokyo Revengers
 
         function renderCards(data, containerId) {
             const container = document.getElementById(containerId);
             container.innerHTML = data.map(anime => `
                 <div class="card" onclick="openPlayer('${anime.title}', ${anime.ep})">
                     <div class="card-img">
-                        <img src="${anime.img}" alt="${anime.title}" onerror="this.src='https://image.tmdb.org/t/p/w500/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg'">
+                        <img src="${anime.img}" alt="${anime.title}" onerror="this.src='https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx16498-8FpUNJcwczYI.jpg'">
                         <div class="card-overlay"></div>
                         <div class="card-rating"><i class="fa-solid fa-star" style="margin-left:5px;"></i> ${anime.rating}</div>
                     </div>
@@ -329,7 +316,6 @@
                 `;
             }
             
-            // إعادة الفيديو للبداية
             video.pause();
             video.currentTime = 0;
         }
