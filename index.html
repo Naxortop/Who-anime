@@ -87,6 +87,15 @@
         .card-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 8px; text-shadow: 1px 1px 3px #000; }
         .card-meta { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); }
 
+        /* Guide Page Styles */
+        .guide-container { max-width: 900px; margin: 0 auto; padding: 50px 20px; }
+        .guide-card { background: var(--dark-card); border-radius: 20px; padding: 40px; border: 1px solid rgba(212, 175, 55, 0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin-bottom: 30px; }
+        .guide-card h2 { color: var(--gold); font-size: 1.8rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .guide-card p { color: var(--text-muted); line-height: 2; font-size: 1.1rem; margin-bottom: 15px; }
+        .guide-card ul { list-style-type: none; padding-right: 10px; }
+        .guide-card ul li { color: var(--text-muted); line-height: 2; font-size: 1.1rem; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px; }
+        .guide-card ul li i { color: var(--gold); margin-top: 8px; }
+
         /* Modal & Player */
         .modal { position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,0.95); backdrop-filter: blur(15px); display: none; flex-direction: column; overflow-y: auto; }
         .modal.active { display: flex; }
@@ -107,6 +116,7 @@
             .nav-links { display: none; }
             .player-container { grid-template-columns: 1fr; }
             .search-box { display: none; }
+            .guide-card { padding: 20px; }
         }
     </style>
 </head>
@@ -117,7 +127,7 @@
         <nav class="nav-links">
             <a onclick="navigate('home')" id="nav-home" class="active">الرئيسية</a>
             <a onclick="navigate('latest')" id="nav-latest">أحدث الحلقات</a>
-            <a onclick="navigate('catalog')" id="nav-catalog">دليل الأنمي</a>
+            <a onclick="navigate('guide')" id="nav-guide">دليل الموقع</a>
         </nav>
         <div class="header-actions">
             <div class="search-box">
@@ -163,13 +173,42 @@
         </div>
     </div>
 
-    <!-- 3. CATALOG PAGE -->
-    <div id="page-catalog" class="page">
-        <div class="container">
-            <div class="section-header" style="margin-top: 20px;">
-                <h2 class="section-title"><span></span> دليل الأنمي الشامل</h2>
+    <!-- 3. GUIDE PAGE (Text Only) -->
+    <div id="page-guide" class="page">
+        <div class="guide-container">
+            <div class="section-title" style="margin-bottom: 30px; justify-content: center;">
+                <span></span> دليل منصة Who Anime <span></span>
             </div>
-            <div class="grid" id="catalogGrid"></div>
+            
+            <div class="guide-card">
+                <h2><i class="fa-solid fa-circle-info"></i> مرحباً بك في عائلة Who Anime</h2>
+                <p>منصة Who Anime هي المنصة العربية الأولى المخصصة لعشاق الأنمي والمانجا. هدفنا هو تقديم تجربة مشاهدة فاخرة، سريعة، وخالية من الإزعاج، مع أفضل جودة ترجمة واحترافية في العرض.</p>
+            </div>
+
+            <div class="guide-card">
+                <h2><i class="fa-solid fa-star"></i> مميزات المنصة</h2>
+                <ul>
+                    <li><i class="fa-solid fa-check-circle"></i> <strong>جودة عالية:</strong> جميع الحلقات متوفرة بدقة تصل إلى 1080p Full HD مع ترجمة دقيقة.</li>
+                    <li><i class="fa-solid fa-check-circle"></i> <strong>تحديث مستمر:</strong> نضيف أحدث الحلقات فور صدورها عالمياً.</li>
+                    <li><i class="fa-solid fa-check-circle"></i> <strong>بدون إعلانات مزعجة:</strong> تجربة مشاهدة هادئة ومريحة للعين.</li>
+                    <li><i class="fa-solid fa-check-circle"></i> <strong>دعم فني:</strong> فريقنا متواجد دائماً لحل أي مشكلة تواجهك.</li>
+                </ul>
+            </div>
+
+            <div class="guide-card">
+                <h2><i class="fa-solid fa-shield-halved"></i> قوانين وشروط المجتمع</h2>
+                <ul>
+                    <li><i class="fa-solid fa-gavel"></i> يُمنع منعاً باتاً نشر أي محتوى مسيء أو مخالف للآداب العامة.</li>
+                    <li><i class="fa-solid fa-gavel"></i> يُمنع مشاركة روابط مواقع أخرى أو الترويج لأي منصات منافسة.</li>
+                    <li><i class="fa-solid fa-gavel"></i> احترام جميع الأعضاء والابتعاد عن التعصب والتحزب.</li>
+                    <li><i class="fa-solid fa-gavel"></i> جميع حقوق المشاهدة محفوظة لأصحابها الشرعيين، والمنصة لا تدعم القرصنة.</li>
+                </ul>
+            </div>
+            
+            <div class="guide-card" style="text-align: center; border-color: var(--gold);">
+                <h2 style="justify-content: center; margin-bottom: 10px;">استمتع برحلتك! 🚀</h2>
+                <p>إذا كان لديك أي استفسار أو اقتراح، يمكنك التواصل معنا عبر حسابات التواصل الاجتماعي الخاصة بنا.</p>
+            </div>
         </div>
     </div>
 
@@ -183,14 +222,14 @@
         <div class="player-container">
             <div>
                 <div class="video-wrapper">
-                    <!-- مشغل فيديو حقيقي HTML5 مع فيديو يعمل 100% -->
+                    <!-- مشغل الفيديو المباشر (بدون تريلر - حلقات كاملة) -->
                     <video id="mainVideo" controls poster="https://cdn.myanimelist.net/images/anime/10/47347.jpg">
-                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+                        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" type="video/mp4">
                         متصفحك لا يدعم تشغيل الفيديو.
                     </video>
                 </div>
                 <div style="margin-top: 20px; display: flex; gap: 10px;">
-                    <button class="btn-play gold-bg" style="padding: 10px 20px; font-size: 0.9rem;"><i class="fa-solid fa-server"></i> سيرفر VIP</button>
+                    <button class="btn-play gold-bg" style="padding: 10px 20px; font-size: 0.9rem;"><i class="fa-solid fa-server"></i> سيرفر 1 (يوتيوب)</button>
                     <button class="btn-login" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2);"><i class="fa-solid fa-server"></i> سيرفر 2</button>
                 </div>
             </div>
@@ -258,14 +297,12 @@
         // تعبئة البيانات
         renderCards(animeDB, 'homeGrid');
         renderCards(animeDB, 'latestGrid');
-        renderCards(animeDB, 'catalogGrid');
 
         // البحث
         function searchAnime(query) {
             const filtered = animeDB.filter(a => a.title.toLowerCase().includes(query.toLowerCase()));
             if(document.getElementById('page-home').classList.contains('active')) renderCards(filtered, 'homeGrid');
             if(document.getElementById('page-latest').classList.contains('active')) renderCards(filtered, 'latestGrid');
-            if(document.getElementById('page-catalog').classList.contains('active')) renderCards(filtered, 'catalogGrid');
         }
 
         // المشغل
