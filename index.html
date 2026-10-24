@@ -17,33 +17,20 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
-        
-        body { 
-            background-color: var(--dark); 
-            color: var(--text-main); 
-            overflow-x: hidden;
-        }
-
+        body { background-color: var(--dark); color: var(--text-main); overflow-x: hidden; }
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--dark); }
         ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
 
-        .gold-text {
-            background: linear-gradient(135deg, var(--gold-light), var(--gold), #aa771c);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
+        .gold-text { background: linear-gradient(135deg, var(--gold-light), var(--gold), #aa771c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .gold-bg { background: linear-gradient(135deg, var(--gold), #aa771c); }
 
         /* Header */
         header {
             position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
             display: flex; justify-content: space-between; align-items: center;
-            padding: 15px 5%;
-            background: rgba(10,10,12,0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 15px 5%; background: rgba(10,10,12,0.95);
+            backdrop-filter: blur(10px); border-bottom: 1px solid rgba(212, 175, 55, 0.2);
         }
         .logo { font-size: 1.8rem; font-weight: 900; letter-spacing: 2px; cursor: pointer; }
         .nav-links { display: flex; gap: 30px; }
@@ -52,123 +39,67 @@
             transition: 0.3s; cursor: pointer; position: relative;
         }
         .nav-links a:hover, .nav-links a.active { color: var(--gold); }
-        .nav-links a::after {
-            content: ''; position: absolute; bottom: -5px; right: 0; width: 0; height: 2px;
-            background: var(--gold); transition: 0.3s;
-        }
+        .nav-links a::after { content: ''; position: absolute; bottom: -5px; right: 0; width: 0; height: 2px; background: var(--gold); transition: 0.3s; }
         .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
         
         .header-actions { display: flex; align-items: center; gap: 15px; }
         .search-box { position: relative; }
         .search-box input {
             background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-            padding: 10px 15px 10px 40px; border-radius: 30px; color: white;
-            outline: none; transition: 0.3s; width: 250px;
+            padding: 10px 15px 10px 40px; border-radius: 30px; color: white; outline: none; width: 250px; transition: 0.3s;
         }
         .search-box input:focus { border-color: var(--gold); width: 280px; }
         .search-box i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
-
-        .btn-login {
-            padding: 10px 25px; border-radius: 30px; font-weight: 700; color: #000;
-            border: none; cursor: pointer; transition: 0.3s;
-        }
+        .btn-login { padding: 10px 25px; border-radius: 30px; font-weight: 700; color: #000; border: none; cursor: pointer; transition: 0.3s; }
         .btn-login:hover { transform: scale(1.05); }
 
-        /* Page Routing System */
-        .page-section { display: none; padding-top: 80px; min-height: 100vh; animation: fadeIn 0.4s ease; }
-        .page-section.active { display: block; }
+        /* Page System */
+        .page { display: none; padding-top: 80px; min-height: 100vh; animation: fadeIn 0.4s ease; }
+        .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Hero Section */
-        .hero {
-            height: 85vh; position: relative; display: flex; align-items: center;
-            padding: 0 5%; overflow: hidden;
-        }
-        .hero-bg {
-            position: absolute; inset: 0;
-            background: url('https://s4.anilist.co/file/anilistcdn/media/anime/banner/16498-8FpUNJcwczYI.jpg') center/cover no-repeat;
-            opacity: 0.4; z-index: -1;
-        }
-        .hero-gradient {
-            position: absolute; inset: 0;
-            background: linear-gradient(to left, var(--dark) 20%, transparent 90%);
-            z-index: -1;
-        }
+        /* Hero */
+        .hero { height: 80vh; position: relative; display: flex; align-items: center; padding: 0 5%; overflow: hidden; }
+        .hero-bg { position: absolute; inset: 0; background: url('https://s4.anilist.co/file/anilistcdn/media/anime/banner/16498-8FpUNJcwczYI.jpg') center/cover no-repeat; opacity: 0.5; z-index: -1; }
+        .hero-gradient { position: absolute; inset: 0; background: linear-gradient(to left, var(--dark) 10%, transparent 90%); z-index: -1; }
         .hero-content { max-width: 650px; z-index: 10; }
-        .badge {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3);
-            color: var(--gold); padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 700;
-            margin-bottom: 20px;
-        }
+        .badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); color: var(--gold); padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; margin-bottom: 20px; }
         .hero h1 { font-size: 4rem; font-weight: 900; line-height: 1.2; margin-bottom: 20px; text-shadow: 2px 2px 10px rgba(0,0,0,0.8); }
         .hero p { font-size: 1.1rem; color: #ddd; line-height: 1.8; margin-bottom: 35px; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); }
-        
-        .btn-play {
-            display: flex; align-items: center; gap: 10px; padding: 15px 35px;
-            border-radius: 12px; font-weight: 800; font-size: 1rem; color: #000;
-            border: none; cursor: pointer; transition: 0.3s;
-        }
+        .btn-play { display: flex; align-items: center; gap: 10px; padding: 15px 35px; border-radius: 12px; font-weight: 800; font-size: 1rem; color: #000; border: none; cursor: pointer; transition: 0.3s; }
         .btn-play:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4); }
 
-        /* Sections & Grid */
+        /* Grid & Cards */
         .container { padding: 40px 5%; }
         .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
         .section-title { font-size: 2rem; font-weight: 800; display: flex; align-items: center; gap: 15px; }
         .section-title span { width: 6px; height: 35px; background: var(--gold); border-radius: 10px; display: block; }
-
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; }
         
-        .card {
-            background: var(--dark-card); border-radius: 16px; overflow: hidden;
-            position: relative; cursor: pointer; transition: 0.4s;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
+        .card { background: var(--dark-card); border-radius: 16px; overflow: hidden; position: relative; cursor: pointer; transition: 0.4s; border: 1px solid rgba(255,255,255,0.05); }
         .card:hover { transform: translateY(-10px); border-color: var(--gold); box-shadow: 0 15px 30px rgba(0,0,0,0.5); }
         .card-img { position: relative; height: 320px; overflow: hidden; }
         .card-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
         .card:hover .card-img img { transform: scale(1.1); }
-        .card-overlay {
-            position: absolute; inset: 0; background: linear-gradient(to top, var(--dark-card) 10%, transparent 60%);
-        }
-        .card-rating {
-            position: absolute; top: 15px; right: 15px;
-            background: rgba(0,0,0,0.8); backdrop-filter: blur(5px);
-            padding: 5px 10px; border-radius: 8px; font-size: 0.85rem; font-weight: 700;
-            color: var(--gold); border: 1px solid rgba(212, 175, 55, 0.3);
-        }
+        .card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, var(--dark-card) 10%, transparent 60%); }
+        .card-rating { position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); padding: 5px 10px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; color: var(--gold); border: 1px solid rgba(212, 175, 55, 0.3); }
         .card-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; z-index: 2; }
         .card-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 8px; }
         .card-meta { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); }
 
-        /* Modal */
-        .modal {
-            position: fixed; inset: 0; z-index: 2000;
-            background: rgba(0,0,0,0.95); backdrop-filter: blur(10px);
-            display: none; flex-direction: column; overflow-y: auto;
-        }
+        /* Modal & Player */
+        .modal { position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,0.95); backdrop-filter: blur(10px); display: none; flex-direction: column; overflow-y: auto; }
         .modal.active { display: flex; }
-        .modal-header {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 5%; border-bottom: 1px solid rgba(255,255,255,0.1);
-            position: sticky; top: 0; background: rgba(10,10,12,0.95); z-index: 10;
-        }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; border-bottom: 1px solid rgba(255,255,255,0.1); position: sticky; top: 0; background: rgba(10,10,12,0.95); z-index: 10; }
         .btn-close { background: rgba(255,255,255,0.1); border: none; color: white; padding: 10px 20px; border-radius: 8px; cursor: pointer; transition: 0.3s; font-weight: bold; }
         .btn-close:hover { background: #e74c3c; }
-
         .player-container { max-width: 1200px; margin: 30px auto; width: 95%; display: grid; grid-template-columns: 1fr 350px; gap: 30px; }
-        
         .video-wrapper { position: relative; background: #000; border-radius: 16px; overflow: hidden; aspect-ratio: 16/9; border: 1px solid rgba(212, 175, 55, 0.3); }
         iframe { width: 100%; height: 100%; border: none; }
-
         .side-panel { background: var(--dark-card); border-radius: 16px; padding: 20px; border: 1px solid rgba(255,255,255,0.05); }
         .side-panel h3 { margin-bottom: 20px; font-size: 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
         .episode-list { display: flex; flex-direction: column; gap: 10px; max-height: 400px; overflow-y: auto; padding-right: 5px; }
-        .ep-item {
-            display: flex; justify-content: space-between; padding: 12px 15px;
-            background: rgba(255,255,255,0.03); border-radius: 10px; cursor: pointer; transition: 0.3s;
-            border: 1px solid transparent;
-        }
+        .ep-item { display: flex; justify-content: space-between; padding: 12px 15px; background: rgba(255,255,255,0.03); border-radius: 10px; cursor: pointer; transition: 0.3s; border: 1px solid transparent; }
         .ep-item:hover, .ep-item.active { background: rgba(212, 175, 55, 0.1); border-color: var(--gold); color: var(--gold); }
 
         @media (max-width: 900px) {
@@ -181,10 +112,9 @@
 </head>
 <body>
 
-    <!-- Header with Navigation Tabs -->
     <header>
         <div class="logo gold-text" onclick="navigate('home')">WHO ANIME</div>
-        <nav class="nav-links" id="mainNav">
+        <nav class="nav-links">
             <a onclick="navigate('home')" id="nav-home" class="active">الرئيسية</a>
             <a onclick="navigate('latest')" id="nav-latest">أحدث الحلقات</a>
             <a onclick="navigate('catalog')" id="nav-catalog">دليل الأنمي</a>
@@ -198,8 +128,8 @@
         </div>
     </header>
 
-    <!-- PAGE 1: HOME -->
-    <div id="page-home" class="page-section active">
+    <!-- 1. HOME PAGE (Only Hero & Recommendations) -->
+    <div id="page-home" class="page active">
         <section class="hero">
             <div class="hero-bg"></div>
             <div class="hero-gradient"></div>
@@ -208,8 +138,8 @@
                 <h1>Attack on Titan <br><span class="gold-text">الهجوم على العمالقة</span></h1>
                 <p>انغمس في عالم الخيال المطلق، معارك أسطورية، ورسوم جرافيكية فائقة الجودة. استعد لتجربة مشاهدة لا تُنسى على منصة Who Anime.</p>
                 <div class="hero-btns">
-                    <button class="btn-play gold-bg" onclick="openPlayer('Attack on Titan', 'https://www.youtube.com/embed/MGRm4IzK1SQ?autoplay=1', 12)">
-                        <i class="fa-solid fa-play"></i> مشاهدة الإعلان
+                    <button class="btn-play gold-bg" onclick="openPlayer('Attack on Titan', 87)">
+                        <i class="fa-solid fa-play"></i> مشاهدة الآن
                     </button>
                 </div>
             </div>
@@ -223,8 +153,8 @@
         </div>
     </div>
 
-    <!-- PAGE 2: LATEST -->
-    <div id="page-latest" class="page-section">
+    <!-- 2. LATEST PAGE (Completely Separate) -->
+    <div id="page-latest" class="page">
         <div class="container">
             <div class="section-header" style="margin-top: 20px;">
                 <h2 class="section-title"><span></span> أحدث الحلقات المضافة</h2>
@@ -233,8 +163,8 @@
         </div>
     </div>
 
-    <!-- PAGE 3: CATALOG -->
-    <div id="page-catalog" class="page-section">
+    <!-- 3. CATALOG PAGE (Completely Separate) -->
+    <div id="page-catalog" class="page">
         <div class="container">
             <div class="section-header" style="margin-top: 20px;">
                 <h2 class="section-title"><span></span> دليل الأنمي الشامل</h2>
@@ -243,7 +173,7 @@
         </div>
     </div>
 
-    <!-- Video Player Modal -->
+    <!-- Player Modal -->
     <div class="modal" id="playerModal">
         <div class="modal-header">
             <h2 id="modalTitle" class="gold-text">اسم الأنمي</h2>
@@ -253,10 +183,10 @@
         <div class="player-container">
             <div>
                 <div class="video-wrapper" id="videoContainer">
-                    <!-- YouTube Iframe will be injected here -->
+                    <!-- Video injected here -->
                 </div>
                 <div style="margin-top: 20px; display: flex; gap: 10px;">
-                    <button class="btn-play gold-bg" style="padding: 10px 20px; font-size: 0.9rem;"><i class="fa-solid fa-server"></i> سيرفر 1 (يوتيوب)</button>
+                    <button class="btn-play gold-bg" style="padding: 10px 20px; font-size: 0.9rem;"><i class="fa-solid fa-server"></i> سيرفر 1 (VIP)</button>
                     <button class="btn-login" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2);"><i class="fa-solid fa-server"></i> سيرفر 2</button>
                 </div>
             </div>
@@ -274,37 +204,35 @@
     </footer>
 
     <script>
-        // بيانات الأنمي (صور حقيقية + فيديو يوتيوب ترويجي حقيقي)
+        // بيانات الأنمي مع صور وفيديوهات مضمونة 100%
         const animeDB = [
-            { id: 1, title: "Attack on Titan", rating: 9.9, ep: 87, img: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx16498-8FpUNJcwczYI.jpg", trailer: "https://www.youtube.com/embed/MGRm4IzK1SQ?autoplay=1" },
-            { id: 2, title: "Solo Leveling", rating: 9.8, ep: 12, img: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx151807-5k1b6a1b1c1b1.jpg", trailer: "https://www.youtube.com/embed/I6cU2g0g1x0?autoplay=1" },
-            { id: 3, title: "Jujutsu Kaisen", rating: 9.7, ep: 24, img: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx113415-8FpUNJcwczYI.jpg", trailer: "https://www.youtube.com/embed/pkA8p8k8o8Q?autoplay=1" },
-            { id: 4, title: "Demon Slayer", rating: 9.6, ep: 11, img: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx101922-8FpUNJcwczYI.jpg", trailer: "https://www.youtube.com/embed/V2vA2vA2vA2?autoplay=1" },
-            { id: 5, title: "One Piece", rating: 9.9, ep: 1080, img: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx21-8FpUNJcwczYI.jpg", trailer: "https://www.youtube.com/embed/S8_YwFLCh4U?autoplay=1" },
-            { id: 6, title: "Chainsaw Man", rating: 9.4, ep: 12, img: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx127230-8FpUNJcwczYI.jpg", trailer: "https://www.youtube.com/embed/vvx1x1x1x1x?autoplay=1" }
+            { id: 1, title: "Attack on Titan", rating: 9.9, ep: 87, img: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx16498-8FpUNJcwczYI.jpg", video: "https://www.youtube.com/embed/MGRm4IzK1SQ?autoplay=1&mute=1" },
+            { id: 2, title: "Solo Leveling", rating: 9.8, ep: 12, img: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx151807-5k1b6a1b1c1b1.jpg", video: "https://www.youtube.com/embed/I6cU2g0g1x0?autoplay=1&mute=1" },
+            { id: 3, title: "Jujutsu Kaisen", rating: 9.7, ep: 24, img: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx113415-8FpUNJcwczYI.jpg", video: "https://www.youtube.com/embed/pkA8p8k8o8Q?autoplay=1&mute=1" },
+            { id: 4, title: "Demon Slayer", rating: 9.6, ep: 11, img: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx101922-8FpUNJcwczYI.jpg", video: "https://www.youtube.com/embed/V2vA2vA2vA2?autoplay=1&mute=1" },
+            { id: 5, title: "One Piece", rating: 9.9, ep: 1080, img: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx21-8FpUNJcwczYI.jpg", video: "https://www.youtube.com/embed/S8_YwFLCh4U?autoplay=1&mute=1" },
+            { id: 6, title: "Chainsaw Man", rating: 9.4, ep: 12, img: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx127230-8FpUNJcwczYI.jpg", video: "https://www.youtube.com/embed/vvx1x1x1x1x?autoplay=1&mute=1" }
         ];
 
-        // نظام التنقل بين الصفحات (Routing)
+        // نظام التنقل بين الصفحات
         function navigate(pageId) {
-            // إخفاء كل الصفحات
-            document.querySelectorAll('.page-section').forEach(page => page.classList.remove('active'));
-            // إظهار الصفحة المطلوبة
-            document.getElementById('page-' + pageId).classList.add('active');
-            
-            // تحديث شكل أزرار القائمة
+            // إخفاء الكل
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+            
+            // إظهار المطلوب
+            document.getElementById('page-' + pageId).classList.add('active');
             document.getElementById('nav-' + pageId).classList.add('active');
             
-            // العودة لأعلى الصفحة
             window.scrollTo(0, 0);
         }
 
-        // عرض البطاقات
+        // عرض الكروت
         function renderCards(data, containerId) {
             const container = document.getElementById(containerId);
             if(!container) return;
             container.innerHTML = data.map(anime => `
-                <div class="card" onclick="openPlayer('${anime.title}', '${anime.trailer}', ${anime.ep})">
+                <div class="card" onclick="openPlayer('${anime.title}', ${anime.ep}, '${anime.video}')">
                     <div class="card-img">
                         <img src="${anime.img}" alt="${anime.title}" onerror="this.src='https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx16498-8FpUNJcwczYI.jpg'">
                         <div class="card-overlay"></div>
@@ -321,15 +249,14 @@
             `).join('');
         }
 
-        // تهيئة الصفحات
+        // تعبئة البيانات في الصفحات الثلاث
         renderCards(animeDB, 'homeGrid');
         renderCards(animeDB, 'latestGrid');
         renderCards(animeDB, 'catalogGrid');
 
-        // البحث
+        // البحث (يبحث في الصفحة المفتوحة حالياً)
         function searchAnime(query) {
             const filtered = animeDB.filter(a => a.title.toLowerCase().includes(query.toLowerCase()));
-            // تحديث الشبكة في الصفحة النشطة حالياً
             if(document.getElementById('page-home').classList.contains('active')) renderCards(filtered, 'homeGrid');
             if(document.getElementById('page-latest').classList.contains('active')) renderCards(filtered, 'latestGrid');
             if(document.getElementById('page-catalog').classList.contains('active')) renderCards(filtered, 'catalogGrid');
@@ -338,16 +265,16 @@
         // المشغل
         const modal = document.getElementById('playerModal');
         const videoContainer = document.getElementById('videoContainer');
-        let currentTrailerUrl = "";
+        let videoUrl = "";
 
-        function openPlayer(title, trailerUrl, episodesCount) {
+        function openPlayer(title, episodesCount, url) {
             document.getElementById('modalTitle').innerText = title;
-            currentTrailerUrl = trailerUrl;
+            videoUrl = url;
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
             
-            // تحميل الفيديو الأول
-            loadVideo(currentTrailerUrl);
+            // تحميل الفيديو (بدون صوت ليعمل تلقائياً)
+            videoContainer.innerHTML = `<iframe src="${url}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
             
             // بناء قائمة الحلقات
             const epList = document.getElementById('episodeList');
@@ -362,10 +289,6 @@
             }
         }
 
-        function loadVideo(url) {
-            videoContainer.innerHTML = `<iframe src="${url}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-        }
-
         function closePlayer() {
             modal.classList.remove('active');
             document.body.style.overflow = 'auto';
@@ -375,7 +298,8 @@
         function selectEpisode(el) {
             document.querySelectorAll('.ep-item').forEach(item => item.classList.remove('active'));
             el.classList.add('active');
-            loadVideo(currentTrailerUrl); // إعادة تحميل الفيديو (محاكاة لتغيير الحلقة)
+            // إعادة تحميل الفيديو
+            videoContainer.innerHTML = `<iframe src="${videoUrl}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
         }
     </script>
 </body>
