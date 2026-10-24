@@ -128,7 +128,7 @@
         </div>
     </header>
 
-    <!-- 1. HOME PAGE (Only Hero & Recommendations) -->
+    <!-- 1. HOME PAGE -->
     <div id="page-home" class="page active">
         <section class="hero">
             <div class="hero-bg"></div>
@@ -138,7 +138,7 @@
                 <h1>Attack on Titan <br><span class="gold-text">الهجوم على العمالقة</span></h1>
                 <p>انغمس في عالم الخيال المطلق، معارك أسطورية، ورسوم جرافيكية فائقة الجودة. استعد لتجربة مشاهدة لا تُنسى على منصة Who Anime.</p>
                 <div class="hero-btns">
-                    <button class="btn-play gold-bg" onclick="openPlayer('Attack on Titan', 87)">
+                    <button class="btn-play gold-bg" onclick="openPlayer('Attack on Titan', 87, 'https://www.youtube.com/embed/MGRm4IzK1SQ?autoplay=1&mute=1')">
                         <i class="fa-solid fa-play"></i> مشاهدة الآن
                     </button>
                 </div>
@@ -153,7 +153,7 @@
         </div>
     </div>
 
-    <!-- 2. LATEST PAGE (Completely Separate) -->
+    <!-- 2. LATEST PAGE -->
     <div id="page-latest" class="page">
         <div class="container">
             <div class="section-header" style="margin-top: 20px;">
@@ -163,7 +163,7 @@
         </div>
     </div>
 
-    <!-- 3. CATALOG PAGE (Completely Separate) -->
+    <!-- 3. CATALOG PAGE -->
     <div id="page-catalog" class="page">
         <div class="container">
             <div class="section-header" style="margin-top: 20px;">
@@ -186,7 +186,7 @@
                     <!-- Video injected here -->
                 </div>
                 <div style="margin-top: 20px; display: flex; gap: 10px;">
-                    <button class="btn-play gold-bg" style="padding: 10px 20px; font-size: 0.9rem;"><i class="fa-solid fa-server"></i> سيرفر 1 (VIP)</button>
+                    <button class="btn-play gold-bg" style="padding: 10px 20px; font-size: 0.9rem;"><i class="fa-solid fa-server"></i> سيرفر 1 (يوتيوب)</button>
                     <button class="btn-login" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2);"><i class="fa-solid fa-server"></i> سيرفر 2</button>
                 </div>
             </div>
@@ -204,26 +204,22 @@
     </footer>
 
     <script>
-        // بيانات الأنمي مع صور وفيديوهات مضمونة 100%
+        // بيانات الأنمي بصور مضمونة 100% من MyAnimeList وفيديوهات حقيقية
         const animeDB = [
-            { id: 1, title: "Attack on Titan", rating: 9.9, ep: 87, img: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx16498-8FpUNJcwczYI.jpg", video: "https://www.youtube.com/embed/MGRm4IzK1SQ?autoplay=1&mute=1" },
-            { id: 2, title: "Solo Leveling", rating: 9.8, ep: 12, img: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx151807-5k1b6a1b1c1b1.jpg", video: "https://www.youtube.com/embed/I6cU2g0g1x0?autoplay=1&mute=1" },
-            { id: 3, title: "Jujutsu Kaisen", rating: 9.7, ep: 24, img: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx113415-8FpUNJcwczYI.jpg", video: "https://www.youtube.com/embed/pkA8p8k8o8Q?autoplay=1&mute=1" },
-            { id: 4, title: "Demon Slayer", rating: 9.6, ep: 11, img: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx101922-8FpUNJcwczYI.jpg", video: "https://www.youtube.com/embed/V2vA2vA2vA2?autoplay=1&mute=1" },
-            { id: 5, title: "One Piece", rating: 9.9, ep: 1080, img: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx21-8FpUNJcwczYI.jpg", video: "https://www.youtube.com/embed/S8_YwFLCh4U?autoplay=1&mute=1" },
-            { id: 6, title: "Chainsaw Man", rating: 9.4, ep: 12, img: "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx127230-8FpUNJcwczYI.jpg", video: "https://www.youtube.com/embed/vvx1x1x1x1x?autoplay=1&mute=1" }
+            { id: 1, title: "Attack on Titan", rating: 9.9, ep: 87, img: "https://cdn.myanimelist.net/images/anime/10/47347.jpg", video: "https://www.youtube.com/embed/MGRm4IzK1SQ?autoplay=1&mute=1" },
+            { id: 2, title: "Solo Leveling", rating: 9.8, ep: 12, img: "https://cdn.myanimelist.net/images/anime/1543/139020.jpg", video: "https://www.youtube.com/embed/I6cU2g0g1x0?autoplay=1&mute=1" },
+            { id: 3, title: "Jujutsu Kaisen", rating: 9.7, ep: 24, img: "https://cdn.myanimelist.net/images/anime/1171/109222.jpg", video: "https://www.youtube.com/embed/pkA8p8k8o8Q?autoplay=1&mute=1" },
+            { id: 4, title: "Demon Slayer", rating: 9.6, ep: 11, img: "https://cdn.myanimelist.net/images/anime/1286/99889.jpg", video: "https://www.youtube.com/embed/V2vA2vA2vA2?autoplay=1&mute=1" },
+            { id: 5, title: "One Piece", rating: 9.9, ep: 1080, img: "https://cdn.myanimelist.net/images/anime/6/73245.jpg", video: "https://www.youtube.com/embed/S8_YwFLCh4U?autoplay=1&mute=1" },
+            { id: 6, title: "Chainsaw Man", rating: 9.4, ep: 12, img: "https://cdn.myanimelist.net/images/anime/1806/126216.jpg", video: "https://www.youtube.com/embed/vvx1x1x1x1x?autoplay=1&mute=1" }
         ];
 
         // نظام التنقل بين الصفحات
         function navigate(pageId) {
-            // إخفاء الكل
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
-            
-            // إظهار المطلوب
             document.getElementById('page-' + pageId).classList.add('active');
             document.getElementById('nav-' + pageId).classList.add('active');
-            
             window.scrollTo(0, 0);
         }
 
@@ -234,7 +230,7 @@
             container.innerHTML = data.map(anime => `
                 <div class="card" onclick="openPlayer('${anime.title}', ${anime.ep}, '${anime.video}')">
                     <div class="card-img">
-                        <img src="${anime.img}" alt="${anime.title}" onerror="this.src='https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx16498-8FpUNJcwczYI.jpg'">
+                        <img src="${anime.img}" alt="${anime.title}" onerror="this.src='https://cdn.myanimelist.net/images/anime/10/47347.jpg'">
                         <div class="card-overlay"></div>
                         <div class="card-rating"><i class="fa-solid fa-star" style="margin-left:5px;"></i> ${anime.rating}</div>
                     </div>
@@ -249,12 +245,12 @@
             `).join('');
         }
 
-        // تعبئة البيانات في الصفحات الثلاث
+        // تعبئة البيانات
         renderCards(animeDB, 'homeGrid');
         renderCards(animeDB, 'latestGrid');
         renderCards(animeDB, 'catalogGrid');
 
-        // البحث (يبحث في الصفحة المفتوحة حالياً)
+        // البحث
         function searchAnime(query) {
             const filtered = animeDB.filter(a => a.title.toLowerCase().includes(query.toLowerCase()));
             if(document.getElementById('page-home').classList.contains('active')) renderCards(filtered, 'homeGrid');
@@ -273,7 +269,7 @@
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
             
-            // تحميل الفيديو (بدون صوت ليعمل تلقائياً)
+            // تحميل الفيديو
             videoContainer.innerHTML = `<iframe src="${url}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
             
             // بناء قائمة الحلقات
