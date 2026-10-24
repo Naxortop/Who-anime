@@ -10,10 +10,13 @@
         :root {
             --gold: #d4af37;
             --gold-light: #fcf6ba;
+            --gold-dark: #aa771c;
             --dark: #070709;
             --dark-card: #111116;
+            --darker-card: #0c0c10;
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
@@ -23,158 +26,157 @@
         ::-webkit-scrollbar-track { background: var(--dark); }
         ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
 
-        .gold-text { background: linear-gradient(135deg, var(--gold-light), var(--gold), #aa771c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .gold-bg { background: linear-gradient(135deg, var(--gold), #aa771c); }
+        .gold-text { background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gold-bg { background: linear-gradient(135deg, var(--gold), var(--gold-dark)); }
 
-        /* الخلفية المتحركة المتناسقة الرهيبة */
+        /* الخلفية المتحركة الأسطورية متعددة الطبقات */
         .animated-bg {
-            position: fixed;
-            inset: 0;
-            z-index: -999;
-            background: radial-gradient(circle at 50% 20%, #151108 0%, #070709 80%);
+            position: fixed; inset: 0; z-index: -999;
+            background: radial-gradient(circle at 50% 10%, #171206 0%, var(--dark) 75%);
             overflow: hidden;
         }
         .animated-bg::before {
-            content: '';
-            position: absolute;
-            width: 300%;
-            height: 300%;
-            top: -100%;
-            left: -100%;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.04) 0%, transparent 40%);
-            animation: rotateBg 25s linear infinite;
+            content: ''; position: absolute; width: 300%; height: 300%; top: -100%; left: -100%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 40%);
+            animation: rotateBg 30s linear infinite;
         }
-        @keyframes rotateBg {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        @keyframes rotateBg { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* Header & Logo */
+        /* الهيدر الاحترافي */
         header {
             position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
             display: flex; justify-content: space-between; align-items: center;
-            padding: 15px 5%; background: rgba(7, 7, 9, 0.9);
+            padding: 15px 5%; background: rgba(7, 7, 9, 0.85);
             backdrop-filter: blur(15px); border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            transition: var(--transition);
         }
         
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-        }
+        .logo-container { display: flex; align-items: center; gap: 12px; cursor: pointer; }
         .logo-icon {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, var(--gold), #aa771c);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #000;
-            font-size: 1.5rem;
-            font-weight: 900;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
-            transition: 0.3s;
+            width: 48px; height: 48px; background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            border-radius: 14px; display: flex; align-items: center; justify-content: center;
+            color: #000; font-size: 1.5rem; font-weight: 900;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); transition: var(--transition);
         }
-        .logo-container:hover .logo-icon { transform: scale(1.05); shadow: 0 0 25px rgba(212, 175, 55, 0.8); }
+        .logo-container:hover .logo-icon { transform: scale(1.08) rotate(5deg); box-shadow: 0 0 30px rgba(212, 175, 55, 0.7); }
         .logo-text-group h1 { font-size: 1.6rem; font-weight: 900; letter-spacing: 1.5px; line-height: 1; }
         .logo-text-group span { font-size: 0.7rem; color: var(--text-muted); letter-spacing: 3px; text-transform: uppercase; font-weight: 700; }
 
         .nav-links { display: flex; gap: 30px; }
         .nav-links a {
             color: var(--text-main); text-decoration: none; font-weight: 600; font-size: 0.95rem;
-            transition: 0.3s; cursor: pointer; position: relative;
+            transition: var(--transition); cursor: pointer; position: relative;
         }
         .nav-links a:hover, .nav-links a.active { color: var(--gold); }
-        .nav-links a::after { content: ''; position: absolute; bottom: -5px; right: 0; width: 0; height: 2px; background: var(--gold); transition: 0.3s; }
+        .nav-links a::after { content: ''; position: absolute; bottom: -5px; right: 0; width: 0; height: 2px; background: var(--gold); transition: var(--transition); }
         .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
         
         .header-actions { display: flex; align-items: center; gap: 15px; }
         .search-box { position: relative; }
         .search-box input {
             background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-            padding: 10px 15px 10px 40px; border-radius: 30px; color: white; outline: none; width: 250px; transition: 0.3s;
+            padding: 10px 15px 10px 40px; border-radius: 30px; color: white; outline: none; width: 250px; transition: var(--transition);
         }
-        .search-box input:focus { border-color: var(--gold); width: 280px; box-shadow: 0 0 15px rgba(212,175,55,0.2); }
+        .search-box input:focus { border-color: var(--gold); width: 290px; box-shadow: 0 0 20px rgba(212,175,55,0.25); background: rgba(0,0,0,0.5); }
         .search-box i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
-        .btn-login { padding: 10px 25px; border-radius: 30px; font-weight: 700; color: #000; border: none; cursor: pointer; transition: 0.3s; }
-        .btn-login:hover { transform: scale(1.05); box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
+        
+        .btn-action { padding: 10px 25px; border-radius: 30px; font-weight: 700; color: #000; border: none; cursor: pointer; transition: var(--transition); }
+        .btn-action:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(212, 175, 55, 0.5); }
 
-        /* Page System */
-        .page { display: none; padding-top: 80px; min-height: 100vh; animation: fadeIn 0.4s ease; }
+        /* نظام الصفحات */
+        .page { display: none; padding-top: 90px; min-height: 100vh; animation: fadeIn 0.4s ease; }
         .page.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Hero */
+        /* القسم الرئيسي (Hero) */
         .hero { height: 85vh; position: relative; display: flex; align-items: center; padding: 0 5%; overflow: hidden; }
-        .hero-bg { position: absolute; inset: 0; background: url('https://cdn.myanimelist.net/images/anime/10/47347.jpg') center/cover no-repeat; opacity: 0.4; z-index: -1; filter: blur(4px); transform: scale(1.1); }
-        .hero-gradient { position: absolute; inset: 0; background: linear-gradient(to left, var(--dark) 20%, transparent 90%), linear-gradient(to top, var(--dark) 10%, transparent 50%); z-index: -1; }
+        .hero-bg { position: absolute; inset: 0; background: url('https://cdn.myanimelist.net/images/anime/10/47347.jpg') center/cover no-repeat; opacity: 0.35; z-index: -1; filter: blur(5px); transform: scale(1.1); transition: var(--transition); }
+        .hero-gradient { position: absolute; inset: 0; background: linear-gradient(to left, var(--dark) 15%, transparent 85%), linear-gradient(to top, var(--dark) 10%, transparent 60%); z-index: -1; }
         .hero-content { max-width: 650px; z-index: 10; }
         .badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); color: var(--gold); padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; margin-bottom: 20px; backdrop-filter: blur(5px); }
-        .hero h2 { font-size: 4rem; font-weight: 900; line-height: 1.2; margin-bottom: 20px; text-shadow: 2px 2px 15px rgba(0,0,0,0.8); }
-        .hero p { font-size: 1.1rem; color: #ccc; line-height: 1.8; margin-bottom: 35px; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); }
-        .btn-play { display: flex; align-items: center; gap: 10px; padding: 15px 35px; border-radius: 12px; font-weight: 800; font-size: 1rem; color: #000; border: none; cursor: pointer; transition: 0.3s; }
-        .btn-play:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.5); }
+        .hero h2 { font-size: 4rem; font-weight: 900; line-height: 1.2; margin-bottom: 20px; text-shadow: 2px 2px 20px rgba(0,0,0,0.9); }
+        .hero p { font-size: 1.1rem; color: #ccc; line-height: 1.8; margin-bottom: 35px; text-shadow: 1px 1px 8px rgba(0,0,0,0.9); }
+        
+        .btn-play { display: inline-flex; align-items: center; gap: 12px; padding: 16px 40px; border-radius: 14px; font-weight: 800; font-size: 1.05rem; color: #000; border: none; cursor: pointer; transition: var(--transition); }
+        .btn-play:hover { transform: translateY(-4px); box-shadow: 0 12px 35px rgba(212, 175, 55, 0.6); }
 
-        /* Grid & Cards */
-        .container { padding: 40px 5%; }
-        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+        /* نظام الفئات والتصنيفات (Genres Filter Bar) */
+        .genres-bar { display: flex; gap: 12px; padding: 0 5% 30px 5%; overflow-x: auto; white-space: nowrap; }
+        .genre-chip { background: var(--dark-card); border: 1px solid rgba(255,255,255,0.08); padding: 8px 20px; border-radius: 25px; color: var(--text-muted); cursor: pointer; transition: var(--transition); font-weight: 600; font-size: 0.9rem; }
+        .genre-chip:hover, .genre-chip.active { background: rgba(212, 175, 55, 0.15); border-color: var(--gold); color: var(--gold); box-shadow: 0 0 15px rgba(212,175,55,0.15); }
+
+        /* شبكة الكروت (Cards Grid) */
+        .container { padding: 20px 5% 60px 5%; }
+        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 35px; }
         .section-title { font-size: 2rem; font-weight: 800; display: flex; align-items: center; gap: 15px; }
         .section-title span { width: 6px; height: 35px; background: var(--gold); border-radius: 10px; display: block; box-shadow: 0 0 15px var(--gold); }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; }
         
-        .card { background: var(--dark-card); border-radius: 16px; overflow: hidden; position: relative; cursor: pointer; transition: 0.4s; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
-        .card:hover { transform: translateY(-10px); border-color: var(--gold); box-shadow: 0 15px 30px rgba(0,0,0,0.6), 0 0 20px rgba(212,175,55,0.2); }
-        .card-img { position: relative; height: 320px; overflow: hidden; }
-        .card-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .card:hover .card-img img { transform: scale(1.1); }
-        .card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, var(--dark-card) 5%, transparent 70%); }
-        .card-rating { position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); padding: 5px 10px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; color: var(--gold); border: 1px solid rgba(212, 175, 55, 0.3); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 30px; }
+        
+        .card { background: var(--dark-card); border-radius: 18px; overflow: hidden; position: relative; cursor: pointer; transition: var(--transition); border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
+        .card:hover { transform: translateY(-12px) scale(1.02); border-color: var(--gold); box-shadow: 0 20px 40px rgba(0,0,0,0.7), 0 0 25px rgba(212,175,55,0.25); }
+        .card-img { position: relative; height: 340px; overflow: hidden; }
+        .card-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+        .card:hover .card-img img { transform: scale(1.12); }
+        .card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, var(--dark-card) 5%, transparent 75%); }
+        .card-rating { position: absolute; top: 15px; right: 15px; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); padding: 6px 12px; border-radius: 10px; font-size: 0.85rem; font-weight: 700; color: var(--gold); border: 1px solid rgba(212, 175, 55, 0.35); }
         .card-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; z-index: 2; }
-        .card-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 8px; text-shadow: 1px 1px 3px #000; }
-        .card-meta { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-muted); }
+        .card-title { font-size: 1.15rem; font-weight: 800; margin-bottom: 8px; text-shadow: 1px 1px 4px #000; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .card-meta { display: flex; justify-content: space-between; font-size: 0.82rem; color: var(--text-muted); }
 
-        /* Guide Page Styles */
-        .guide-container { max-width: 900px; margin: 0 auto; padding: 50px 20px; }
-        .guide-card { background: var(--dark-card); border-radius: 20px; padding: 40px; border: 1px solid rgba(212, 175, 55, 0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin-bottom: 30px; }
-        .guide-card h3 { color: var(--gold); font-size: 1.8rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        /* دليل الموقع والصفحات الثابتة */
+        .guide-container { max-width: 950px; margin: 0 auto; padding: 20px 20px 60px 20px; }
+        .guide-card { background: var(--dark-card); border-radius: 22px; padding: 40px; border: 1px solid rgba(212, 175, 55, 0.2); box-shadow: 0 15px 35px rgba(0,0,0,0.5); margin-bottom: 30px; backdrop-filter: blur(10px); }
+        .guide-card h3 { color: var(--gold); font-size: 1.8rem; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
         .guide-card p { color: var(--text-muted); line-height: 2; font-size: 1.1rem; margin-bottom: 15px; }
         .guide-card ul { list-style-type: none; padding-right: 10px; }
-        .guide-card ul li { color: var(--text-muted); line-height: 2; font-size: 1.1rem; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 10px; }
+        .guide-card ul li { color: var(--text-muted); line-height: 2.2; font-size: 1.05rem; display: flex; align-items: flex-start; gap: 12px; }
         .guide-card ul li i { color: var(--gold); margin-top: 8px; }
 
-        /* Modal & Player */
-        .modal { position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,0.96); backdrop-filter: blur(20px); display: none; flex-direction: column; overflow-y: auto; }
+        /* مشغل الفيديو والنافذة المنخفضة الأسطورية (Modal) */
+        .modal { position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,0.97); backdrop-filter: blur(25px); display: none; flex-direction: column; overflow-y: auto; animation: fadeInModal 0.3s ease; }
         .modal.active { display: flex; }
-        .modal-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; border-bottom: 1px solid rgba(255,255,255,0.1); position: sticky; top: 0; background: rgba(7,7,9,0.95); z-index: 10; }
-        .btn-close { background: rgba(255,255,255,0.1); border: none; color: white; padding: 10px 20px; border-radius: 8px; cursor: pointer; transition: 0.3s; font-weight: bold; }
-        .btn-close:hover { background: #e74c3c; }
-        .player-container { max-width: 1200px; margin: 30px auto; width: 95%; display: grid; grid-template-columns: 1fr 350px; gap: 30px; }
-        .video-wrapper { position: relative; background: #000; border-radius: 16px; overflow: hidden; aspect-ratio: 16/9; border: 1px solid rgba(212, 175, 55, 0.3); box-shadow: 0 0 30px rgba(0,0,0,0.8); }
+        @keyframes fadeInModal { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+        
+        .modal-header { display: flex; justify-content: space-between; align-items: center; padding: 20px 5%; border-bottom: 1px solid rgba(255,255,255,0.1); position: sticky; top: 0; background: rgba(7,7,9,0.95); z-index: 10; backdrop-filter: blur(15px); }
+        .btn-close { background: rgba(255,255,255,0.08); border: none; color: white; padding: 10px 22px; border-radius: 10px; cursor: pointer; transition: var(--transition); font-weight: bold; display: flex; align-items: center; gap: 8px; }
+        .btn-close:hover { background: #e74c3c; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(231,76,60,0.4); }
+        
+        .player-container { max-width: 1300px; margin: 30px auto; width: 95%; display: grid; grid-template-columns: 1fr 380px; gap: 30px; }
+        .video-box-wrapper { display: flex; flex-direction: column; gap: 20px; }
+        .video-wrapper { position: relative; background: #000; border-radius: 20px; overflow: hidden; aspect-ratio: 16/9; border: 1px solid rgba(212, 175, 55, 0.4); box-shadow: 0 0 40px rgba(0,0,0,0.9); }
         video { width: 100%; height: 100%; object-fit: cover; outline: none; }
-        .side-panel { background: var(--dark-card); border-radius: 16px; padding: 20px; border: 1px solid rgba(255,255,255,0.05); }
-        .side-panel h3 { margin-bottom: 20px; font-size: 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
-        .episode-list { display: flex; flex-direction: column; gap: 10px; max-height: 400px; overflow-y: auto; padding-right: 5px; }
-        .ep-item { display: flex; justify-content: space-between; padding: 12px 15px; background: rgba(255,255,255,0.03); border-radius: 10px; cursor: pointer; transition: 0.3s; border: 1px solid transparent; }
-        .ep-item:hover, .ep-item.active { background: rgba(212, 175, 55, 0.1); border-color: var(--gold); color: var(--gold); }
+        
+        .server-selector { display: flex; gap: 12px; flex-wrap: wrap; }
+        .server-btn { background: var(--darker-card); border: 1px solid rgba(255,255,255,0.1); color: var(--text-main); padding: 12px 22px; border-radius: 12px; font-weight: 700; cursor: pointer; transition: var(--transition); display: flex; align-items: center; gap: 8px; }
+        .server-btn:hover, .server-btn.active { background: rgba(212, 175, 55, 0.15); border-color: var(--gold); color: var(--gold); box-shadow: 0 0 15px rgba(212,175,55,0.2); }
 
-        @media (max-width: 900px) {
-            .hero h2 { font-size: 2.5rem; }
+        .side-panel { background: var(--dark-card); border-radius: 20px; padding: 25px; border: 1px solid rgba(255,255,255,0.06); height: fit-content; max-height: 650px; display: flex; flex-direction: column; }
+        .side-panel h3 { margin-bottom: 20px; font-size: 1.3rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .episode-list { display: flex; flex-direction: column; gap: 12px; overflow-y: auto; padding-left: 5px; }
+        .ep-item { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; background: rgba(255,255,255,0.03); border-radius: 12px; cursor: pointer; transition: var(--transition); border: 1px solid transparent; }
+        .ep-item:hover, .ep-item.active { background: rgba(212, 175, 55, 0.12); border-color: var(--gold); color: var(--gold); transform: translateX(-4px); }
+
+        /* التذييل الفاخر */
+        footer { text-align: center; padding: 50px; border-top: 1px solid rgba(255,255,255,0.06); color: var(--text-muted); margin-top: 60px; background: rgba(5,5,7,0.8); }
+
+        /* التجاوب (Responsive Design) */
+        @media (max-width: 992px) {
+            .hero h2 { font-size: 2.8rem; }
             .nav-links { display: none; }
             .player-container { grid-template-columns: 1fr; }
             .search-box { display: none; }
-            .guide-card { padding: 20px; }
+            .guide-card { padding: 25px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- الخلفية المتحركة الأسطورية -->
+    <!-- الخلفية المتحركة -->
     <div class="animated-bg"></div>
 
+    <!-- الهيدر العلوي -->
     <header>
-        <!-- الشعار الأسطوري المطور -->
         <div class="logo-container" onclick="navigate('home')">
             <div class="logo-icon"><i class="fa-solid fa-crown"></i></div>
             <div class="logo-text-group">
@@ -188,24 +190,25 @@
             <a onclick="navigate('latest')" id="nav-latest">أحدث الحلقات</a>
             <a onclick="navigate('guide')" id="nav-guide">دليل الموقع</a>
         </nav>
+
         <div class="header-actions">
             <div class="search-box">
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <input type="text" id="searchInput" placeholder="ابحث عن أنمي..." oninput="searchAnime(this.value)">
             </div>
-            <button class="btn-login gold-bg" onclick="alert('نظام تسجيل الدخول قادم قريباً!')">تسجيل الدخول</button>
+            <button class="btn-action gold-bg" onclick="alert('مرحباً بك يا ناكسور! نظام العضوية قريباً جداً 🚀')">تسجيل الدخول</button>
         </div>
     </header>
 
-    <!-- 1. HOME PAGE -->
+    <!-- 1. الصفحة الرئيسية -->
     <div id="page-home" class="page active">
         <section class="hero">
-            <div class="hero-bg"></div>
+            <div class="hero-bg" id="heroBg"></div>
             <div class="hero-gradient"></div>
             <div class="hero-content">
-                <div class="badge"><i class="fa-solid fa-fire"></i> الأنمي الأكثر شهرة</div>
-                <h2>Attack on Titan <br><span class="gold-text">الهجوم على العمالقة</span></h2>
-                <p>انغمس في عالم الخيال المطلق، معارك أسطورية، ورسوم جرافيكية فائقة الجودة. استعد لتجربة مشاهدة لا تُنسى على منصة Who Anime.</p>
+                <div class="badge"><i class="fa-solid fa-fire"></i> الأنمي الأكثر شهرة عالمياً</div>
+                <h2 id="heroTitle">Attack on Titan <br><span class="gold-text">الهجوم على العمالقة</span></h2>
+                <p id="heroDesc">انغمس في عالم الخيال المطلق، معارك أسطورية، ورسوم جرافيكية فائقة الجودة. استعد لتجربة مشاهدة لا تُنسى على منصة Who Anime.</p>
                 <div class="hero-btns">
                     <button class="btn-play gold-bg" onclick="openPlayer(1)">
                         <i class="fa-solid fa-play"></i> مشاهدة الآن
@@ -214,25 +217,34 @@
             </div>
         </section>
         
+        <!-- فئات التصنيفات -->
+        <div class="genres-bar" style="margin-top: 40px;">
+            <div class="genre-chip active" onclick="filterGenre('الكل', this)">الكل</div>
+            <div class="genre-chip" onclick="filterGenre('أكشن', this)">⚔️ أكشن ومعارك</div>
+            <div class="genre-chip" onclick="filterGenre('خيال', this)">🌌 خيال علمي</div>
+            <div class="genre-chip" onclick="filterGenre('دراما', this)">🎭 دراما وإثارة</div>
+            <div class="genre-chip" onclick="filterGenre('مغامرة', this)">🗺️ مغامرات</div>
+        </div>
+
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title"><span></span> ترشيحات المنصة</h2>
+                <h2 class="section-title"><span></span> ترشيحات المنصة الأسطورية</h2>
             </div>
             <div class="grid" id="homeGrid"></div>
         </div>
     </div>
 
-    <!-- 2. LATEST PAGE -->
+    <!-- 2. صفحة أحدث الحلقات -->
     <div id="page-latest" class="page">
-        <div class="container">
-            <div class="section-header" style="margin-top: 20px;">
-                <h2 class="section-title"><span></span> أحدث الحلقات المضافة</h2>
+        <div class="container" style="margin-top: 20px;">
+            <div class="section-header">
+                <h2 class="section-title"><span></span> أحدث الحلقات المضافة حديثاً</h2>
             </div>
             <div class="grid" id="latestGrid"></div>
         </div>
     </div>
 
-    <!-- 3. GUIDE PAGE -->
+    <!-- 3. صفحة دليل الموقع -->
     <div id="page-guide" class="page">
         <div class="guide-container">
             <div class="section-title" style="margin-bottom: 30px; justify-content: center;">
@@ -245,22 +257,22 @@
             </div>
 
             <div class="guide-card">
-                <h3><i class="fa-solid fa-star"></i> مميزات المنصة</h3>
+                <h3><i class="fa-solid fa-star"></i> مميزات المنصة الحصرية</h3>
                 <ul>
-                    <li><i class="fa-solid fa-check-circle"></i> <strong>جودة عالية:</strong> جميع الحلقات متوفرة بدقة تصل إلى 1080p Full HD مع ترجمة دقيقة.</li>
-                    <li><i class="fa-solid fa-check-circle"></i> <strong>تحديث مستمر:</strong> نضيف أحدث الحلقات فور صدورها عالمياً.</li>
-                    <li><i class="fa-solid fa-check-circle"></i> <strong>بدون إعلانات مزعجة:</strong> تجربة مشاهدة هادئة ومريحة للعين.</li>
+                    <li><i class="fa-solid fa-check-circle"></i> <strong>جودة عرض خارقة:</strong> جميع الحلقات متوفرة بدقة تصل إلى 1080p Full HD مع ترجمة احترافية دقيقة.</li>
+                    <li><i class="fa-solid fa-check-circle"></i> <strong>تحديثات فورية:</strong> إضافة أحدث الحلقات والسيرفرات فور صدورها عالمياً باليابان.</li>
+                    <li><i class="fa-solid fa-check-circle"></i> <strong>تجارب خالية من الإعلانات:</strong> تصفح ومشاهدة هادئة ومريحة لعينيك تماماً.</li>
                 </ul>
             </div>
-            
+
             <div class="guide-card" style="text-align: center; border-color: var(--gold);">
-                <h3 style="justify-content: center; margin-bottom: 10px;">استمتع برحلتك! 🚀</h3>
-                <p>إذا كان لديك أي استفسار أو اقتراح، يمكنك التواصل معنا عبر حسابات التواصل الاجتماعي الخاصة بنا.</p>
+                <h3 style="justify-content: center; margin-bottom: 10px;">انطلق في مغامرتك الآن! 🚀</h3>
+                <p>اختر أنميك المفضل وابدأ رحلة المشاهدة الأسطورية على منصة Who Anime.</p>
             </div>
         </div>
     </div>
 
-    <!-- Player Modal -->
+    <!-- نافذة العرض والمشغل الاحترافي (Modal) -->
     <div class="modal" id="playerModal">
         <div class="modal-header">
             <h2 id="modalTitle" class="gold-text">اسم الأنمي</h2>
@@ -268,48 +280,51 @@
         </div>
         
         <div class="player-container">
-            <div>
+            <div class="video-box-wrapper">
                 <div class="video-wrapper">
-                    <!-- مشغل الفيديو الديناميكي الفردي لكل أنمي -->
                     <video id="mainVideo" controls poster="">
                         <source id="videoSource" src="" type="video/mp4">
                         متصفحك لا يدعم تشغيل الفيديو.
                     </video>
                 </div>
-                <div style="margin-top: 20px; display: flex; gap: 10px;">
-                    <button class="btn-play gold-bg" style="padding: 10px 20px; font-size: 0.9rem;"><i class="fa-solid fa-server"></i> السيرفر الرئيسي (HD)</button>
+                <!-- اختيار السيرفرات -->
+                <div class="server-selector">
+                    <button class="server-btn active"><i class="fa-solid fa-server"></i> السيرفر الرئيسي (VIP HD)</button>
+                    <button class="server-btn"><i class="fa-solid fa-bolt"></i> سيرفر السرعة العالية</button>
+                    <button class="server-btn"><i class="fa-solid fa-shield-halved"></i> سيرفر الاحتياط الآمن</button>
                 </div>
             </div>
 
             <div class="side-panel">
-                <h3>قائمة الحلقات</h3>
+                <h3><i class="fa-solid fa-list-ul"></i> قائمة الحلقات</h3>
                 <div class="episode-list" id="episodeList"></div>
             </div>
         </div>
     </div>
 
-    <footer style="text-align: center; padding: 40px; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-muted); margin-top: 50px;">
+    <footer>
         <h3 class="gold-text" style="margin-bottom: 10px;">WHO ANIME</h3>
         <p>المنصة العربية الأولى لعشاق الأنمي الفاخر. جميع الحقوق محفوظة &copy; 2026.</p>
     </footer>
 
     <script>
-        // قاعدة البيانات الشاملة مع صور عالية الجودة وروابط فيديو مخصصة لكل أنمي
+        // قاعدة البيانات الشاملة والمضبوطة بعناية فائقة
         const animeDB = [
-            { id: 1, title: "Attack on Titan", rating: 9.9, ep: 87, img: "https://cdn.myanimelist.net/images/anime/10/47347.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
-            { id: 2, title: "Solo Leveling", rating: 9.8, ep: 12, img: "https://cdn.myanimelist.net/images/anime/1543/139020.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" },
-            { id: 3, title: "Jujutsu Kaisen", rating: 9.7, ep: 24, img: "https://cdn.myanimelist.net/images/anime/1171/109222.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4" },
-            { id: 4, title: "Demon Slayer", rating: 9.6, ep: 11, img: "https://cdn.myanimelist.net/images/anime/1286/99889.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4" },
-            { id: 5, title: "One Piece", rating: 9.9, ep: 1080, img: "https://cdn.myanimelist.net/images/anime/6/73245.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
-            { id: 6, title: "Chainsaw Man", rating: 9.4, ep: 12, img: "https://cdn.myanimelist.net/images/anime/1806/126216.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
-            { id: 7, title: "My Hero Academia", rating: 9.2, ep: 138, img: "https://cdn.myanimelist.net/images/anime/10/78745.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" },
-            { id: 8, title: "Tokyo Revengers", rating: 9.0, ep: 37, img: "https://cdn.myanimelist.net/images/anime/1830/118337.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4" },
-            { id: 9, title: "Hunter x Hunter", rating: 9.8, ep: 148, img: "https://cdn.myanimelist.net/images/anime/1337/99013.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4" },
-            { id: 10, title: "Death Note", rating: 9.7, ep: 37, img: "https://cdn.myanimelist.net/images/anime/9/9453.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
-            { id: 11, title: "Fullmetal Alchemist", rating: 9.9, ep: 64, img: "https://cdn.myanimelist.net/images/anime/1223/96541.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
-            { id: 12, title: "Spy x Family", rating: 9.5, ep: 37, img: "https://cdn.myanimelist.net/images/anime/1441/122795.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" }
+            { id: 1, title: "Attack on Titan", genre: "أكشن", rating: 9.9, ep: 87, desc: "انغمس في عالم الخيال المطلق والمعارك الأسطورية المصيرية.", img: "https://cdn.myanimelist.net/images/anime/10/47347.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
+            { id: 2, title: "Solo Leveling", genre: "أكشن", rating: 9.8, ep: 12, desc: "قصة الصياد الأضعف الذي يتحول تدريجياً إلى أقوى كائن في العالم.", img: "https://cdn.myanimelist.net/images/anime/1543/139020.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" },
+            { id: 3, title: "Jujutsu Kaisen", genre: "خيال", rating: 9.7, ep: 24, desc: "عالم مليء باللعنات المرعبة والمعارك بالسحر الخارق.", img: "https://cdn.myanimelist.net/images/anime/1171/109222.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4" },
+            { id: 4, title: "Demon Slayer", genre: "أكشن", rating: 9.6, ep: 11, desc: "رحلة الانتقام وتحويل الأخت العائدة للحياة البشرية.", img: "https://cdn.myanimelist.net/images/anime/1286/99889.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4" },
+            { id: 5, title: "One Piece", genre: "مغامرة", rating: 9.9, ep: 1080, desc: "مغامرة طاقم قبعة القش الكبرى في البحث عن الكنز الأسطوري.", img: "https://cdn.myanimelist.net/images/anime/6/73245.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
+            { id: 6, title: "Chainsaw Man", genre: "دراما", rating: 9.4, ep: 12, desc: "شاب يعيش حياة فقيرة مع شيطان المنشار حتى تتغير حياته بالكامل.", img: "https://cdn.myanimelist.net/images/anime/1806/126216.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
+            { id: 7, title: "My Hero Academia", genre: "أكشن", rating: 9.2, ep: 138, desc: "عالم يمتلك فيه الجميع قوى خارقة باستثناء بطلنا الشاب.", img: "https://cdn.myanimelist.net/images/anime/10/78745.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" },
+            { id: 8, title: "Tokyo Revengers", genre: "دراما", rating: 9.0, ep: 37, desc: "السفر عبر الزمن لإنقاذ حياة الحبيبة وتغيير مستقبل العصابات.", img: "https://cdn.myanimelist.net/images/anime/1830/118337.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4" },
+            { id: 9, title: "Hunter x Hunter", genre: "مغامرة", rating: 9.8, ep: 148, desc: "اختبارات الصيادين الخطيرة ورحلة البحث عن الأب.", img: "https://cdn.myanimelist.net/images/anime/1337/99013.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4" },
+            { id: 10, title: "Death Note", genre: "خيال", rating: 9.7, ep: 37, desc: "صراع ذكاء أسطوري بين شاب يمتلك دفتر الموت وأعظم محقق في العالم.", img: "https://cdn.myanimelist.net/images/anime/9/9453.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
+            { id: 11, title: "Fullmetal Alchemist", genre: "خيال", rating: 9.9, ep: 64, desc: "رحلة الأخوين إلريك لاستعادة أجسادهما عبر الخيمياء المحرمة.", img: "https://cdn.myanimelist.net/images/anime/1223/96541.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
+            { id: 12, title: "Spy x Family", genre: "مغامرة", rating: 9.5, ep: 37, desc: "جاسوس وقاتلة ومخاطبة عقول يشكلون عائلة مزيفة ومضحكة.", img: "https://cdn.myanimelist.net/images/anime/1441/122795.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" }
         ];
 
+        // تنقل الصفحات
         function navigate(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
@@ -319,6 +334,7 @@
             window.scrollTo(0, 0);
         }
 
+        // عرض الكروت في الشبكة
         function renderCards(data, containerId) {
             const container = document.getElementById(containerId);
             if(!container) return;
@@ -343,12 +359,27 @@
         renderCards(animeDB, 'homeGrid');
         renderCards(animeDB, 'latestGrid');
 
+        // فلترة التصنيفات
+        function filterGenre(genre, el) {
+            document.querySelectorAll('.genre-chip').forEach(chip => chip.classList.remove('active'));
+            el.classList.add('active');
+            
+            if(genre === 'الكل') {
+                renderCards(animeDB, 'homeGrid');
+            } else {
+                const filtered = animeDB.filter(a => a.genre === genre);
+                renderCards(filtered, 'homeGrid');
+            }
+        }
+
+        // محرك البحث الفوري
         function searchAnime(query) {
             const filtered = animeDB.filter(a => a.title.toLowerCase().includes(query.toLowerCase()));
             renderCards(filtered, 'homeGrid');
             renderCards(filtered, 'latestGrid');
         }
 
+        // مشغل الفيديو والنافذة
         const modal = document.getElementById('playerModal');
         const videoElement = document.getElementById('mainVideo');
         const videoSource = document.getElementById('videoSource');
@@ -360,15 +391,14 @@
             document.getElementById('modalTitle').innerText = anime.title;
             videoSource.src = anime.video;
             videoElement.poster = anime.img;
-            videoElement.load(); // تحديث مصدر الفيديو بشكل فوري وصحيح
+            videoElement.load();
             
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
             
             const epList = document.getElementById('episodeList');
             epList.innerHTML = '';
-            // عرض أول 20 حلقة كنموذج تفاعلي متكامل لكل أنمي
-            for(let i = 1; i <= Math.min(anime.ep, 20); i++) {
+            for(let i = 1; i <= Math.min(anime.ep, 25); i++) {
                 epList.innerHTML += `
                     <div class="ep-item ${i === 1 ? 'active' : ''}" onclick="selectEpisode(this)">
                         <span>الحلقة ${i}</span>
