@@ -64,7 +64,7 @@
         .hero-gradient { position: absolute; inset: 0; background: linear-gradient(to left, var(--dark) 20%, transparent 90%), linear-gradient(to top, var(--dark) 10%, transparent 50%); z-index: -1; }
         .hero-content { max-width: 650px; z-index: 10; }
         .badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); color: var(--gold); padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; margin-bottom: 20px; backdrop-filter: blur(5px); }
-        .hero h1 { font-size: 4.5rem; font-weight: 900; line-height: 1.2; margin-bottom: 20px; text-shadow: 2px 2px 15px rgba(0,0,0,0.8); }
+        .hero h1 { font-size: 4rem; font-weight: 900; line-height: 1.2; margin-bottom: 20px; text-shadow: 2px 2px 15px rgba(0,0,0,0.8); }
         .hero p { font-size: 1.1rem; color: #ccc; line-height: 1.8; margin-bottom: 35px; text-shadow: 1px 1px 5px rgba(0,0,0,0.8); }
         .btn-play { display: flex; align-items: center; gap: 10px; padding: 15px 35px; border-radius: 12px; font-weight: 800; font-size: 1rem; color: #000; border: none; cursor: pointer; transition: 0.3s; }
         .btn-play:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.5); }
@@ -112,7 +112,7 @@
         .ep-item:hover, .ep-item.active { background: rgba(212, 175, 55, 0.1); border-color: var(--gold); color: var(--gold); }
 
         @media (max-width: 900px) {
-            .hero h1 { font-size: 3rem; }
+            .hero h1 { font-size: 2.5rem; }
             .nav-links { display: none; }
             .player-container { grid-template-columns: 1fr; }
             .search-box { display: none; }
@@ -173,7 +173,7 @@
         </div>
     </div>
 
-    <!-- 3. GUIDE PAGE (Text Only) -->
+    <!-- 3. GUIDE PAGE -->
     <div id="page-guide" class="page">
         <div class="guide-container">
             <div class="section-title" style="margin-bottom: 30px; justify-content: center;">
@@ -222,15 +222,14 @@
         <div class="player-container">
             <div>
                 <div class="video-wrapper">
-                    <!-- مشغل الفيديو المباشر (بدون تريلر - حلقات كاملة) -->
                     <video id="mainVideo" controls poster="https://cdn.myanimelist.net/images/anime/10/47347.jpg">
                         <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" type="video/mp4">
                         متصفحك لا يدعم تشغيل الفيديو.
                     </video>
                 </div>
                 <div style="margin-top: 20px; display: flex; gap: 10px;">
-                    <button class="btn-play gold-bg" style="padding: 10px 20px; font-size: 0.9rem;"><i class="fa-solid fa-server"></i> سيرفر 1 (يوتيوب)</button>
-                    <button class="btn-login" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2);"><i class="fa-solid fa-server"></i> سيرفر 2</button>
+                    <button class="btn-play gold-bg" style="padding: 10px 20px; font-size: 0.9rem;"><i class="fa-solid fa-server"></i> سيرفر أساسي</button>
+                    <button class="btn-login" style="background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2);"><i class="fa-solid fa-server"></i> سيرفر احتياطي</button>
                 </div>
             </div>
 
@@ -247,7 +246,6 @@
     </footer>
 
     <script>
-        // 12 أنمي حقيقي بصور مضمونة 100% من MyAnimeList
         const animeDB = [
             { id: 1, title: "Attack on Titan", rating: 9.9, ep: 87, img: "https://cdn.myanimelist.net/images/anime/10/47347.jpg" },
             { id: 2, title: "Solo Leveling", rating: 9.8, ep: 12, img: "https://cdn.myanimelist.net/images/anime/1543/139020.jpg" },
@@ -263,16 +261,15 @@
             { id: 12, title: "Spy x Family", rating: 9.5, ep: 37, img: "https://cdn.myanimelist.net/images/anime/1441/122795.jpg" }
         ];
 
-        // نظام التنقل بين الصفحات
         function navigate(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
             document.getElementById('page-' + pageId).classList.add('active');
-            document.getElementById('nav-' + pageId).classList.add('active');
+            const activeNav = document.getElementById('nav-' + pageId);
+            if(activeNav) activeNav.classList.add('active');
             window.scrollTo(0, 0);
         }
 
-        // عرض الكروت
         function renderCards(data, containerId) {
             const container = document.getElementById(containerId);
             if(!container) return;
@@ -294,18 +291,15 @@
             `).join('');
         }
 
-        // تعبئة البيانات
         renderCards(animeDB, 'homeGrid');
         renderCards(animeDB, 'latestGrid');
 
-        // البحث
         function searchAnime(query) {
             const filtered = animeDB.filter(a => a.title.toLowerCase().includes(query.toLowerCase()));
-            if(document.getElementById('page-home').classList.contains('active')) renderCards(filtered, 'homeGrid');
-            if(document.getElementById('page-latest').classList.contains('active')) renderCards(filtered, 'latestGrid');
+            renderCards(filtered, 'homeGrid');
+            renderCards(filtered, 'latestGrid');
         }
 
-        // المشغل
         const modal = document.getElementById('playerModal');
         const videoElement = document.getElementById('mainVideo');
 
@@ -314,11 +308,9 @@
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
             
-            // إعادة الفيديو للبداية
             videoElement.pause();
             videoElement.currentTime = 0;
             
-            // بناء قائمة الحلقات
             const epList = document.getElementById('episodeList');
             epList.innerHTML = '';
             for(let i = 1; i <= episodesCount; i++) {
