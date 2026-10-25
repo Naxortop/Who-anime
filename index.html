@@ -1,101 +1,131 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" id="htmlRoot">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Who Anime | المنصة العربية للأنمي</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <title>Who Anime | المنصة الأسطورية الخارقة</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Cairo', 'sans-serif'] },
+                    colors: {
+                        gold: { DEFAULT: '#d4af37', light: '#fcf6ba', dark: '#aa771c' },
+                        dark: { DEFAULT: '#070709', card: '#111116', border: '#1f1f27' }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { transition: background-color 0.4s ease, color 0.4s ease; scroll-behavior: smooth; }
+        .gold-text { background: linear-gradient(135deg, #fcf6ba, #d4af37, #aa771c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .gold-bg { background: linear-gradient(135deg, #d4af37, #aa771c); }
+        .glass-card { background: rgba(17, 17, 22, 0.95); backdrop-filter: blur(24px); border: 1px solid rgba(212, 175, 55, 0.3); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .light .glass-card { background: rgba(255, 255, 255, 0.95); border: 1px solid rgba(212, 175, 55, 0.4); }
+        .card-hover:hover { transform: translateY(-10px) scale(1.03); border-color: #d4af37; box-shadow: 0 30px 60px rgba(212, 175, 55, 0.35); }
+        .page-section { display: none; opacity: 0; transition: opacity 0.35s ease; }
+        .page-section.active { display: block; opacity: 1; animation: fadeIn 0.4s ease forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #070709; }
+        ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 10px; }
+        #toast { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%) translateY(100px); transition: transform 0.3s ease, opacity 0.3s ease; opacity: 0; z-index: 9999; }
+        #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    </style>
 </head>
-<body>
+<body class="dark bg-dark text-gray-100 min-h-screen flex flex-col font-sans">
 
-    <!-- الهيدر العلوي -->
-    <header>
-        <div class="nav-container">
-            <a class="logo" onclick="nav('home')">
-                <i class="fa-solid fa-play-circle" style="color: #ff9800;"></i> WHO ANIME
-            </a>
-            
-            <ul class="nav-menu">
-                <li><a onclick="nav('home')" id="nav-home" class="active">الرئيسية</a></li>
-                <li><a onclick="nav('latest')" id="nav-latest">أحدث الحلقات</a></li>
-                <li><a onclick="nav('favorites')" id="nav-favorites">المفضلة (<span id="favCount">0</span>)</a></li>
-                <li><a onclick="nav('history')" id="nav-history">السجل</a></li>
-            </ul>
+    <!-- شريط الإشعارات -->
+    <div id="toast" class="glass-card px-6 py-3 rounded-full text-gold font-bold shadow-2xl flex items-center gap-3 border border-gold/50">
+        <i id="toastIcon" class="fa-solid fa-circle-check"></i>
+        <span id="toastMsg">تمت العملية بنجاح</span>
+    </div>
 
-            <div style="display: flex; gap: 8px; align-items: center;">
-                <input type="text" id="searchInput" oninput="searchAnime()" placeholder="ابحث عن أنمي..." style="background: #0f1015; border: 1px solid #222531; padding: 6px 12px; border-radius: 6px; color: #fff; font-size: 0.8rem; outline: none;">
-                <button onclick="playRandomAnime()" class="btn-witinime" style="padding: 6px 10px;" title="أنمي عشوائي"><i class="fa-solid fa-dice"></i></button>
+    <!-- الهيدر العلوي الأسطوري -->
+    <header class="fixed top-0 w-full z-50 glass-card px-4 lg:px-8 py-3.5 shadow-2xl">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-4">
+            <div class="flex items-center gap-6">
+                <div class="text-xl lg:text-2xl font-black cursor-pointer gold-text tracking-wider flex items-center gap-2" onclick="nav('home')">
+                    <i class="fa-solid fa-crown text-lg animate-bounce"></i> WHO ANIME
+                </div>
+                <nav class="hidden md:flex gap-5 font-bold text-xs lg:text-sm">
+                    <a onclick="nav('home')" id="nav-home" class="cursor-pointer hover:text-gold transition text-gold">الرئيسية</a>
+                    <a onclick="nav('latest')" id="nav-latest" class="cursor-pointer hover:text-gold transition text-gray-300">أحدث الحلقات</a>
+                    <a onclick="nav('favorites')" id="nav-favorites" class="cursor-pointer hover:text-gold transition text-gray-300">المفضلة (<span id="favCount">0</span>)</a>
+                    <a onclick="nav('history')" id="nav-history" class="cursor-pointer hover:text-gold transition text-gray-300">السجل</a>
+                </nav>
+            </div>
+
+            <div class="flex items-center gap-2 lg:gap-3">
+                <div class="relative hidden sm:block">
+                    <i class="fa-solid fa-magnifying-glass absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-xs"></i>
+                    <input type="text" id="searchInput" oninput="searchAnime()" placeholder="ابحث في آلاف الأنميات والأعمال..." class="bg-dark border border-dark-border rounded-full pr-9 pl-3 py-1.5 text-xs focus:outline-none focus:border-gold transition w-44 lg:w-64 text-white shadow-inner">
+                </div>
+                <button onclick="playRandomAnime()" title="أنمي عشوائي" class="w-8 h-8 rounded-full border border-dark-border hover:border-gold hover:text-gold flex items-center justify-center transition shadow-md text-xs">
+                    <i class="fa-solid fa-dice"></i>
+                </button>
+                <button onclick="openRequestModal()" title="طلب أنمي" class="w-8 h-8 rounded-full border border-dark-border hover:border-gold hover:text-gold flex items-center justify-center transition shadow-md text-xs">
+                    <i class="fa-solid fa-film"></i>
+                </button>
+                <button onclick="toggleTheme()" class="w-8 h-8 rounded-full border border-dark-border hover:border-gold hover:text-gold flex items-center justify-center transition shadow-md text-xs">
+                    <i class="fa-solid fa-moon" id="themeIcon"></i>
+                </button>
             </div>
         </div>
     </header>
 
-    <!-- المحتوى الرئيسي للموقع -->
-    <main>
-        <!-- الرئيسية -->
-        <section id="sec-home" class="page-section active">
-            <div style="margin-bottom: 1.5rem; background: #171821; padding: 1.5rem; border-radius: 8px; border-right: 4px solid #ff9800;">
-                <h2 style="font-size: 1.2rem; color: #fff; margin-bottom: 5px;">مرحباً بك في Who Anime</h2>
-                <p style="font-size: 0.85rem; color: #9ca3af;">تصفح أقوى وأحدث الأنميات المترجمة والمدبلجة بجودة عالية وبدون إعلانات مزعجة.</p>
-            </div>
-
-            <h3 style="font-size: 1.1rem; color: #ff9800; margin-bottom: 1rem; border-bottom: 1px solid #222531; padding-bottom: 6px;">
-                <i class="fa-solid fa-fire"></i> قائمة الأنميات المتاحة
-            </h3>
-            
-            <div id="grid-home" class="anime-grid"></div>
-        </section>
-
-        <!-- أحدث الحلقات -->
-        <section id="sec-latest" class="page-section">
-            <h3 style="font-size: 1.1rem; color: #ff9800; margin-bottom: 1rem; border-bottom: 1px solid #222531; padding-bottom: 6px;">
-                <i class="fa-solid fa-bolt"></i> أحدث الحلقات المضافة
-            </h3>
-            <div id="grid-latest" class="anime-grid"></div>
-        </section>
-
-        <!-- المفضلة -->
-        <section id="sec-favorites" class="page-section">
-            <h3 style="font-size: 1.1rem; color: #ff9800; margin-bottom: 1rem; border-bottom: 1px solid #222531; padding-bottom: 6px;">
-                <i class="fa-solid fa-heart"></i> أنمياتي المفضلة
-            </h3>
-            <div id="grid-favorites" class="anime-grid"></div>
-        </section>
-
-        <!-- السجل -->
-        <section id="sec-history" class="page-section">
-            <h3 style="font-size: 1.1rem; color: #ff9800; margin-bottom: 1rem; border-bottom: 1px solid #222531; padding-bottom: 6px;">
-                <i class="fa-solid fa-clock-rotate-left"></i> سجل المشاهدة الأخير
-            </h3>
-            <div id="grid-history" class="anime-grid"></div>
-        </section>
-    </main>
-
-    <!-- نافذة مشغل الحلقات (Modal) -->
-    <div id="playerModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:2000; align-items:center; justify-content:center; padding:1rem;">
-        <div style="max-width: 900px; width: 100%; background: #171821; border-radius: 8px; padding: 1.25rem; border: 1px solid #222531;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                <h3 id="playerTitle" style="color: #ff9800; font-size: 1rem;"></h3>
-                <button onclick="closePlayer()" style="background: #ef4444; color: #fff; border: none; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; font-weight: 700;">إغلاق</button>
-            </div>
-            
-            <div style="display: grid; grid-template-columns: 1fr; gap: 1rem;">
-                <div style="aspect-ratio: 16/9; width: 100%; background: #000; border-radius: 6px; overflow: hidden;">
-                    <iframe id="animeIframe" src="" style="width: 100%; height: 100%; border: none;" allowfullscreen></iframe>
-                </div>
-                <div style="background: #0f1015; padding: 10px; border-radius: 6px; max-height: 150px; overflow-y: auto;" id="episodeList"></div>
-            </div>
-        </div>
+    <!-- شريط الهواتف -->
+    <div class="md:hidden flex justify-around bg-dark/95 border-b border-dark-border py-2 px-2 fixed top-[56px] w-full z-40 text-xs font-bold shadow-md">
+        <a onclick="nav('home')" id="mob-home" class="text-gold">الرئيسية</a>
+        <a onclick="nav('latest')" id="mob-latest" class="text-gray-400">الأحدث</a>
+        <a onclick="nav('favorites')" id="mob-favorites" class="text-gray-400">المفضلة</a>
+        <a onclick="nav('history')" id="mob-history" class="text-gray-400">السجل</a>
     </div>
 
-    <!-- الفوتر -->
-    <footer>
-        <p>WHO ANIME &copy; 2026 - جميع الحقوق محفوظة</p>
-    </footer>
+    <!-- المحتوى الرئيسي -->
+    <main class="flex-1 pt-28 md:pt-24 pb-12 px-4 lg:px-8 max-w-7xl mx-auto w-full">
+        <section id="sec-home" class="page-section active">
+            <!-- البانر -->
+            <div class="relative rounded-3xl overflow-hidden glass-card p-6 md:p-12 mb-10 flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl border border-gold/30">
+                <div class="relative z-10 md:w-3/5 space-y-4">
+                    <div class="inline-block bg-gold/15 text-gold px-4 py-1.5 rounded-full text-xs font-bold border border-gold/40">
+                        <i class="fa-solid fa-fire ml-2"></i> الإصدار الملياري الخارق 2026
+                    </div>
+                    <h1 class="text-3xl md:text-5xl font-black leading-tight">
+                        Attack on Titan <br>
+                        <span class="gold-text text-2xl md:text-3xl">الهجوم على العمالقة</span>
+                    </h1>
+                    <p class="text-gray-400 text-sm leading-relaxed max-w-xl">
+                        أضخم مكتبة أنمي متكاملة في تاريخ المنصات العربية، تتضمن آلاف الحلقات والأعمال المدعومة بسيرفرات فائقة السرعة.
+                    </p>
+                    <div class="flex gap-4 pt-2">
+                        <button onclick="openPlayer(1, 1)" class="gold-bg text-black font-bold px-7 py-3 rounded-xl hover:scale-105 transition flex items-center gap-2 shadow-lg shadow-gold/30">
+                            <i class="fa-solid fa-play"></i> مشاهدة الحلقة الأولى
+                        </button>
+                        <button onclick="openDetails(1)" class="glass-card hover:border-gold px-6 py-3 rounded-xl font-bold transition flex items-center gap-2">
+                            <i class="fa-solid fa-circle-info text-gold"></i> التفاصيل
+                        </button>
+                    </div>
+                </div>
+                <div class="hidden md:block w-1/3 relative">
+                    <img src="https://cdn.myanimelist.net/images/anime/10/47347.jpg" class="relative rounded-2xl shadow-2xl border-2 border-gold/40 w-full object-cover">
+                </div>
+            </div>
 
-    <!-- ربط ملفات السكربتات الأساسية -->
-    <script src="anime-data.js"></script>
-    <script src="player.js"></script>
-    <script src="app.js"></script>
-</body>
-</html>
+            <!-- فئات التصنيفات -->
+            <div class="flex gap-2.5 overflow-x-auto pb-4 mb-6 scrollbar-none">
+                <button onclick="filterGenre('الكل', this)" class="genre-btn active px-4 py-2 rounded-xl text-xs md:text-sm font-bold bg-gold text-black transition whitespace-nowrap shadow-md">الكل (<span id="countAll">0</span>)</button>
+                <button onclick="filterGenre('أكشن', this)" class="genre-btn px-4 py-2 rounded-xl text-xs md:text-sm font-bold glass-card hover:border-gold transition whitespace-nowrap text-gray-300">⚔️ أكشن</button>
+                <button onclick="filterGenre('خيال', this)" class="genre-btn px-4 py-2 rounded-xl text-xs md:text-sm font-bold glass-card hover:border-gold transition whitespace-nowrap text-gray-300">🌌 خيال علمي</button>
+                <button onclick="filterGenre('مغامرة', this)" class="genre-btn px-4 py-2 rounded-xl text-xs md:text-sm font-bold glass-card hover:border-gold transition whitespace-nowrap text-gray-300">🗺
