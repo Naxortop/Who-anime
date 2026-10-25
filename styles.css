@@ -1,14 +1,109 @@
-/* الأنماط العامة والتنسيقات الفاخرة للمنصة */
-body { transition: background-color 0.4s ease, color 0.4s ease; scroll-behavior: smooth; background-color: #070709; color: #f3f4f6; font-family: 'Cairo', sans-serif; margin: 0; padding: 0; }
-.gold-text { background: linear-gradient(135deg, #fcf6ba, #d4af37, #aa771c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.gold-bg { background: linear-gradient(135deg, #d4af37, #aa771c); }
-.glass-card { background: rgba(17, 17, 22, 0.95); backdrop-filter: blur(24px); border: 1px solid rgba(212, 175, 55, 0.25); transition: all 0.3s ease; }
-.light .glass-card { background: rgba(255, 255, 255, 0.95); border: 1px solid rgba(212, 175, 55, 0.4); }
-.card-hover:hover { transform: translateY(-8px) scale(1.02); border-color: #d4af37; box-shadow: 0 20px 40px rgba(212, 175, 55, 0.3); }
-.page-section { display: none; opacity: 0; transition: opacity 0.3s ease; }
-.page-section.active { display: block; opacity: 1; }
-::-webkit-scrollbar { width: 8px; }
+/* =========================================================
+   Who Anime - Modern Responsive Engine 2026
+   ========================================================= */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap');
+
+:root {
+    --gold-primary: #d4af37;
+    --gold-light: #fcf6ba;
+    --gold-dark: #aa771c;
+    --bg-dark: #070709;
+    --card-bg: rgba(17, 17, 22, 0.85);
+    --border-color: rgba(212, 175, 55, 0.2);
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: #f3f4f6;
+    font-family: 'Cairo', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+/* Glassmorphism العصري */
+.glass-panel {
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.gold-text {
+    background: linear-gradient(135deg, var(--gold-light), var(--gold-primary), var(--gold-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.gold-btn {
+    background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+    color: #000;
+    font-weight: 800;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gold-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+}
+
+/* بطاقات الأنمي المتجاوبة */
+.anime-card {
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    background: #111116;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.anime-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: var(--gold-primary);
+    box-shadow: 0 15px 35px rgba(212, 175, 55, 0.25);
+}
+
+/* تحسين الشبكة المتجاوبة لكل الشاشات */
+.responsive-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+@media (min-width: 640px) {
+    .responsive-grid { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+}
+
+@media (min-width: 768px) {
+    .responsive-grid { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+}
+
+@media (min-width: 1024px) {
+    .responsive-grid { grid-template-columns: repeat(5, 1fr); gap: 1.5rem; }
+}
+
+@media (min-width: 1280px) {
+    .responsive-grid { grid-template-columns: repeat(6, 1fr); gap: 1.75rem; }
+}
+
+/* إخفاء شريط السكرول الظاهر */
+::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: #070709; }
-::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 10px; }
-#toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(100px); transition: 0.3s; opacity: 0; z-index: 9999; }
-#toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+::-webkit-scrollbar-thumb { background: var(--gold-primary); border-radius: 10px; }
+
+/* التنبيهات */
+#toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    z-index: 9999;
+}
+#toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
