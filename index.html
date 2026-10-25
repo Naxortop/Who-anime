@@ -31,7 +31,7 @@
         body { transition: background-color 0.4s ease, color 0.4s ease; scroll-behavior: smooth; }
         .gold-text { background: linear-gradient(135deg, #fcf6ba, #d4af37, #aa771c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .gold-bg { background: linear-gradient(135deg, #d4af37, #aa771c); }
-        .glass-card { background: rgba(17, 17, 22, 0.8); backdrop-filter: blur(16px); border: 1px solid rgba(212, 175, 55, 0.2); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .glass-card { background: rgba(17, 17, 22, 0.85); backdrop-filter: blur(16px); border: 1px solid rgba(212, 175, 55, 0.2); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .light .glass-card { background: rgba(255, 255, 255, 0.9); border: 1px solid rgba(212, 175, 55, 0.35); }
         .card-hover:hover { transform: translateY(-10px) scale(1.02); border-color: #d4af37; box-shadow: 0 20px 40px rgba(212, 175, 55, 0.25); }
         .page-section { display: none; opacity: 0; transition: opacity 0.35s ease; }
@@ -69,28 +69,23 @@
         </div>
 
         <div class="flex gap-2.5 items-center">
-            <!-- بحث متقدم -->
             <div class="relative hidden sm:block">
                 <i class="fa-solid fa-magnifying-glass absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
                 <input type="text" id="searchInput" oninput="searchAnime()" placeholder="ابحث عن أنمي..." class="bg-dark border border-dark-border rounded-full pr-10 pl-4 py-1.5 text-sm focus:outline-none focus:border-gold transition w-40 lg:w-60 text-white shadow-inner">
             </div>
 
-            <!-- زر تشغيل عشوائي -->
             <button onclick="playRandomAnime()" title="أنمي عشوائي" class="w-9 h-9 rounded-full border border-dark-border hover:border-gold hover:text-gold flex items-center justify-center transition shadow-md">
                 <i class="fa-solid fa-dice text-sm"></i>
             </button>
 
-            <!-- زر طلب أنمي -->
             <button onclick="openRequestModal()" title="طلب أنمي" class="w-9 h-9 rounded-full border border-dark-border hover:border-gold hover:text-gold flex items-center justify-center transition shadow-md">
                 <i class="fa-solid fa-film text-sm"></i>
             </button>
 
-            <!-- زر اللغة -->
             <button onclick="toggleLang()" class="px-2.5 py-1.5 rounded-full border border-dark-border hover:border-gold hover:text-gold text-xs font-bold transition">
                 <span id="langBtnText">EN</span>
             </button>
             
-            <!-- زر الوضع الليلي/النهاري -->
             <button onclick="toggleTheme()" class="w-9 h-9 rounded-full border border-dark-border hover:border-gold hover:text-gold flex items-center justify-center transition shadow-md">
                 <i class="fa-solid fa-moon text-sm" id="themeIcon"></i>
             </button>
@@ -115,16 +110,15 @@
         
         <!-- 1. الرئيسية -->
         <section id="sec-home" class="page-section active">
-            <!-- شريط الأخبار والإعلانات المتحرك -->
             <div class="glass-card rounded-2xl p-4 mb-8 flex items-center justify-between border-gold/40 bg-gradient-to-r from-gold/15 via-transparent to-transparent shadow-xl">
                 <div class="flex items-center gap-3 text-xs md:text-sm font-bold">
                     <span class="bg-gold text-black px-2.5 py-1 rounded-lg text-xs animate-pulse">تحديث خيالي</span>
-                    <span class="text-gray-200">تم إضافة ميزة حفظ سجل المشاهدة وتشغيل الحلقات بدون تقطيع بروابط VIP فائقة السرعة! 🚀</span>
+                    <span class="text-gray-200">تم ضبط وتنسيق مشغل الفيديو واختيار الأنمي بشكل احترافي ومتناسق! 🚀</span>
                 </div>
                 <button onclick="this.parentElement.style.display='none'" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
             </div>
 
-            <!-- البانر الترويجي الخرافي -->
+            <!-- البانر الترويجي -->
             <div class="relative rounded-3xl overflow-hidden glass-card p-6 md:p-12 mb-10 flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl border border-gold/30">
                 <div class="relative z-10 md:w-3/5 space-y-4">
                     <div class="inline-block bg-gold/15 text-gold px-4 py-1.5 rounded-full text-xs font-bold border border-gold/40">
@@ -152,7 +146,7 @@
                 </div>
             </div>
 
-            <!-- إحصائيات المنصة الحية -->
+            <!-- الإحصائيات -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
                 <div class="glass-card p-4 rounded-2xl text-center shadow-lg">
                     <h3 class="text-2xl md:text-3xl font-black gold-text mb-1">1,500+</h3>
@@ -172,7 +166,7 @@
                 </div>
             </div>
 
-            <!-- شريط التصنيفات (Genres) -->
+            <!-- فئات التصنيفات -->
             <div class="flex gap-2.5 md:gap-3 overflow-x-auto pb-4 mb-6 scrollbar-none">
                 <button onclick="filterGenre('الكل', this)" class="genre-btn active px-4 py-2 rounded-xl text-xs md:text-sm font-bold bg-gold text-black transition whitespace-nowrap shadow-md shadow-gold/20" data-i18n="all">الكل</button>
                 <button onclick="filterGenre('أكشن', this)" class="genre-btn px-4 py-2 rounded-xl text-xs md:text-sm font-bold glass-card hover:border-gold transition whitespace-nowrap text-gray-300" data-i18n="action">⚔️ أكشن</button>
@@ -181,7 +175,6 @@
                 <button onclick="filterGenre('دراما', this)" class="genre-btn px-4 py-2 rounded-xl text-xs md:text-sm font-bold glass-card hover:border-gold transition whitespace-nowrap text-gray-300" data-i18n="drama">🎭 دراما</button>
             </div>
 
-            <!-- عنوان القسم والفرز -->
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-xl md:text-2xl font-bold flex items-center gap-3">
                     <span class="w-2 h-7 gold-bg rounded-full"></span> <span data-i18n="recommendations">ترشيحات المنصة الأسطورية</span>
@@ -193,7 +186,6 @@
                 </select>
             </div>
 
-            <!-- شبكة الكروت الرئيسية -->
             <div id="grid-home" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6"></div>
         </section>
 
@@ -289,13 +281,18 @@
         </div>
     </div>
 
-    <!-- ================= مشغل الفيديو الاحترافي الخارق (Player Modal) ================= -->
+    <!-- ================= مشغل الفيديو الاحترافي المُعدّل (Player Modal) ================= -->
     <div id="playerModal" class="fixed inset-0 bg-black/98 backdrop-blur-xl z-[120] hidden flex-col justify-center items-center p-2 md:p-6">
         <div class="w-full max-w-5xl relative">
-            <div class="flex justify-between items-center mb-3">
-                <h3 id="playerTitle" class="text-lg md:text-xl font-bold gold-text"></h3>
-                <button onclick="closePlayer()" class="text-gray-400 hover:text-red-500 text-sm font-bold transition flex items-center gap-2 bg-dark/70 px-4 py-1.5 rounded-xl border border-dark-border shadow">
-                    <i class="fa-solid fa-xmark"></i> <span data-i18n="close">إغلاق ومشاهدة لاحقة</span>
+            
+            <!-- تم تعديل الهيدر العلوي للمشغل ليكون مرتب ومنسق تماماً بدون أي تداخل -->
+            <div class="flex justify-between items-center mb-4 px-2 border-b border-dark-border pb-3">
+                <div class="flex items-center gap-3">
+                    <span class="w-2.5 h-6 gold-bg rounded-full"></span>
+                    <h3 id="playerTitle" class="text-xl md:text-2xl font-black gold-text tracking-wide">اسم الأنمي</h3>
+                </div>
+                <button onclick="closePlayer()" class="text-gray-300 hover:text-white text-xs md:text-sm font-bold transition flex items-center gap-2 bg-dark/80 hover:bg-red-600/80 px-4 py-2 rounded-xl border border-dark-border shadow">
+                    <i class="fa-solid fa-xmark text-sm"></i> <span data-i18n="close">إغلاق ومشاهدة لاحقة</span>
                 </button>
             </div>
             
@@ -381,7 +378,7 @@
                 bannerTag: "الأنمي الأسطوري المتصدر هذا الأسبوع", bannerDesc: "انغمس في عالم الخيال المطلق، معارك أسطورية، ورسوم جرافيكية فائقة الجودة. استعد لتجربة مشاهدة لا تُنسى.",
                 stat1: "أنمي مترجم حصري", stat2: "حلقة أصلية عالية الدقة", stat3: "سيرفرات مستقرة وآمنة", stat4: "إعلانات مزعجة تماماً",
                 recommendations: "ترشيحات المنصة الأسطورية", latestEpisodes: "أحدث الحلقات المضافة حديثاً",
-                myFavorites: "قائمة المفضلة لديك", guideTitle: "دليل منصة Who Anime",
+                myFavorites: "قائمة المفضلة لديك", history: "سجل المشاهدة الخاص بك", guideTitle: "دليل منصة Who Anime",
                 guideH1: "مرحباً بك في عائلة Who Anime", guideP1: "منصة Who Anime هي وجهتك الأولى لمشاهدة أفضل أعمال الأنمي بجودة خارقة وترجمة احترافية.",
                 guideH2: "مميزات المنصة الخارقة", feat1: "دقة عرض تصل إلى 1080p Full HD حقيقية.", feat2: "تحديثات فورية ويومية للحلقات الجديدة.",
                 feat3: "سيرفرات متعددة وسريعة تعمل على جميع الأجهزة بكفاءة.", feat4: "حفظ المفضلة وسجل المشاهدة تلقائياً.",
@@ -546,7 +543,6 @@
         function closeDetails() { detailsModal.classList.remove('flex'); detailsModal.classList.add('hidden'); }
         function toggleFavoriteFromModal() { if(activeAnimeId) { toggleFavorite(activeAnimeId); openDetails(activeAnimeId); } }
 
-        // نافذة الطلب
         const requestModal = document.getElementById('requestModal');
         function openRequestModal() { requestModal.classList.remove('hidden'); requestModal.classList.add('flex'); }
         function closeRequestModal() { requestModal.classList.remove('flex'); requestModal.classList.add('hidden'); }
@@ -558,7 +554,6 @@
             showToast('تم إرسال طلبك بنجاح وسيتم توفيره قريباً!', 'fa-paper-plane');
         }
 
-        // مشغل الفيديو
         const playerModal = document.getElementById('playerModal');
         const video = document.getElementById('mainVideo');
         const source = document.getElementById('videoSource');
@@ -567,7 +562,6 @@
             const anime = animeDB.find(a => a.id === id);
             if(!anime) return;
 
-            // إضافة للسجل
             if(!historyList.includes(id)) {
                 historyList.unshift(id);
                 if(historyList.length > 15) historyList.pop();
