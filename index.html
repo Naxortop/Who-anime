@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Who Anime | المنصة الأسطورية</title>
+    <title>Who Anime | المنصة الأسطورية الخارقة</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -31,98 +31,104 @@
         body { transition: background-color 0.4s ease, color 0.4s ease; scroll-behavior: smooth; }
         .gold-text { background: linear-gradient(135deg, #fcf6ba, #d4af37, #aa771c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .gold-bg { background: linear-gradient(135deg, #d4af37, #aa771c); }
-        .glass-card { background: rgba(17, 17, 22, 0.75); backdrop-filter: blur(14px); border: 1px solid rgba(212, 175, 55, 0.18); transition: all 0.3s ease; }
-        .light .glass-card { background: rgba(255, 255, 255, 0.85); border: 1px solid rgba(212, 175, 55, 0.3); }
-        .card-hover:hover { transform: translateY(-8px); border-color: #d4af37; box-shadow: 0 15px 35px rgba(212, 175, 55, 0.2); }
-        .page-section { display: none; opacity: 0; transition: opacity 0.3s ease; }
+        .glass-card { background: rgba(17, 17, 22, 0.8); backdrop-filter: blur(16px); border: 1px solid rgba(212, 175, 55, 0.2); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .light .glass-card { background: rgba(255, 255, 255, 0.9); border: 1px solid rgba(212, 175, 55, 0.35); }
+        .card-hover:hover { transform: translateY(-10px) scale(1.02); border-color: #d4af37; box-shadow: 0 20px 40px rgba(212, 175, 55, 0.25); }
+        .page-section { display: none; opacity: 0; transition: opacity 0.35s ease; }
         .page-section.active { display: block; opacity: 1; animation: fadeIn 0.4s ease forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #070709; }
         ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 10px; }
         .light ::-webkit-scrollbar-track { background: #f3f4f6; }
-        /* Toast Notification */
-        #toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(100px); transition: transform 0.3s ease, opacity 0.3s ease; opacity: 0; z-index: 9999; }
+        #toast { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%) translateY(100px); transition: transform 0.3s ease, opacity 0.3s ease; opacity: 0; z-index: 9999; }
         #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
     </style>
 </head>
 <body class="dark bg-dark text-gray-100 min-h-screen flex flex-col font-sans">
 
     <!-- شريط الإشعارات المؤقتة (Toast) -->
-    <div id="toast" class="glass-card px-6 py-3 rounded-full text-gold font-bold shadow-2xl flex items-center gap-3 border border-gold/40">
+    <div id="toast" class="glass-card px-6 py-3 rounded-full text-gold font-bold shadow-2xl flex items-center gap-3 border border-gold/50">
         <i id="toastIcon" class="fa-solid fa-circle-check"></i>
-        <span id="toastMsg">تمت الإضافة بنجاح</span>
+        <span id="toastMsg">تمت العملية بنجاح</span>
     </div>
 
-    <!-- ================= الهيدر العلوي ================= -->
-    <header class="fixed top-0 w-full z-50 glass-card px-4 md:px-8 py-3.5 flex justify-between items-center shadow-xl">
+    <!-- ================= الهيدر العلوي الأسطوري ================= -->
+    <header class="fixed top-0 w-full z-50 glass-card px-4 md:px-8 py-3.5 flex justify-between items-center shadow-2xl">
         <div class="flex items-center gap-6">
-            <div class="text-2xl md:text-3xl font-black cursor-pointer gold-text tracking-wider flex items-center gap-2" onclick="nav('home')">
-                <i class="fa-solid fa-crown text-xl"></i> WHO ANIME
+            <div class="text-2xl md:text-3xl font-black cursor-pointer gold-text tracking-wider flex items-center gap-2.5" onclick="nav('home')">
+                <i class="fa-solid fa-crown text-xl animate-bounce"></i> WHO ANIME
             </div>
             <nav class="hidden lg:flex gap-6 font-bold text-sm">
                 <a onclick="nav('home')" id="nav-home" class="cursor-pointer hover:text-gold transition text-gold" data-i18n="home">الرئيسية</a>
                 <a onclick="nav('latest')" id="nav-latest" class="cursor-pointer hover:text-gold transition text-gray-300" data-i18n="latest">أحدث الحلقات</a>
                 <a onclick="nav('favorites')" id="nav-favorites" class="cursor-pointer hover:text-gold transition text-gray-300" data-i18n="favorites">المفضلة (<span id="favCount">0</span>)</a>
+                <a onclick="nav('history')" id="nav-history" class="cursor-pointer hover:text-gold transition text-gray-300" data-i18n="history">سجل المشاهدة</a>
                 <a onclick="nav('guide')" id="nav-guide" class="cursor-pointer hover:text-gold transition text-gray-300" data-i18n="guide">دليل الموقع</a>
             </nav>
         </div>
 
         <div class="flex gap-2.5 items-center">
-            <!-- بحث -->
+            <!-- بحث متقدم -->
             <div class="relative hidden sm:block">
                 <i class="fa-solid fa-magnifying-glass absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                <input type="text" id="searchInput" oninput="searchAnime()" placeholder="ابحث عن أنمي..." class="bg-dark border border-dark-border rounded-full pr-10 pl-4 py-1.5 text-sm focus:outline-none focus:border-gold transition w-40 lg:w-56 text-white">
+                <input type="text" id="searchInput" oninput="searchAnime()" placeholder="ابحث عن أنمي..." class="bg-dark border border-dark-border rounded-full pr-10 pl-4 py-1.5 text-sm focus:outline-none focus:border-gold transition w-40 lg:w-60 text-white shadow-inner">
             </div>
 
             <!-- زر تشغيل عشوائي -->
-            <button onclick="playRandomAnime()" title="أنمي عشوائي" class="w-9 h-9 rounded-full border border-dark-border hover:border-gold hover:text-gold flex items-center justify-center transition">
+            <button onclick="playRandomAnime()" title="أنمي عشوائي" class="w-9 h-9 rounded-full border border-dark-border hover:border-gold hover:text-gold flex items-center justify-center transition shadow-md">
                 <i class="fa-solid fa-dice text-sm"></i>
             </button>
 
-            <!-- زر تبديل اللغة -->
+            <!-- زر طلب أنمي -->
+            <button onclick="openRequestModal()" title="طلب أنمي" class="w-9 h-9 rounded-full border border-dark-border hover:border-gold hover:text-gold flex items-center justify-center transition shadow-md">
+                <i class="fa-solid fa-film text-sm"></i>
+            </button>
+
+            <!-- زر اللغة -->
             <button onclick="toggleLang()" class="px-2.5 py-1.5 rounded-full border border-dark-border hover:border-gold hover:text-gold text-xs font-bold transition">
                 <span id="langBtnText">EN</span>
             </button>
             
-            <!-- زر الوضع الليلي -->
-            <button onclick="toggleTheme()" class="w-9 h-9 rounded-full border border-dark-border hover:border-gold hover:text-gold flex items-center justify-center transition">
+            <!-- زر الوضع الليلي/النهاري -->
+            <button onclick="toggleTheme()" class="w-9 h-9 rounded-full border border-dark-border hover:border-gold hover:text-gold flex items-center justify-center transition shadow-md">
                 <i class="fa-solid fa-moon text-sm" id="themeIcon"></i>
             </button>
             
-            <button onclick="showToast('نظام العضوية متاح قريباً!', 'fa-user')" class="gold-bg text-black font-bold px-4 py-1.5 rounded-full text-xs md:text-sm hover:scale-105 transition shadow-lg shadow-gold/20" data-i18n="login">
+            <button onclick="showToast('نظام العضوية الملكية متاح قريباً!', 'fa-user')" class="gold-bg text-black font-bold px-4 py-1.5 rounded-full text-xs md:text-sm hover:scale-105 transition shadow-lg shadow-gold/20" data-i18n="login">
                 تسجيل الدخول
             </button>
         </div>
     </header>
 
-    <!-- روابط الموبايل العلوية -->
-    <div class="lg:hidden flex justify-around bg-dark/90 border-b border-dark-border py-2 px-4 fixed top-[60px] w-full z-40 text-xs font-bold">
+    <!-- شريط روابط الهواتف الذكية -->
+    <div class="lg:hidden flex justify-around bg-dark/95 border-b border-dark-border py-2.5 px-2 fixed top-[60px] w-full z-40 text-xs font-bold">
         <a onclick="nav('home')" id="mob-home" class="text-gold" data-i18n="home">الرئيسية</a>
         <a onclick="nav('latest')" id="mob-latest" class="text-gray-400" data-i18n="latest">الأحدث</a>
         <a onclick="nav('favorites')" id="mob-favorites" class="text-gray-400" data-i18n="favorites">المفضلة</a>
+        <a onclick="nav('history')" id="mob-history" class="text-gray-400" data-i18n="history">السجل</a>
         <a onclick="nav('guide')" id="mob-guide" class="text-gray-400" data-i18n="guide">الدليل</a>
     </div>
 
-    <!-- ================= المحتوى الرئيسي ================= -->
+    <!-- ================= المحتوى الرئيسي للمنصة ================= -->
     <main class="flex-1 pt-28 lg:pt-24 pb-12 px-4 md:px-8 max-w-7xl mx-auto w-full">
         
         <!-- 1. الرئيسية -->
         <section id="sec-home" class="page-section active">
-            <!-- شريط الإعلانات السريع -->
-            <div class="glass-card rounded-2xl p-4 mb-8 flex items-center justify-between border-gold/30 bg-gradient-to-r from-gold/10 to-transparent">
+            <!-- شريط الأخبار والإعلانات المتحرك -->
+            <div class="glass-card rounded-2xl p-4 mb-8 flex items-center justify-between border-gold/40 bg-gradient-to-r from-gold/15 via-transparent to-transparent shadow-xl">
                 <div class="flex items-center gap-3 text-xs md:text-sm font-bold">
-                    <span class="bg-gold text-black px-2.5 py-1 rounded-lg text-xs animate-pulse">جديد</span>
-                    <span class="text-gray-200">تم تحديث سيرفرات البث بدقة 1080p خارقة وخالية من الإعلانات! 🚀</span>
+                    <span class="bg-gold text-black px-2.5 py-1 rounded-lg text-xs animate-pulse">تحديث خيالي</span>
+                    <span class="text-gray-200">تم إضافة ميزة حفظ سجل المشاهدة وتشغيل الحلقات بدون تقطيع بروابط VIP فائقة السرعة! 🚀</span>
                 </div>
                 <button onclick="this.parentElement.style.display='none'" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
             </div>
 
-            <!-- البانر الرئيسي -->
-            <div class="relative rounded-3xl overflow-hidden glass-card p-6 md:p-12 mb-10 flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl">
+            <!-- البانر الترويجي الخرافي -->
+            <div class="relative rounded-3xl overflow-hidden glass-card p-6 md:p-12 mb-10 flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl border border-gold/30">
                 <div class="relative z-10 md:w-3/5 space-y-4">
-                    <div class="inline-block bg-gold/10 text-gold px-4 py-1.5 rounded-full text-xs font-bold border border-gold/30">
-                        <i class="fa-solid fa-fire ml-2"></i> <span data-i18n="bannerTag">الأنمي الأكثر مشاهدة هذا الأسبوع</span>
+                    <div class="inline-block bg-gold/15 text-gold px-4 py-1.5 rounded-full text-xs font-bold border border-gold/40">
+                        <i class="fa-solid fa-fire ml-2"></i> <span data-i18n="bannerTag">الأنمي الأسطوري المتصدر هذا الأسبوع</span>
                     </div>
                     <h1 class="text-3xl md:text-5xl font-black leading-tight">
                         Attack on Titan <br>
@@ -141,33 +147,33 @@
                     </div>
                 </div>
                 <div class="hidden md:block w-1/3 relative">
-                    <div class="absolute inset-0 bg-gold blur-3xl opacity-20 rounded-full"></div>
+                    <div class="absolute inset-0 bg-gold blur-3xl opacity-25 rounded-full"></div>
                     <img src="https://cdn.myanimelist.net/images/anime/10/47347.jpg" class="relative rounded-2xl shadow-2xl border-2 border-gold/40 transform rotate-2 hover:rotate-0 transition duration-500 w-full object-cover">
                 </div>
             </div>
 
             <!-- إحصائيات المنصة الحية -->
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-                <div class="glass-card p-4 rounded-2xl text-center">
-                    <h3 class="text-2xl md:text-3xl font-black gold-text mb-1">1,200+</h3>
-                    <p class="text-xs text-gray-400" data-i18n="stat1">أنمي مترجم</p>
+                <div class="glass-card p-4 rounded-2xl text-center shadow-lg">
+                    <h3 class="text-2xl md:text-3xl font-black gold-text mb-1">1,500+</h3>
+                    <p class="text-xs text-gray-400" data-i18n="stat1">أنمي مترجم حصري</p>
                 </div>
-                <div class="glass-card p-4 rounded-2xl text-center">
-                    <h3 class="text-2xl md:text-3xl font-black gold-text mb-1">25K</h3>
-                    <p class="text-xs text-gray-400" data-i18n="stat2">حلقة أصلية</p>
+                <div class="glass-card p-4 rounded-2xl text-center shadow-lg">
+                    <h3 class="text-2xl md:text-3xl font-black gold-text mb-1">35K</h3>
+                    <p class="text-xs text-gray-400" data-i18n="stat2">حلقة أصلية عالية الدقة</p>
                 </div>
-                <div class="glass-card p-4 rounded-2xl text-center">
-                    <h3 class="text-2xl md:text-3xl font-black gold-text mb-1">99.9%</h3>
-                    <p class="text-xs text-gray-400" data-i18n="stat3">سيرفرات مستقرة</p>
+                <div class="glass-card p-4 rounded-2xl text-center shadow-lg">
+                    <h3 class="text-2xl md:text-3xl font-black gold-text mb-1">100%</h3>
+                    <p class="text-xs text-gray-400" data-i18n="stat3">سيرفرات مستقرة وآمنة</p>
                 </div>
-                <div class="glass-card p-4 rounded-2xl text-center">
+                <div class="glass-card p-4 rounded-2xl text-center shadow-lg">
                     <h3 class="text-2xl md:text-3xl font-black gold-text mb-1">0</h3>
-                    <p class="text-xs text-gray-400" data-i18n="stat4">إعلانات مزعجة</p>
+                    <p class="text-xs text-gray-400" data-i18n="stat4">إعلانات مزعجة تماماً</p>
                 </div>
             </div>
 
-            <!-- شريط الفئات (Genres Filter Bar) -->
-            <div class="flex gap-2 md:gap-3 overflow-x-auto pb-4 mb-6 scrollbar-none">
+            <!-- شريط التصنيفات (Genres) -->
+            <div class="flex gap-2.5 md:gap-3 overflow-x-auto pb-4 mb-6 scrollbar-none">
                 <button onclick="filterGenre('الكل', this)" class="genre-btn active px-4 py-2 rounded-xl text-xs md:text-sm font-bold bg-gold text-black transition whitespace-nowrap shadow-md shadow-gold/20" data-i18n="all">الكل</button>
                 <button onclick="filterGenre('أكشن', this)" class="genre-btn px-4 py-2 rounded-xl text-xs md:text-sm font-bold glass-card hover:border-gold transition whitespace-nowrap text-gray-300" data-i18n="action">⚔️ أكشن</button>
                 <button onclick="filterGenre('خيال', this)" class="genre-btn px-4 py-2 rounded-xl text-xs md:text-sm font-bold glass-card hover:border-gold transition whitespace-nowrap text-gray-300" data-i18n="fantasy">🌌 خيال علمي</button>
@@ -175,19 +181,19 @@
                 <button onclick="filterGenre('دراما', this)" class="genre-btn px-4 py-2 rounded-xl text-xs md:text-sm font-bold glass-card hover:border-gold transition whitespace-nowrap text-gray-300" data-i18n="drama">🎭 دراما</button>
             </div>
 
-            <!-- العنوان والترتيب -->
+            <!-- عنوان القسم والفرز -->
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-xl md:text-2xl font-bold flex items-center gap-3">
-                    <span class="w-2 h-7 gold-bg rounded-full"></span> <span data-i18n="recommendations">ترشيحات المنصة</span>
+                    <span class="w-2 h-7 gold-bg rounded-full"></span> <span data-i18n="recommendations">ترشيحات المنصة الأسطورية</span>
                 </h2>
-                <select id="sortSelect" onchange="sortAnime()" class="bg-dark border border-dark-border rounded-xl px-3 py-1.5 text-xs text-gray-300 focus:outline-none focus:border-gold">
+                <select id="sortSelect" onchange="sortAnime()" class="bg-dark border border-dark-border rounded-xl px-3 py-1.5 text-xs text-gray-300 focus:outline-none focus:border-gold shadow-inner">
                     <option value="default" data-i18n="sortDefault">ترتيب افتراضي</option>
                     <option value="rating" data-i18n="sortRating">الأعلى تقييماً ⭐</option>
                     <option value="episodes" data-i18n="sortEp">الأكثر حلقات 📺</option>
                 </select>
             </div>
 
-            <!-- شبكة الأنمي -->
+            <!-- شبكة الكروت الرئيسية -->
             <div id="grid-home" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6"></div>
         </section>
 
@@ -195,7 +201,7 @@
         <section id="sec-latest" class="page-section">
             <div class="flex justify-between items-center mb-6 mt-2">
                 <h2 class="text-xl md:text-2xl font-bold flex items-center gap-3">
-                    <span class="w-2 h-7 gold-bg rounded-full"></span> <span data-i18n="latestEpisodes">أحدث الحلقات المضافة</span>
+                    <span class="w-2 h-7 gold-bg rounded-full"></span> <span data-i18n="latestEpisodes">أحدث الحلقات المضافة حديثاً</span>
                 </h2>
             </div>
             <div id="grid-latest" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6"></div>
@@ -211,18 +217,29 @@
             <div id="grid-favorites" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6"></div>
         </section>
 
-        <!-- 4. دليل الموقع -->
+        <!-- 4. سجل المشاهدة -->
+        <section id="sec-history" class="page-section">
+            <div class="flex justify-between items-center mb-6 mt-2">
+                <h2 class="text-xl md:text-2xl font-bold flex items-center gap-3">
+                    <span class="w-2 h-7 gold-bg rounded-full"></span> <span>سجل المشاهدة الخاص بك</span>
+                </h2>
+                <button onclick="clearHistory()" class="text-xs text-red-400 hover:text-red-500 glass-card px-3 py-1.5 rounded-lg border border-red-500/30">مسح السجل</button>
+            </div>
+            <div id="grid-history" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6"></div>
+        </section>
+
+        <!-- 5. دليل الموقع -->
         <section id="sec-guide" class="page-section max-w-4xl mx-auto py-6">
             <h2 class="text-3xl font-bold mb-8 text-center gold-text" data-i18n="guideTitle">دليل منصة Who Anime</h2>
             
-            <div class="glass-card p-6 md:p-8 rounded-2xl mb-6 space-y-3">
+            <div class="glass-card p-6 md:p-8 rounded-2xl mb-6 space-y-3 shadow-xl">
                 <h3 class="text-xl font-bold text-gold flex items-center gap-2"><i class="fa-solid fa-circle-info"></i> <span data-i18n="guideH1">مرحباً بك في عائلة Who Anime</span></h3>
                 <p class="text-gray-300 leading-relaxed text-sm md:text-base" data-i18n="guideP1">
-                    منصة Who Anime هي وجهتك الأولى لمشاهدة أفضل أعمال الأنمي بجودة خارقة وترجمة احترافية. صُممت المنصة لتمنحك مشاهدة سلسة وسريعة وخالية تماماً من الإعلانات.
+                    منصة Who Anime هي وجهتك الأولى لمشاهدة أفضل أعمال الأنمي بجودة خارقة وترجمة احترافية. صُممت المنصة لتمنحك مشاهدة سلسة وسريعة وخالية تماماً من الإعلانات المزعجة.
                 </p>
             </div>
 
-            <div class="glass-card p-6 md:p-8 rounded-2xl mb-6 space-y-4">
+            <div class="glass-card p-6 md:p-8 rounded-2xl mb-6 space-y-4 shadow-xl">
                 <h3 class="text-xl font-bold text-gold flex items-center gap-2"><i class="fa-solid fa-star"></i> <span data-i18n="guideH2">مميزات المنصة الخارقة</span></h3>
                 <ul class="space-y-3 text-gray-300 text-sm md:text-base">
                     <li class="flex items-start gap-3"><i class="fa-solid fa-check-circle text-gold mt-1"></i> <span data-i18n="feat1">دقة عرض تصل إلى 1080p Full HD حقيقية.</span></li>
@@ -235,24 +252,24 @@
     </main>
 
     <!-- ================= نافذة تفاصيل الأنمي (Details Modal) ================= -->
-    <div id="detailsModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-[110] hidden items-center justify-center p-4">
-        <div class="glass-card max-w-xl w-full rounded-2xl p-6 relative border border-gold/40 shadow-2xl">
+    <div id="detailsModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-[110] hidden items-center justify-center p-4">
+        <div class="glass-card max-w-xl w-full rounded-3xl p-6 md:p-8 relative border border-gold/40 shadow-2xl">
             <button onclick="closeDetails()" class="absolute top-4 left-4 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
             <div class="flex flex-col sm:flex-row gap-6 items-center">
-                <img id="detImg" src="" class="w-36 h-48 object-cover rounded-xl border border-gold/30 shadow-lg">
+                <img id="detImg" src="" class="w-36 h-48 object-cover rounded-2xl border border-gold/40 shadow-xl">
                 <div class="space-y-3 text-right w-full">
                     <h3 id="detTitle" class="text-2xl font-black gold-text"></h3>
                     <div class="flex gap-4 text-xs text-gray-400">
                         <span id="detRating" class="text-gold font-bold"></span>
                         <span id="detEp"></span>
-                        <span id="detGenre" class="bg-gold/10 px-2 py-0.5 rounded text-gold border border-gold/30"></span>
+                        <span id="detGenre" class="bg-gold/15 px-2.5 py-0.5 rounded-lg text-gold border border-gold/30"></span>
                     </div>
                     <p id="detDesc" class="text-gray-300 text-xs md:text-sm leading-relaxed"></p>
                     <div class="pt-2 flex gap-3">
-                        <button id="detPlayBtn" class="gold-bg text-black font-bold px-6 py-2 rounded-xl text-sm flex items-center gap-2">
+                        <button id="detPlayBtn" class="gold-bg text-black font-bold px-6 py-2.5 rounded-xl text-sm flex items-center gap-2 shadow-lg shadow-gold/20">
                             <i class="fa-solid fa-play"></i> <span data-i18n="watchNow">مشاهدة الآن</span>
                         </button>
-                        <button id="detFavBtn" onclick="toggleFavoriteFromModal()" class="glass-card px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 hover:border-gold">
+                        <button id="detFavBtn" onclick="toggleFavoriteFromModal()" class="glass-card px-4 py-2.5 rounded-xl text-sm font-bold flex items-center gap-2 hover:border-gold">
                             <i class="fa-regular fa-heart text-gold"></i> <span data-i18n="favorite">المفضلة</span>
                         </button>
                     </div>
@@ -261,46 +278,58 @@
         </div>
     </div>
 
-    <!-- ================= مشغل الفيديو الاحترافي (Player Modal) ================= -->
-    <div id="playerModal" class="fixed inset-0 bg-black/95 backdrop-blur-md z-[120] hidden flex-col justify-center items-center p-2 md:p-6">
+    <!-- ================= نافذة طلب الأنمي (Request Modal) ================= -->
+    <div id="requestModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-[115] hidden items-center justify-center p-4">
+        <div class="glass-card max-w-md w-full rounded-3xl p-6 relative border border-gold/40 shadow-2xl">
+            <button onclick="closeRequestModal()" class="absolute top-4 left-4 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <h3 class="text-xl font-bold gold-text mb-4"><i class="fa-solid fa-film ml-2"></i> طلب أنمي جديد</h3>
+            <p class="text-gray-400 text-xs mb-4">اكتب اسم الأنمي الذي تود إضافته وسيقوم فريق المنصة بتوفيره قريباً.</p>
+            <input type="text" id="reqAnimeInput" placeholder="اسم الأنمي بالإنجليزية أو العربية..." class="w-full bg-dark border border-dark-border rounded-xl px-4 py-2.5 text-sm text-white mb-4 focus:outline-none focus:border-gold">
+            <button onclick="submitAnimeRequest()" class="w-full gold-bg text-black font-bold py-2.5 rounded-xl text-sm shadow-lg shadow-gold/20">إرسال الطلب</button>
+        </div>
+    </div>
+
+    <!-- ================= مشغل الفيديو الاحترافي الخارق (Player Modal) ================= -->
+    <div id="playerModal" class="fixed inset-0 bg-black/98 backdrop-blur-xl z-[120] hidden flex-col justify-center items-center p-2 md:p-6">
         <div class="w-full max-w-5xl relative">
             <div class="flex justify-between items-center mb-3">
                 <h3 id="playerTitle" class="text-lg md:text-xl font-bold gold-text"></h3>
-                <button onclick="closePlayer()" class="text-gray-400 hover:text-red-500 text-lg font-bold transition flex items-center gap-2 bg-dark/60 px-4 py-1.5 rounded-xl border border-dark-border">
-                    <i class="fa-solid fa-xmark"></i> <span data-i18n="close">إغلاق</span>
+                <button onclick="closePlayer()" class="text-gray-400 hover:text-red-500 text-sm font-bold transition flex items-center gap-2 bg-dark/70 px-4 py-1.5 rounded-xl border border-dark-border shadow">
+                    <i class="fa-solid fa-xmark"></i> <span data-i18n="close">إغلاق ومشاهدة لاحقة</span>
                 </button>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <!-- الفيديو والتحكم -->
+                <!-- الفيديو والتحكم المتقدم -->
                 <div class="md:col-span-2 flex flex-col gap-3">
-                    <div class="bg-black rounded-2xl overflow-hidden border border-gold/40 shadow-2xl relative aspect-video flex items-center justify-center">
+                    <div class="bg-black rounded-2xl overflow-hidden border border-gold/50 shadow-2xl relative aspect-video flex items-center justify-center">
                         <video id="mainVideo" controls class="w-full h-full object-cover">
                             <source id="videoSource" src="" type="video/mp4">
                             متصفحك لا يدعم تشغيل الفيديو.
                         </video>
                     </div>
 
-                    <!-- السيرفرات والأدوات الإضافية -->
+                    <!-- شريط أدوات المشغل المتطورة -->
                     <div class="flex flex-wrap justify-between items-center gap-2">
                         <div class="flex gap-2">
                             <button onclick="switchServer(0)" id="srv0" class="gold-bg text-black px-3.5 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow">
-                                <i class="fa-solid fa-server"></i> سيرفر VIP HD
+                                <i class="fa-solid fa-server"></i> سيرفر VIP 4K
                             </button>
                             <button onclick="switchServer(1)" id="srv1" class="glass-card text-gray-300 hover:text-gold px-3.5 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5">
                                 <i class="fa-solid fa-server"></i> سيرفر سريع
                             </button>
                         </div>
                         <div class="flex gap-2 text-xs">
-                            <button onclick="changeSpeed(1)" class="glass-card px-2.5 py-1 rounded-lg text-gold font-bold">1x</button>
-                            <button onclick="changeSpeed(1.5)" class="glass-card px-2.5 py-1 rounded-lg hover:text-gold">1.5x</button>
-                            <button onclick="changeSpeed(2)" class="glass-card px-2.5 py-1 rounded-lg hover:text-gold">2x</button>
+                            <button onclick="changeSpeed(1)" class="glass-card px-3 py-1 rounded-lg text-gold font-bold">1x</button>
+                            <button onclick="changeSpeed(1.25)" class="glass-card px-3 py-1 rounded-lg hover:text-gold">1.25x</button>
+                            <button onclick="changeSpeed(1.5)" class="glass-card px-3 py-1 rounded-lg hover:text-gold">1.5x</button>
+                            <button onclick="changeSpeed(2)" class="glass-card px-3 py-1 rounded-lg hover:text-gold">2x</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- قائمة الحلقات -->
-                <div class="glass-card rounded-2xl p-4 h-[280px] md:h-[400px] flex flex-col">
+                <!-- قائمة الحلقات الجانبية المتجاوبة -->
+                <div class="glass-card rounded-2xl p-4 h-[280px] md:h-[400px] flex flex-col shadow-xl">
                     <h4 class="text-sm font-bold gold-text mb-3 border-b border-dark-border pb-2 flex items-center justify-between">
                         <span><i class="fa-solid fa-list-ul ml-1"></i> <span data-i18n="episodesList">قائمة الحلقات</span></span>
                         <span id="currentEpLabel" class="text-xs text-gray-400">الحلقة 1</span>
@@ -311,8 +340,8 @@
         </div>
     </div>
 
-    <!-- التذييل -->
-    <footer class="text-center py-8 border-t border-dark-border text-gray-500 text-xs mt-auto">
+    <!-- التذييل الملكي -->
+    <footer class="text-center py-8 border-t border-dark-border text-gray-500 text-xs mt-auto bg-dark/50">
         <p class="gold-text text-xl font-bold mb-1 tracking-widest">WHO ANIME</p>
         <p data-i18n="footerText">المنصة العربية الأولى لعشاق الأنمي الفاخر. جميع الحقوق محفوظة &copy; 2026</p>
     </footer>
@@ -322,13 +351,12 @@
         <i class="fa-solid fa-arrow-up"></i>
     </button>
 
-    <!-- ================= البرمجة الكاملة (JavaScript) ================= -->
+    <!-- ================= البرمجة الكاملة والذكية (JavaScript Engine) ================= -->
     <script>
-        // قاعدة البيانات الشاملة مع التصنيفات والقصة
         const animeDB = [
             { id: 1, title: "Attack on Titan", genre: "أكشن", rating: 9.9, ep: 87, desc: "صراع البشرية الأخير ضد العمالقة العملاقة وكشف أسرار العالم خلف الجدران.", img: "https://cdn.myanimelist.net/images/anime/10/47347.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
             { id: 2, title: "Solo Leveling", genre: "أكشن", rating: 9.8, ep: 12, desc: "قصة الصياد الأضعف سونغ جين وو الذي يكتسب قدرة فريدة للارتقاء بمستواه بلا حدود.", img: "https://cdn.myanimelist.net/images/anime/1543/139020.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" },
-            { id: 3, title: "Jujutsu Kaisen", genre: "خيال", rating: 9.7, ep: 24, desc: "طلاب ثانوية السحر يقاتلون اللعנות الخارقة لحماية العالم من الدمار.", img: "https://cdn.myanimelist.net/images/anime/1171/109222.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4" },
+            { id: 3, title: "Jujutsu Kaisen", genre: "خيال", rating: 9.7, ep: 24, desc: "طلاب ثانوية السحر يقاتلون اللعنات الخارقة لحماية العالم من الدمار.", img: "https://cdn.myanimelist.net/images/anime/1171/109222.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4" },
             { id: 4, title: "Demon Slayer", genre: "أكشن", rating: 9.6, ep: 11, desc: "تانجيرو ينضم لفيلق قتلة الشياطين للانتقام لعائلته وإعادة أخته لحالتها البشرية.", img: "https://cdn.myanimelist.net/images/anime/1286/99889.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4" },
             { id: 5, title: "One Piece", genre: "مغامرة", rating: 9.9, ep: 1080, desc: "مغامرة لوفي وطاقمه الأسطوري للبحث عن الكنز الأعظم ونيل لقب ملك القراصنة.", img: "https://cdn.myanimelist.net/images/anime/6/73245.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
             { id: 6, title: "Chainsaw Man", genre: "دراما", rating: 9.4, ep: 12, desc: "دينجي الذي يدمج روحه مع شيطان المنشار ليخوض معارك دموية وصاخبة.", img: "https://cdn.myanimelist.net/images/anime/1806/126216.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
@@ -340,35 +368,34 @@
             { id: 12, title: "Spy x Family", genre: "مغامرة", rating: 9.5, ep: 37, desc: "جاسوس وقاتلة ومخاطبة عقول يشكلون عائلة مزيفة لأهداف سرية.", img: "https://cdn.myanimelist.net/images/anime/1441/122795.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" }
         ];
 
-        // نظام المفضلة وسجل المشاهدة (LocalStorage)
         let favorites = JSON.parse(localStorage.getItem('who_favs')) || [];
+        let historyList = JSON.parse(localStorage.getItem('who_history')) || [];
         let currentLang = 'ar';
         let currentFilter = 'الكل';
         let activeAnimeId = null;
 
-        // القواميس للغة (عربي / English)
         const translations = {
             ar: {
-                home: "الرئيسية", latest: "أحدث الحلقات", favorites: "المفضلة", guide: "دليل الموقع",
+                home: "الرئيسية", latest: "أحدث الحلقات", favorites: "المفضلة", history: "سجل المشاهدة", guide: "دليل الموقع",
                 login: "تسجيل الدخول", watchNow: "مشاهدة الآن", details: "التفاصيل",
-                bannerTag: "الأنمي الأكثر مشاهدة هذا الأسبوع", bannerDesc: "انغمس في عالم الخيال المطلق، معارك أسطورية، ورسوم جرافيكية فائقة الجودة. استعد لتجربة مشاهدة لا تُنسى.",
-                stat1: "أنمي مترجم", stat2: "حلقة أصلية", stat3: "سيرفرات مستقرة", stat4: "إعلانات مزعجة",
-                recommendations: "ترشيحات المنصة", latestEpisodes: "أحدث الحلقات المضافة",
+                bannerTag: "الأنمي الأسطوري المتصدر هذا الأسبوع", bannerDesc: "انغمس في عالم الخيال المطلق، معارك أسطورية، ورسوم جرافيكية فائقة الجودة. استعد لتجربة مشاهدة لا تُنسى.",
+                stat1: "أنمي مترجم حصري", stat2: "حلقة أصلية عالية الدقة", stat3: "سيرفرات مستقرة وآمنة", stat4: "إعلانات مزعجة تماماً",
+                recommendations: "ترشيحات المنصة الأسطورية", latestEpisodes: "أحدث الحلقات المضافة حديثاً",
                 myFavorites: "قائمة المفضلة لديك", guideTitle: "دليل منصة Who Anime",
                 guideH1: "مرحباً بك في عائلة Who Anime", guideP1: "منصة Who Anime هي وجهتك الأولى لمشاهدة أفضل أعمال الأنمي بجودة خارقة وترجمة احترافية.",
                 guideH2: "مميزات المنصة الخارقة", feat1: "دقة عرض تصل إلى 1080p Full HD حقيقية.", feat2: "تحديثات فورية ويومية للحلقات الجديدة.",
                 feat3: "سيرفرات متعددة وسريعة تعمل على جميع الأجهزة بكفاءة.", feat4: "حفظ المفضلة وسجل المشاهدة تلقائياً.",
-                episodesList: "قائمة الحلقات", close: "إغلاق", favorite: "المفضلة", footerText: "المنصة العربية الأولى لعشاق الأنمي الفاخر. جميع الحقوق محفوظة © 2026",
+                episodesList: "قائمة الحلقات", close: "إغلاق ومشاهدة لاحقة", favorite: "المفضلة", footerText: "المنصة العربية الأولى لعشاق الأنمي الفاخر. جميع الحقوق محفوظة © 2026",
                 sortDefault: "ترتيب افتراضي", sortRating: "الأعلى تقييماً ⭐", sortEp: "الأكثر حلقات 📺",
                 all: "الكل", action: "⚔️ أكشن", fantasy: "🌌 خيال علمي", adventure: "🗺️ مغامرات", drama: "🎭 دراما"
             },
             en: {
-                home: "Home", latest: "Latest", favorites: "Favorites", guide: "Guide",
+                home: "Home", latest: "Latest", favorites: "Favorites", history: "History", guide: "Guide",
                 login: "Sign In", watchNow: "Watch Now", details: "Details",
-                bannerTag: "Most Popular Anime This Week", bannerDesc: "Immerse yourself in a world of absolute fantasy, legendary battles, and top-tier graphics.",
-                stat1: "Subbed Anime", stat2: "Original Episodes", stat3: "Stable Servers", stat4: "Annoying Ads",
-                recommendations: "Platform Recommendations", latestEpisodes: "Latest Added Episodes",
-                myFavorites: "Your Favorite List", guideTitle: "Who Anime Guide",
+                bannerTag: "Top Trending Anime This Week", bannerDesc: "Immerse yourself in a world of absolute fantasy, legendary battles, and top-tier graphics.",
+                stat1: "Exclusive Anime", stat2: "HD Original Episodes", stat3: "Secure Servers", stat4: "Annoying Ads",
+                recommendations: "Legendary Recommendations", latestEpisodes: "Latest Added Episodes",
+                myFavorites: "Your Favorite List", history: "Watch History", guideTitle: "Who Anime Guide",
                 guideH1: "Welcome to Who Anime Family", guideP1: "Your ultimate destination for high-quality anime streaming with professional subtitles.",
                 guideH2: "Awesome Features", feat1: "True 1080p Full HD resolution.", feat2: "Daily instant updates for new episodes.",
                 feat3: "Multiple fast servers compatible with all devices.", feat4: "Auto-save favorites and watch history.",
@@ -378,13 +405,11 @@
             }
         };
 
-        // نظام التنقل (SPA)
         function nav(pageId) {
             document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
             document.getElementById('sec-' + pageId).classList.add('active');
             
-            // تحديث كلاسات الأزرار
-            ['home', 'latest', 'favorites', 'guide'].forEach(p => {
+            ['home', 'latest', 'favorites', 'history', 'guide'].forEach(p => {
                 const el = document.getElementById('nav-' + p);
                 const mobEl = document.getElementById('mob-' + p);
                 if(el) { el.classList.toggle('text-gold', p === pageId); el.classList.toggle('text-gray-300', p !== pageId); }
@@ -392,25 +417,25 @@
             });
 
             if(pageId === 'favorites') renderFavorites();
+            if(pageId === 'history') renderHistory();
             window.scrollTo(0, 0);
         }
 
-        // عرض الكروت
         function renderCards(containerId, data) {
             const container = document.getElementById(containerId);
             if(!container) return;
             
             if(data.length === 0) {
-                container.innerHTML = `<div class="col-span-full text-center text-gray-500 py-12" data-i18n="noResults">لا توجد نتائج مطابقة.</div>`;
+                container.innerHTML = `<div class="col-span-full text-center text-gray-500 py-12">لا توجد نتائج مطابقة.</div>`;
                 return;
             }
 
             container.innerHTML = data.map(a => {
                 const isFav = favorites.includes(a.id);
                 return `
-                    <div class="glass-card rounded-2xl overflow-hidden card-hover cursor-pointer group relative">
+                    <div class="glass-card rounded-2xl overflow-hidden card-hover cursor-pointer group relative shadow-lg">
                         <div class="absolute top-2 left-2 z-20">
-                            <button onclick="event.stopPropagation(); toggleFavorite(${a.id})" class="w-8 h-8 rounded-full bg-black/70 backdrop-blur-md flex items-center justify-center text-gold border border-gold/30 hover:scale-110 transition">
+                            <button onclick="event.stopPropagation(); toggleFavorite(${a.id})" class="w-8 h-8 rounded-full bg-black/75 backdrop-blur-md flex items-center justify-center text-gold border border-gold/30 hover:scale-110 transition shadow">
                                 <i class="${isFav ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
                             </button>
                         </div>
@@ -425,7 +450,7 @@
                             <h4 class="font-bold text-sm mb-1 truncate text-white group-hover:text-gold transition">${a.title}</h4>
                             <div class="flex justify-between text-xs text-gray-400">
                                 <span>${a.ep} حلقة</span>
-                                <span class="text-gold font-bold">HD</span>
+                                <span class="text-gold font-bold">1080p HD</span>
                             </div>
                         </div>
                     </div>
@@ -433,12 +458,10 @@
             }).join('');
         }
 
-        // تحديث العرض الأولي
         renderCards('grid-home', animeDB);
         renderCards('grid-latest', animeDB);
         document.getElementById('favCount').innerText = favorites.length;
 
-        // فلترة التصنيفات
         function filterGenre(genre, btn) {
             currentFilter = genre;
             document.querySelectorAll('.genre-btn').forEach(b => {
@@ -452,7 +475,6 @@
             renderCards('grid-home', filtered);
         }
 
-        // ترتيب الأنمي
         function sortAnime() {
             const sortBy = document.getElementById('sortSelect').value;
             let sorted = [...animeDB];
@@ -461,7 +483,6 @@
             renderCards('grid-home', sorted);
         }
 
-        // البحث الفوري
         function searchAnime() {
             const query = document.getElementById('searchInput').value.toLowerCase();
             const filtered = animeDB.filter(a => a.title.toLowerCase().includes(query) || a.desc.toLowerCase().includes(query));
@@ -469,7 +490,6 @@
             renderCards('grid-latest', filtered);
         }
 
-        // نظام المفضلة
         function toggleFavorite(id) {
             const index = favorites.indexOf(id);
             if(index > -1) {
@@ -491,7 +511,18 @@
             renderCards('grid-favorites', favsData);
         }
 
-        // نافذة تفاصيل الأنمي
+        function renderHistory() {
+            const historyData = animeDB.filter(a => historyList.includes(a.id));
+            renderCards('grid-history', historyData);
+        }
+
+        function clearHistory() {
+            historyList = [];
+            localStorage.removeItem('who_history');
+            renderHistory();
+            showToast('تم مسح سجل المشاهدة', 'fa-trash');
+        }
+
         const detailsModal = document.getElementById('detailsModal');
         function openDetails(id) {
             const anime = animeDB.find(a => a.id === id);
@@ -515,7 +546,19 @@
         function closeDetails() { detailsModal.classList.remove('flex'); detailsModal.classList.add('hidden'); }
         function toggleFavoriteFromModal() { if(activeAnimeId) { toggleFavorite(activeAnimeId); openDetails(activeAnimeId); } }
 
-        // مشغل الفيديو الاحترافي
+        // نافذة الطلب
+        const requestModal = document.getElementById('requestModal');
+        function openRequestModal() { requestModal.classList.remove('hidden'); requestModal.classList.add('flex'); }
+        function closeRequestModal() { requestModal.classList.remove('flex'); requestModal.classList.add('hidden'); }
+        function submitAnimeRequest() {
+            const val = document.getElementById('reqAnimeInput').value.trim();
+            if(!val) { showToast('الرجاء كتابة اسم الأنمي أولاً', 'fa-triangle-exclamation'); return; }
+            closeRequestModal();
+            document.getElementById('reqAnimeInput').value = '';
+            showToast('تم إرسال طلبك بنجاح وسيتم توفيره قريباً!', 'fa-paper-plane');
+        }
+
+        // مشغل الفيديو
         const playerModal = document.getElementById('playerModal');
         const video = document.getElementById('mainVideo');
         const source = document.getElementById('videoSource');
@@ -523,6 +566,13 @@
         function openPlayer(id) {
             const anime = animeDB.find(a => a.id === id);
             if(!anime) return;
+
+            // إضافة للسجل
+            if(!historyList.includes(id)) {
+                historyList.unshift(id);
+                if(historyList.length > 15) historyList.pop();
+                localStorage.setItem('who_history', JSON.stringify(historyList));
+            }
 
             document.getElementById('playerTitle').innerText = anime.title;
             source.src = anime.video;
@@ -533,13 +583,12 @@
             playerModal.classList.add('flex');
             document.body.style.overflow = 'hidden';
 
-            // بناء قائمة الحلقات
             const epList = document.getElementById('episodeList');
             epList.innerHTML = '';
-            const limit = Math.min(anime.ep, 20);
+            const limit = Math.min(anime.ep, 25);
             for(let i = 1; i <= limit; i++) {
                 epList.innerHTML += `
-                    <div onclick="selectEpisode(this, ${i})" class="ep-item flex justify-between items-center p-2.5 rounded-xl bg-dark/40 hover:bg-gold/10 border border-transparent hover:border-gold/30 cursor-pointer transition text-xs ${i === 1 ? 'bg-gold/15 border-gold/40 text-gold font-bold' : 'text-gray-300'}">
+                    <div onclick="selectEpisode(this, ${i})" class="ep-item flex justify-between items-center p-2.5 rounded-xl bg-dark/50 hover:bg-gold/15 border border-transparent hover:border-gold/40 cursor-pointer transition text-xs ${i === 1 ? 'bg-gold/20 border-gold/50 text-gold font-bold' : 'text-gray-300'}">
                         <span>الحلقة ${i}</span>
                         <i class="fa-solid fa-play text-[10px]"></i>
                     </div>
@@ -556,11 +605,11 @@
 
         function selectEpisode(el, epNum) {
             document.querySelectorAll('.ep-item').forEach(item => {
-                item.classList.remove('bg-gold/15', 'border-gold/40', 'text-gold', 'font-bold');
+                item.classList.remove('bg-gold/20', 'border-gold/50', 'text-gold', 'font-bold');
                 item.classList.add('text-gray-300');
             });
             el.classList.remove('text-gray-300');
-            el.classList.add('bg-gold/15', 'border-gold/40', 'text-gold', 'font-bold');
+            el.classList.add('bg-gold/20', 'border-gold/50', 'text-gold', 'font-bold');
             document.getElementById('currentEpLabel').innerText = `الحلقة ${epNum}`;
             video.currentTime = 0;
             video.play();
@@ -569,19 +618,17 @@
         function switchServer(srvIndex) {
             document.getElementById('srv0').className = srvIndex === 0 ? 'gold-bg text-black px-3.5 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow' : 'glass-card text-gray-300 hover:text-gold px-3.5 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5';
             document.getElementById('srv1').className = srvIndex === 1 ? 'gold-bg text-black px-3.5 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow' : 'glass-card text-gray-300 hover:text-gold px-3.5 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5';
-            showToast('تم التبديل للسيرفر الجديد بنجاح', 'fa-server');
+            showToast('تم الاتصال بالسيرفر الجديد بنجاح', 'fa-server');
         }
 
         function changeSpeed(speed) { video.playbackRate = speed; showToast(`سرعة التشغيل: ${speed}x`, 'fa-gauge'); }
 
-        // تشغيل عشوائي
         function playRandomAnime() {
             const random = animeDB[Math.floor(Math.random() * animeDB.length)];
             openPlayer(random.id);
             showToast(`تشغيل عشوائي: ${random.title}`, 'fa-dice');
         }
 
-        // إشعارات Toast
         function showToast(msg, icon = 'fa-circle-check') {
             const toast = document.getElementById('toast');
             document.getElementById('toastMsg').innerText = msg;
@@ -590,14 +637,12 @@
             setTimeout(() => toast.classList.remove('show'), 3000);
         }
 
-        // تبديل اللغة (عربي / English)
         function toggleLang() {
             currentLang = currentLang === 'ar' ? 'en' : 'ar';
             document.getElementById('htmlRoot').setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
             document.getElementById('htmlRoot').setAttribute('lang', currentLang);
             document.getElementById('langBtnText').innerText = currentLang === 'ar' ? 'EN' : 'AR';
             
-            // تحديث النصوص
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if(translations[currentLang][key]) el.innerText = translations[currentLang][key];
@@ -605,7 +650,6 @@
             showToast(currentLang === 'ar' ? 'تم التفعيل بالعربية' : 'Switched to English', 'fa-language');
         }
 
-        // تبديل الوضع (ليلي / نهاري)
         function toggleTheme() {
             const body = document.body;
             const icon = document.getElementById('themeIcon');
@@ -620,7 +664,6 @@
             }
         }
 
-        // زر العودة للأعلى
         window.addEventListener('scroll', () => {
             const btn = document.getElementById('topBtn');
             if(window.scrollY > 400) btn.classList.replace('hidden', 'flex');
