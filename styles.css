@@ -1,1 +1,14 @@
-
+/* الأنماط العامة والتنسيقات الفاخرة للمنصة */
+body { transition: background-color 0.4s ease, color 0.4s ease; scroll-behavior: smooth; background-color: #070709; color: #f3f4f6; font-family: 'Cairo', sans-serif; margin: 0; padding: 0; }
+.gold-text { background: linear-gradient(135deg, #fcf6ba, #d4af37, #aa771c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.gold-bg { background: linear-gradient(135deg, #d4af37, #aa771c); }
+.glass-card { background: rgba(17, 17, 22, 0.95); backdrop-filter: blur(24px); border: 1px solid rgba(212, 175, 55, 0.25); transition: all 0.3s ease; }
+.light .glass-card { background: rgba(255, 255, 255, 0.95); border: 1px solid rgba(212, 175, 55, 0.4); }
+.card-hover:hover { transform: translateY(-8px) scale(1.02); border-color: #d4af37; box-shadow: 0 20px 40px rgba(212, 175, 55, 0.3); }
+.page-section { display: none; opacity: 0; transition: opacity 0.3s ease; }
+.page-section.active { display: block; opacity: 1; }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #070709; }
+::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 10px; }
+#toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(100px); transition: 0.3s; opacity: 0; z-index: 9999; }
+#toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
