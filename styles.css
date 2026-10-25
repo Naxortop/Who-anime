@@ -1,171 +1,103 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
+/* ==========================================================
+   WHO ANIME - MASTER STYLESHEET 2026 (ULTIMATE EDITION)
+   ========================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap');
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+:root {
+    --gold-primary: #d4af37;
+    --gold-light: #fcf6ba;
+    --gold-dark: #aa771c;
+    --bg-dark: #070709;
+    --card-bg: rgba(17, 17, 22, 0.95);
+    --border-color: rgba(212, 175, 55, 0.3);
 }
 
 body {
-    background-color: #0f1015;
-    color: #e5e7eb;
+    transition: background-color 0.4s ease, color 0.4s ease;
+    scroll-behavior: smooth;
+    background-color: var(--bg-dark);
+    color: #f3f4f6;
     font-family: 'Cairo', sans-serif;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
 }
 
-/* هيدر موقع WitAnime النظيف */
-header {
-    background-color: #171821;
-    border-bottom: 2px solid #ff9800;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+.gold-text {
+    background: linear-gradient(135deg, var(--gold-light), var(--gold-primary), var(--gold-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.75rem 1rem;
+.gold-bg {
+    background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
 }
 
-.logo {
-    color: #ff9800;
-    font-size: 1.5rem;
-    font-weight: 900;
-    text-decoration: none;
-    cursor: pointer;
+.glass-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.nav-menu {
-    display: flex;
-    gap: 1.5rem;
-    list-style: none;
+.light .glass-card {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(212, 175, 55, 0.4);
 }
 
-.nav-menu a {
-    color: #cbd5e1;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.nav-menu a:hover, .nav-menu a.active {
-    color: #ff9800;
-}
-
-/* المحتوى الرئيسي */
-main {
-    max-width: 1200px;
-    width: 100%;
-    margin: 20px auto;
-    padding: 0 1rem;
-    flex: 1;
+.card-hover:hover {
+    transform: translateY(-10px) scale(1.03);
+    border-color: var(--gold-primary);
+    box-shadow: 0 30px 60px rgba(212, 175, 55, 0.35);
 }
 
 .page-section {
     display: none;
+    opacity: 0;
+    transition: opacity 0.35s ease;
 }
 
 .page-section.active {
     display: block;
+    opacity: 1;
+    animation: fadeIn 0.4s ease forwards;
 }
 
-/* شبكة الأنميات الاحترافية */
-.anime-grid {
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #070709;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--gold-primary);
+    border-radius: 10px;
+}
+
+#toast {
+    position: fixed;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0;
+    z-index: 9999;
+}
+#toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+/* تنسيقات إضافية لضمان استقرار الشبكة والعرض المتجاوب */
+.anime-grid-box {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
 }
-
-@media (min-width: 768px) {
-    .anime-grid {
-        grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-        gap: 1.25rem;
-    }
-}
-
-.anime-card {
-    background: #171821;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid #222531;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.anime-card:hover {
-    transform: translateY(-5px);
-    border-color: #ff9800;
-}
-
-.card-img-wrapper {
-    position: relative;
-    aspect-ratio: 3/4;
-    width: 100%;
-}
-
-.card-img-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.card-badge {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    background: #ff9800;
-    color: #000;
-    font-size: 0.7rem;
-    font-weight: 800;
-    padding: 2px 6px;
-    border-radius: 4px;
-}
-
-.card-body {
-    padding: 10px;
-}
-
-.card-title {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: #fff;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-/* الأزرار العصرية */
-.btn-witinime {
-    background-color: #ff9800;
-    color: #000;
-    font-weight: 800;
-    padding: 8px 16px;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.btn-witinime:hover {
-    background-color: #e68900;
-}
-
-/* الفوتر */
-footer {
-    background-color: #171821;
-    border-top: 1px solid #222531;
-    text-align: center;
-    padding: 1.5rem;
-    font-size: 0.8rem;
-    color: #9ca3af;
-    margin-top: auto;
-}
+@media (min-width: 640px) { .anime-grid-box { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 768px) { .anime-grid-box { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 1024px) { .anime-grid-box { grid-template-columns: repeat(5, 1fr); } }
