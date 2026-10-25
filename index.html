@@ -113,7 +113,7 @@
             <div class="glass-card rounded-2xl p-4 mb-8 flex items-center justify-between border-gold/40 bg-gradient-to-r from-gold/15 via-transparent to-transparent shadow-xl">
                 <div class="flex items-center gap-3 text-xs md:text-sm font-bold">
                     <span class="bg-gold text-black px-2.5 py-1 rounded-lg text-xs animate-pulse">تحديث خيالي</span>
-                    <span class="text-gray-200">تم ضبط وتنسيق مشغل الفيديو واختيار الأنمي بشكل احترافي ومتناسق! 🚀</span>
+                    <span class="text-gray-200">تم ضبط وتنسيق مشغل الفيديو واختيار الحلقات والأنمي بشكل احترافي ومتناسق! 🚀</span>
                 </div>
                 <button onclick="this.parentElement.style.display='none'" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
             </div>
@@ -132,7 +132,7 @@
                         انغمس في عالم الخيال المطلق، معارك أسطورية، ورسوم جرافيكية فائقة الجودة. استعد لتجربة مشاهدة لا تُنسى على منصة Who Anime.
                     </p>
                     <div class="flex gap-4 pt-2">
-                        <button onclick="openPlayer(1)" class="gold-bg text-black font-bold px-7 py-3 rounded-xl hover:scale-105 transition flex items-center gap-2 shadow-lg shadow-gold/30">
+                        <button onclick="openPlayer(1, 1)" class="gold-bg text-black font-bold px-7 py-3 rounded-xl hover:scale-105 transition flex items-center gap-2 shadow-lg shadow-gold/30">
                             <i class="fa-solid fa-play"></i> <span data-i18n="watchNow">مشاهدة الآن</span>
                         </button>
                         <button onclick="openDetails(1)" class="glass-card hover:border-gold px-6 py-3 rounded-xl font-bold transition flex items-center gap-2">
@@ -285,7 +285,7 @@
     <div id="playerModal" class="fixed inset-0 bg-black/98 backdrop-blur-xl z-[120] hidden flex-col justify-center items-center p-2 md:p-6">
         <div class="w-full max-w-5xl relative">
             
-            <!-- تم تعديل الهيدر العلوي للمشغل ليكون مرتب ومنسق تماماً بدون أي تداخل -->
+            <!-- هيدر المشغل المرتب والمنسق -->
             <div class="flex justify-between items-center mb-4 px-2 border-b border-dark-border pb-3">
                 <div class="flex items-center gap-3">
                     <span class="w-2.5 h-6 gold-bg rounded-full"></span>
@@ -350,19 +350,152 @@
 
     <!-- ================= البرمجة الكاملة والذكية (JavaScript Engine) ================= -->
     <script>
+        // قاعدة البيانات تحتوي على روابط فيديوهات متعددة ومختلفة لكل حلقات الأنمي لتشتغل بشكل حقيقي وفعلي
         const animeDB = [
-            { id: 1, title: "Attack on Titan", genre: "أكشن", rating: 9.9, ep: 87, desc: "صراع البشرية الأخير ضد العمالقة العملاقة وكشف أسرار العالم خلف الجدران.", img: "https://cdn.myanimelist.net/images/anime/10/47347.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
-            { id: 2, title: "Solo Leveling", genre: "أكشن", rating: 9.8, ep: 12, desc: "قصة الصياد الأضعف سونغ جين وو الذي يكتسب قدرة فريدة للارتقاء بمستواه بلا حدود.", img: "https://cdn.myanimelist.net/images/anime/1543/139020.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" },
-            { id: 3, title: "Jujutsu Kaisen", genre: "خيال", rating: 9.7, ep: 24, desc: "طلاب ثانوية السحر يقاتلون اللعنات الخارقة لحماية العالم من الدمار.", img: "https://cdn.myanimelist.net/images/anime/1171/109222.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4" },
-            { id: 4, title: "Demon Slayer", genre: "أكشن", rating: 9.6, ep: 11, desc: "تانجيرو ينضم لفيلق قتلة الشياطين للانتقام لعائلته وإعادة أخته لحالتها البشرية.", img: "https://cdn.myanimelist.net/images/anime/1286/99889.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4" },
-            { id: 5, title: "One Piece", genre: "مغامرة", rating: 9.9, ep: 1080, desc: "مغامرة لوفي وطاقمه الأسطوري للبحث عن الكنز الأعظم ونيل لقب ملك القراصنة.", img: "https://cdn.myanimelist.net/images/anime/6/73245.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
-            { id: 6, title: "Chainsaw Man", genre: "دراما", rating: 9.4, ep: 12, desc: "دينجي الذي يدمج روحه مع شيطان المنشار ليخوض معارك دموية وصاخبة.", img: "https://cdn.myanimelist.net/images/anime/1806/126216.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
-            { id: 7, title: "My Hero Academia", genre: "أكشن", rating: 9.2, ep: 138, desc: "ميدوريا الفتى الخالي من القوى يورث قوة الأسطورة أولمايت ليصبح البطل الأعظم.", img: "https://cdn.myanimelist.net/images/anime/10/78745.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" },
-            { id: 8, title: "Tokyo Revengers", genre: "دراما", rating: 9.0, ep: 37, desc: "تاكيميتشي يعود بالزمن لإنقاذ حياة حبيبته عبر السيطرة على عصابات طوكيو.", img: "https://cdn.myanimelist.net/images/anime/1830/118337.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4" },
-            { id: 9, title: "Hunter x Hunter", genre: "مغامرة", rating: 9.8, ep: 148, desc: "غون فريكس ينطلق في رحلة خطيرة ليصبح صائداً محترفاً ويعثر على أبيه.", img: "https://cdn.myanimelist.net/images/anime/1337/99013.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4" },
-            { id: 10, title: "Death Note", genre: "خيال", rating: 9.7, ep: 37, desc: "لايت ياجامي يعثر على دفتر الموت ويحاول تطهير العالم بصفته الإله الجديد.", img: "https://cdn.myanimelist.net/images/anime/9/9453.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" },
-            { id: 11, title: "Fullmetal Alchemist", genre: "خيال", rating: 9.9, ep: 64, desc: "الأخوان إلريك يخوضان مغامرة كبرى لاستعادة أجسادهما بعد تجسيد بشري محرم.", img: "https://cdn.myanimelist.net/images/anime/1223/96541.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" },
-            { id: 12, title: "Spy x Family", genre: "مغامرة", rating: 9.5, ep: 37, desc: "جاسوس وقاتلة ومخاطبة عقول يشكلون عائلة مزيفة لأهداف سرية.", img: "https://cdn.myanimelist.net/images/anime/1441/122795.jpg", video: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4" }
+            { 
+                id: 1, title: "Attack on Titan", genre: "أكشن", rating: 9.9, ep: 5, 
+                desc: "صراع البشرية الأخير ضد العمالقة العملاقة وكشف أسرار العالم خلف الجدران.", 
+                img: "https://cdn.myanimelist.net/images/anime/10/47347.jpg", 
+                videos: [
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+                ]
+            },
+            { 
+                id: 2, title: "Solo Leveling", genre: "أكشن", rating: 9.8, ep: 5, 
+                desc: "قصة الصياد الأضعف سونغ جين وو الذي يكتسب قدرة فريدة للارتقاء بمستواه بلا حدود.", 
+                img: "https://cdn.myanimelist.net/images/anime/1543/139020.jpg", 
+                videos: [
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+                ]
+            },
+            { 
+                id: 3, title: "Jujutsu Kaisen", genre: "خيال", rating: 9.7, ep: 5, 
+                desc: "طلاب ثانوية السحر يقاتلون اللعنات الخارقة لحماية العالم من الدمار.", 
+                img: "https://cdn.myanimelist.net/images/anime/1171/109222.jpg", 
+                videos: [
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+                ]
+            },
+            { 
+                id: 4, title: "Demon Slayer", genre: "أكشن", rating: 9.6, ep: 5, 
+                desc: "تانجيرو ينضم لفيلق قتلة الشياطين للانتقام لعائلته وإعادة أخته لحالتها البشرية.", 
+                img: "https://cdn.myanimelist.net/images/anime/1286/99889.jpg", 
+                videos: [
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+                ]
+            },
+            { 
+                id: 5, title: "One Piece", genre: "مغامرة", rating: 9.9, ep: 5, 
+                desc: "مغامرة لوفي وطاقمه الأسطوري للبحث عن الكنز الأعظم ونيل لقب ملك القراصنة.", 
+                img: "https://cdn.myanimelist.net/images/anime/6/73245.jpg", 
+                videos: [
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4"
+                ]
+            },
+            { 
+                id: 6, title: "Chainsaw Man", genre: "دراما", rating: 9.4, ep: 5, 
+                desc: "دينجي الذي يدمج روحه مع شيطان المنشار ليخوض معارك دموية وصاخبة.", 
+                img: "https://cdn.myanimelist.net/images/anime/1806/126216.jpg", 
+                videos: [
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+                ]
+            },
+            { 
+                id: 7, title: "My Hero Academia", genre: "أكشن", rating: 9.2, ep: 5, 
+                desc: "ميدوريا الفتى الخالي من القوى يورث قوة الأسطورة أولمايت ليصبح البطل الأعظم.", 
+                img: "https://cdn.myanimelist.net/images/anime/10/78745.jpg", 
+                videos: [
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+                ]
+            },
+            { 
+                id: 8, title: "Tokyo Revengers", genre: "دراما", rating: 9.0, ep: 5, 
+                desc: "تاكيميتشي يعود بالزمن لإنقاذ حياة حبيبته عبر السيطرة على عصابات طوكيو.", 
+                img: "https://cdn.myanimelist.net/images/anime/1830/118337.jpg", 
+                videos: [
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+                ]
+            },
+            { 
+                id: 9, title: "Hunter x Hunter", genre: "مغامرة", rating: 9.8, ep: 5, 
+                desc: "غون فريكس ينطلق في رحلة خطيرة ليصبح صائداً محترفاً ويعثر على أبيه.", 
+                img: "https://cdn.myanimelist.net/images/anime/1337/99013.jpg", 
+                videos: [
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+                ]
+            },
+            { 
+                id: 10, title: "Death Note", genre: "خيال", rating: 9.7, ep: 5, 
+                desc: "لايت ياجامي يعثر على دفتر الموت ويحاول تطهير العالم بصفته الإله الجديد.", 
+                img: "https://cdn.myanimelist.net/images/anime/9/9453.jpg", 
+                videos: [
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4"
+                ]
+            },
+            { 
+                id: 11, title: "Fullmetal Alchemist", genre: "خيال", rating: 9.9, ep: 5, 
+                desc: "الأخوان إلريك يخوضان مغامرة كبرى لاستعادة أجسادهما بعد تجسيد بشري محرم.", 
+                img: "https://cdn.myanimelist.net/images/anime/1223/96541.jpg", 
+                videos: [
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+                ]
+            },
+            { 
+                id: 12, title: "Spy x Family", genre: "مغامرة", rating: 9.5, ep: 5, 
+                desc: "جاسوس وقاتلة ومخاطبة عقول يشكلون عائلة مزيفة لأهداف سرية.", 
+                img: "https://cdn.myanimelist.net/images/anime/1441/122795.jpg", 
+                videos: [
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackSeeTheWorld.mp4",
+                    "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+                ]
+            }
         ];
 
         let favorites = JSON.parse(localStorage.getItem('who_favs')) || [];
@@ -370,6 +503,7 @@
         let currentLang = 'ar';
         let currentFilter = 'الكل';
         let activeAnimeId = null;
+        let currentAnimeVideos = [];
 
         const translations = {
             ar: {
@@ -446,7 +580,7 @@
                         <div class="p-3.5 relative z-10 -mt-10" onclick="openDetails(${a.id})">
                             <h4 class="font-bold text-sm mb-1 truncate text-white group-hover:text-gold transition">${a.title}</h4>
                             <div class="flex justify-between text-xs text-gray-400">
-                                <span>${a.ep} حلقة</span>
+                                <span>${a.ep} حلقات متاحة</span>
                                 <span class="text-gold font-bold">1080p HD</span>
                             </div>
                         </div>
@@ -529,11 +663,11 @@
             document.getElementById('detImg').src = anime.img;
             document.getElementById('detTitle').innerText = anime.title;
             document.getElementById('detRating').innerHTML = `<i class="fa-solid fa-star text-gold ml-1"></i> ${anime.rating}`;
-            document.getElementById('detEp').innerText = `${anime.ep} حلقة`;
+            document.getElementById('detEp').innerText = `${anime.ep} حلقات`;
             document.getElementById('detGenre').innerText = anime.genre;
             document.getElementById('detDesc').innerText = anime.desc;
             
-            document.getElementById('detPlayBtn').setAttribute('onclick', `closeDetails(); openPlayer(${id})`);
+            document.getElementById('detPlayBtn').setAttribute('onclick', `closeDetails(); openPlayer(${id}, 1)`);
             const isFav = favorites.includes(id);
             document.getElementById('detFavBtn').innerHTML = `<i class="${isFav ? 'fa-solid' : 'fa-regular'} fa-heart text-gold"></i> <span>${isFav ? 'إزالة من المفضلة' : 'المفضلة'}</span>`;
 
@@ -558,9 +692,12 @@
         const video = document.getElementById('mainVideo');
         const source = document.getElementById('videoSource');
 
-        function openPlayer(id) {
+        function openPlayer(id, episodeNum = 1) {
             const anime = animeDB.find(a => a.id === id);
             if(!anime) return;
+
+            activeAnimeId = id;
+            currentAnimeVideos = anime.videos;
 
             if(!historyList.includes(id)) {
                 historyList.unshift(id);
@@ -569,7 +706,10 @@
             }
 
             document.getElementById('playerTitle').innerText = anime.title;
-            source.src = anime.video;
+            
+            // تعيين فيديو الحلقة المحددة بناءً على مصفوفة الفيديوهات الخاصة بالأنمي
+            const videoIndex = (episodeNum - 1) % anime.videos.length;
+            source.src = anime.videos[videoIndex];
             video.load();
             video.play();
 
@@ -579,15 +719,16 @@
 
             const epList = document.getElementById('episodeList');
             epList.innerHTML = '';
-            const limit = Math.min(anime.ep, 25);
-            for(let i = 1; i <= limit; i++) {
+            for(let i = 1; i <= anime.ep; i++) {
+                const isSelected = i === episodeNum;
                 epList.innerHTML += `
-                    <div onclick="selectEpisode(this, ${i})" class="ep-item flex justify-between items-center p-2.5 rounded-xl bg-dark/50 hover:bg-gold/15 border border-transparent hover:border-gold/40 cursor-pointer transition text-xs ${i === 1 ? 'bg-gold/20 border-gold/50 text-gold font-bold' : 'text-gray-300'}">
+                    <div onclick="selectEpisode(this, ${id}, ${i})" class="ep-item flex justify-between items-center p-2.5 rounded-xl bg-dark/50 hover:bg-gold/15 border border-transparent hover:border-gold/40 cursor-pointer transition text-xs ${isSelected ? 'bg-gold/20 border-gold/50 text-gold font-bold' : 'text-gray-300'}">
                         <span>الحلقة ${i}</span>
                         <i class="fa-solid fa-play text-[10px]"></i>
                     </div>
                 `;
             }
+            document.getElementById('currentEpLabel').innerText = `الحلقة ${episodeNum}`;
         }
 
         function closePlayer() {
@@ -597,7 +738,7 @@
             video.pause();
         }
 
-        function selectEpisode(el, epNum) {
+        function selectEpisode(el, animeId, epNum) {
             document.querySelectorAll('.ep-item').forEach(item => {
                 item.classList.remove('bg-gold/20', 'border-gold/50', 'text-gold', 'font-bold');
                 item.classList.add('text-gray-300');
@@ -605,8 +746,14 @@
             el.classList.remove('text-gray-300');
             el.classList.add('bg-gold/20', 'border-gold/50', 'text-gold', 'font-bold');
             document.getElementById('currentEpLabel').innerText = `الحلقة ${epNum}`;
-            video.currentTime = 0;
-            video.play();
+            
+            const anime = animeDB.find(a => a.id === animeId);
+            if(anime) {
+                const videoIndex = (epNum - 1) % anime.videos.length;
+                source.src = anime.videos[videoIndex];
+                video.load();
+                video.play();
+            }
         }
 
         function switchServer(srvIndex) {
@@ -619,7 +766,7 @@
 
         function playRandomAnime() {
             const random = animeDB[Math.floor(Math.random() * animeDB.length)];
-            openPlayer(random.id);
+            openPlayer(random.id, 1);
             showToast(`تشغيل عشوائي: ${random.title}`, 'fa-dice');
         }
 
