@@ -1,3 +1,6 @@
+// ==========================================================
+// WHO ANIME - DATABASE MODULE 2026 (MEGA DATABASE)
+// ==========================================================
 const baseAnime = [
     { id: 1, title: "Attack on Titan", aniId: 16498, genre: "أكشن", rating: 9.9, ep: 25, img: "https://cdn.myanimelist.net/images/anime/10/47347.jpg", desc: "صراع البشرية الأخير ضد العمالقة العملاقة وكشف أسرار العالم خلف الجدران." },
     { id: 2, title: "Solo Leveling", aniId: 151807, genre: "أكشن", rating: 9.8, ep: 12, img: "https://cdn.myanimelist.net/images/anime/1543/139020.jpg", desc: "قصة الصياد الأضعف سونغ جين وو الذي يكتسب قدرة فريدة للارتقاء بمستواه بلا حدود." },
@@ -21,6 +24,7 @@ const baseAnime = [
     { id: 20, title: "Dr. Stone", aniId: 38691, genre: "مغامرة", rating: 9.1, ep: 24, img: "https://cdn.myanimelist.net/images/anime/1613/102559.jpg", desc: "سينكو العبقري يستخدم العلم لإعادة بناء الحضارة البشرية بعد تحجر البشر." }
 ];
 
+// تضخيم البيانات برمجياً
 const animeDB = [...baseAnime];
 const extraGenres = ["أكشن", "خيال", "مغامرة", "دراما", "رياضي", "غموض", "رعب"];
 for(let i = 21; i <= 2000; i++) {
