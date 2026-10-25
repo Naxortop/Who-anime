@@ -1,4 +1,3 @@
-// دوال إدارة المشغل والسيرفرات والحلقات
 let activeAnime = null;
 let activeEp = 1;
 let activeMode = 'sub';
@@ -17,9 +16,9 @@ function openPlayer(id, epNum = 1) {
     const epList = document.getElementById('episodeList');
     epList.innerHTML = '';
     for(let i = 1; i <= activeAnime.ep; i++) {
-        let isSel = i === activeEp;
+        const isSelected = i === activeEp;
         epList.innerHTML += `
-            <div onclick="openPlayer(${id}, ${i})" class="p-2.5 mb-1.5 rounded-xl bg-dark/60 hover:bg-gold/20 cursor-pointer text-xs flex justify-between items-center ${isSel ? 'text-gold font-bold bg-gold/10' : 'text-gray-300'}">
+            <div onclick="openPlayer(${id}, ${i})" class="p-2.5 rounded-xl bg-dark/60 hover:bg-gold/20 cursor-pointer text-xs flex justify-between items-center transition ${isSelected ? 'border border-gold/50 text-gold font-bold bg-gold/10' : 'text-gray-300'}">
                 <span>الحلقة ${i}</span>
                 <i class="fa-solid fa-play text-[10px]"></i>
             </div>
