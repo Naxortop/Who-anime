@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Who Anime | المنصة الأسطورية الخارقة</title>
-    
+    <title>Who Anime | المنصة المليارية الخارقة 2026</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
     <!-- Google Fonts & Font Awesome -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <link rel="stylesheet" href="styles.css">
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -26,33 +24,16 @@
             }
         }
     </script>
-
-    <style>
-        body { transition: background-color 0.4s ease, color 0.4s ease; scroll-behavior: smooth; }
-        .gold-text { background: linear-gradient(135deg, #fcf6ba, #d4af37, #aa771c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .gold-bg { background: linear-gradient(135deg, #d4af37, #aa771c); }
-        .glass-card { background: rgba(17, 17, 22, 0.95); backdrop-filter: blur(24px); border: 1px solid rgba(212, 175, 55, 0.3); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .light .glass-card { background: rgba(255, 255, 255, 0.95); border: 1px solid rgba(212, 175, 55, 0.4); }
-        .card-hover:hover { transform: translateY(-10px) scale(1.03); border-color: #d4af37; box-shadow: 0 30px 60px rgba(212, 175, 55, 0.35); }
-        .page-section { display: none; opacity: 0; transition: opacity 0.35s ease; }
-        .page-section.active { display: block; opacity: 1; animation: fadeIn 0.4s ease forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #070709; }
-        ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 10px; }
-        #toast { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%) translateY(100px); transition: transform 0.3s ease, opacity 0.3s ease; opacity: 0; z-index: 9999; }
-        #toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
-    </style>
 </head>
-<body class="dark bg-dark text-gray-100 min-h-screen flex flex-col font-sans">
+<body class="dark bg-dark text-gray-100 min-h-screen flex flex-col font-sans selection:bg-gold selection:text-black">
 
-    <!-- شريط الإشعارات -->
+    <!-- شريط الإشعارات الذكي -->
     <div id="toast" class="glass-card px-6 py-3 rounded-full text-gold font-bold shadow-2xl flex items-center gap-3 border border-gold/50">
         <i id="toastIcon" class="fa-solid fa-circle-check"></i>
         <span id="toastMsg">تمت العملية بنجاح</span>
     </div>
 
-    <!-- الهيدر العلوي الأسطوري -->
+    <!-- الهيدر العلوي -->
     <header class="fixed top-0 w-full z-50 glass-card px-4 lg:px-8 py-3.5 shadow-2xl">
         <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-4">
             <div class="flex items-center gap-6">
@@ -70,7 +51,7 @@
             <div class="flex items-center gap-2 lg:gap-3">
                 <div class="relative hidden sm:block">
                     <i class="fa-solid fa-magnifying-glass absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-xs"></i>
-                    <input type="text" id="searchInput" oninput="searchAnime()" placeholder="ابحث في آلاف الأنميات والأعمال..." class="bg-dark border border-dark-border rounded-full pr-9 pl-3 py-1.5 text-xs focus:outline-none focus:border-gold transition w-44 lg:w-64 text-white shadow-inner">
+                    <input type="text" id="searchInput" oninput="searchAnime()" placeholder="ابحث في آلاف الأنميات..." class="bg-dark border border-dark-border rounded-full pr-9 pl-3 py-1.5 text-xs focus:outline-none focus:border-gold transition w-44 lg:w-64 text-white shadow-inner">
                 </div>
                 <button onclick="playRandomAnime()" title="أنمي عشوائي" class="w-8 h-8 rounded-full border border-dark-border hover:border-gold hover:text-gold flex items-center justify-center transition shadow-md text-xs">
                     <i class="fa-solid fa-dice"></i>
@@ -85,16 +66,16 @@
         </div>
     </header>
 
-    <!-- شريط الهواتف -->
-    <div class="md:hidden flex justify-around bg-dark/95 border-b border-dark-border py-2 px-2 fixed top-[56px] w-full z-40 text-xs font-bold shadow-md">
-        <a onclick="nav('home')" id="mob-home" class="text-gold">الرئيسية</a>
-        <a onclick="nav('latest')" id="mob-latest" class="text-gray-400">الأحدث</a>
-        <a onclick="nav('favorites')" id="mob-favorites" class="text-gray-400">المفضلة</a>
-        <a onclick="nav('history')" id="mob-history" class="text-gray-400">السجل</a>
+    <!-- شريط الهواتف السفلي -->
+    <div class="md:hidden flex justify-around bg-dark/95 border-t border-dark-border py-2.5 px-2 fixed bottom-0 w-full z-40 text-xs font-bold shadow-md">
+        <a onclick="nav('home')" id="mob-home" class="text-gold flex flex-col items-center gap-1"><i class="fa-solid fa-house"></i> الرئيسية</a>
+        <a onclick="nav('latest')" id="mob-latest" class="text-gray-400 flex flex-col items-center gap-1"><i class="fa-solid fa-bolt"></i> الأحدث</a>
+        <a onclick="nav('favorites')" id="mob-favorites" class="text-gray-400 flex flex-col items-center gap-1"><i class="fa-solid fa-heart"></i> المفضلة</a>
+        <a onclick="nav('history')" id="mob-history" class="text-gray-400 flex flex-col items-center gap-1"><i class="fa-solid fa-clock-rotate-left"></i> السجل</a>
     </div>
 
     <!-- المحتوى الرئيسي -->
-    <main class="flex-1 pt-28 md:pt-24 pb-12 px-4 lg:px-8 max-w-7xl mx-auto w-full">
+    <main class="flex-1 pt-28 md:pt-24 pb-20 md:pb-12 px-4 lg:px-8 max-w-7xl mx-auto w-full">
         <section id="sec-home" class="page-section active">
             <!-- البانر -->
             <div class="relative rounded-3xl overflow-hidden glass-card p-6 md:p-12 mb-10 flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl border border-gold/30">
@@ -255,5 +236,10 @@
         <p class="gold-text text-lg font-bold mb-1 tracking-widest">WHO ANIME</p>
         <p>جميع الحقوق محفوظة &copy; 2026 - الإصدار الملياري الخارق</p>
     </footer>
+
+    <!-- ربط الملفات البرمجية -->
+    <script src="anime-data.js"></script>
+    <script src="player.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
