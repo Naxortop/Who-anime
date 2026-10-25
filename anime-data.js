@@ -24,10 +24,10 @@ const baseAnime = [
     { id: 20, title: "Dr. Stone", aniId: 38691, genre: "مغامرة", rating: 9.1, ep: 24, img: "https://cdn.myanimelist.net/images/anime/1613/102559.jpg", desc: "سينكو العبقري يستخدم العلم لإعادة بناء الحضارة البشرية بعد تحجر البشر." }
 ];
 
-// تضخيم البيانات برمجياً
+// تضخيم البيانات برمجياً لإنشاء آلاف الأعمال داخل المنصة
 const animeDB = [...baseAnime];
 const extraGenres = ["أكشن", "خيال", "مغامرة", "دراما", "رياضي", "غموض", "رعب"];
-for(let i = 21; i <= 2000; i++) {
+for(let i = 21; i <= 5000; i++) {
     let base = baseAnime[(i - 1) % baseAnime.length];
     animeDB.push({
         id: i,
