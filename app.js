@@ -40,7 +40,7 @@ function renderCards(containerId, data) {
         container.innerHTML = `<div class="col-span-full text-center text-gray-500 py-12">لا توجد نتائج مطابقة.</div>`; 
         return; 
     }
-    container.innerHTML = data.slice(0, 50).map(a => {
+    container.innerHTML = data.slice(0, 60).map(a => {
         const isFav = favorites.includes(a.id);
         return `
             <div class="glass-card rounded-2xl overflow-hidden card-hover cursor-pointer group relative shadow-lg">
@@ -145,7 +145,7 @@ function submitAnimeRequest() {
 function showToast(msg, icon = 'fa-circle-check') {
     const toast = document.getElementById('toast');
     document.getElementById('toastMsg').innerText = msg;
-    document.getElementById('toastIcon').className = `fa-solid ${icon}`;
+    document.getElementById('toastIcon'].className = `fa-solid ${icon}`;
     toast.classList.add('show');
     setTimeout(() => toast.classList.remove('show'), 3000);
 }
