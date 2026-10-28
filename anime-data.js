@@ -45,7 +45,7 @@ const animeDB = [
         img: "https://cdn.myanimelist.net/images/anime/1286/99889.jpg",
         desc: "قصة تانجيرو في مواجهة قادة الشياطين.",
         seasons: [
-            { name: "الموسم الأول (القطار والقرية)", aniId: 38000, eps: 26 },
+            { name: "الموسم الأول", aniId: 38000, eps: 26 },
             { name: "موسم ترفيهي", aniId: 47778, eps: 11 },
             { name: "تدريب الهاشاشينا", aniId: 55701, eps: 8 }
         ]
