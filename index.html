@@ -25,23 +25,19 @@
 </head>
 <body class="bg-dark text-gray-100 min-h-screen flex flex-col font-sans selection:bg-gold selection:text-black">
 
-    <!-- خلفية سينمائية فاخرة -->
     <div class="fixed inset-0 pointer-events-none z-[-1] overflow-hidden">
         <div class="absolute -top-40 -right-40 w-96 h-96 bg-gold/10 rounded-full blur-[120px]"></div>
         <div class="absolute top-1/2 -left-40 w-96 h-96 bg-gold/5 rounded-full blur-[150px]"></div>
         <div class="absolute inset-0 bg-[radial-gradient(#1f212d_1px,transparent_1px)] [background-size:24px_24px] opacity-25"></div>
     </div>
 
-    <!-- شريط الإشعارات والتنبيهات المطور -->
     <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[99999] glass-card px-6 py-3 rounded-2xl text-gold font-bold shadow-2xl flex items-center gap-3 border border-gold/50 translate-y-20 opacity-0 transition-all duration-300">
         <i id="toastIcon" class="fa-solid fa-circle-check text-base"></i>
         <span id="toastMsg" class="text-xs">تمت العملية بنجاح</span>
     </div>
 
-    <!-- الهيدر العلوي الخرافي -->
     <header class="fixed top-0 w-full z-50 glass-header px-4 lg:px-10 py-3.5 shadow-2xl">
         <div class="max-w-7xl mx-auto flex justify-between items-center gap-4">
-            
             <div class="flex items-center gap-6">
                 <a class="text-xl lg:text-2xl font-black cursor-pointer gold-text tracking-wider flex items-center gap-2" onclick="playSound(); nav('home')">
                     <div class="w-8 h-8 rounded-xl bg-gold/15 border border-gold/40 flex items-center justify-center text-gold shadow">
@@ -58,7 +54,6 @@
                 </nav>
             </div>
 
-            <!-- أزرار الميزات العلوية -->
             <div class="flex items-center gap-2.5">
                 <button onclick="playSound(); nav('search')" title="البحث السريع" class="w-9 h-9 rounded-xl glass-card border border-dark-border hover:border-gold hover:text-gold flex items-center justify-center text-xs transition shadow group">
                     <i class="fa-solid fa-magnifying-glass text-gold group-hover:scale-110 transition"></i>
@@ -76,7 +71,6 @@
         </div>
     </header>
 
-    <!-- شريط الجوال السفلي -->
     <div class="md:hidden flex justify-around bg-dark/95 border-t border-dark-border py-2.5 fixed bottom-0 w-full z-40 text-xs font-bold backdrop-blur-md">
         <a onclick="playSound(); nav('home')" id="mob-home" class="text-gold flex flex-col items-center gap-1"><i class="fa-solid fa-house"></i> الرئيسية</a>
         <a onclick="playSound(); nav('latest')" id="mob-latest" class="text-gray-400 flex flex-col items-center gap-1"><i class="fa-solid fa-bolt"></i> الأحدث</a>
@@ -85,10 +79,7 @@
         <a onclick="playSound(); nav('history')" id="mob-history" class="text-gray-400 flex flex-col items-center gap-1"><i class="fa-solid fa-clock-rotate-left"></i> السجل</a>
     </div>
 
-    <!-- المحتوى الرئيسي -->
     <main class="flex-1 pt-28 pb-20 md:pb-12 px-4 lg:px-10 max-w-7xl mx-auto w-full">
-        
-        <!-- الرئيسية -->
         <section id="sec-home" class="page-section active">
             <div class="relative rounded-3xl overflow-hidden glass-card p-6 lg:p-10 mb-10 flex flex-col md:flex-row items-center justify-between gap-8 border border-gold/30 shadow-2xl">
                 <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent z-0"></div>
@@ -98,17 +89,12 @@
                     </span>
                     <h1 class="text-3xl lg:text-5xl font-black leading-tight">مكتبة الأنمي المليارية <br><span class="gold-text text-2xl lg:text-3xl">آلاف الأعمال والمواسم والأجزاء</span></h1>
                     <p class="text-gray-400 text-xs lg:text-sm leading-relaxed max-w-xl">استمتع بتجربة مشاهدة مذهلة مع خيارات تصفية متقدمة، سيرفرات فائقة السرعة، ومواسم مرتبة بدقة.</p>
-                    <div class="flex gap-3 pt-2">
-                        <button onclick="playSound(); playRandomAnime()" class="gold-bg text-black font-bold px-6 py-2.5 rounded-xl text-xs flex items-center gap-2 shadow-lg hover:scale-105 transition"><i class="fa-solid fa-play"></i> مشاهدة عشوائية</button>
-                        <button onclick="playSound(); nav('search')" class="glass-card hover:border-gold px-6 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-2"><i class="fa-solid fa-search text-gold"></i> تصفح المكتبة</button>
-                    </div>
                 </div>
                 <div class="hidden md:block w-48 relative z-10">
                     <img src="https://cdn.myanimelist.net/images/anime/10/47347.jpg" class="rounded-2xl shadow-2xl border-2 border-gold/40 w-full object-cover aspect-[3/4]">
                 </div>
             </div>
 
-            <!-- أزرار التصنيفات السريعة -->
             <div class="flex gap-2 overflow-x-auto pb-4 mb-6 scrollbar-none">
                 <button onclick="playSound(); filterGenre('الكل', this)" class="genre-btn active px-4 py-2 rounded-xl text-xs font-bold bg-gold text-black transition whitespace-nowrap shadow-md">الكل</button>
                 <button onclick="playSound(); filterGenre('أكشن', this)" class="genre-btn px-4 py-2 rounded-xl text-xs font-bold glass-card hover:border-gold transition whitespace-nowrap text-gray-300">⚔️ أكشن</button>
@@ -132,13 +118,11 @@
             <div id="grid-home" class="anime-grid"></div>
         </section>
 
-        <!-- أحدث الحلقات -->
         <section id="sec-latest" class="page-section">
             <h2 class="text-lg lg:text-xl font-bold mb-6 flex items-center gap-3"><span class="w-2.5 h-6 gold-bg rounded-full"></span> أحدث الحلقات المضافة</h2>
             <div id="grid-latest" class="anime-grid"></div>
         </section>
 
-        <!-- صفحة البحث المتطور الشامل -->
         <section id="sec-search" class="page-section">
             <div class="glass-card p-6 rounded-3xl mb-8 border border-gold/30 shadow-xl space-y-4">
                 <h2 class="text-xl font-black gold-text flex items-center gap-2"><i class="fa-solid fa-magnifying-glass"></i> محرك البحث المتقدم والفلترة</h2>
@@ -150,20 +134,17 @@
             <div id="grid-search" class="anime-grid"></div>
         </section>
 
-        <!-- المفضلة -->
         <section id="sec-favorites" class="page-section">
             <h2 class="text-lg lg:text-xl font-bold mb-6 flex items-center gap-3"><span class="w-2.5 h-6 gold-bg rounded-full"></span> قائمة المفضلة</h2>
             <div id="grid-favorites" class="anime-grid"></div>
         </section>
 
-        <!-- السجل -->
         <section id="sec-history" class="page-section">
             <h2 class="text-lg lg:text-xl font-bold mb-6 flex items-center gap-3"><span class="w-2.5 h-6 gold-bg rounded-full"></span> سجل المشاهدة الأخير</h2>
             <div id="grid-history" class="anime-grid"></div>
         </section>
     </main>
 
-    <!-- نافذة تفاصيل الأنمي والمواسم -->
     <div id="detailsModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-[110] hidden items-center justify-center p-4">
         <div class="glass-card max-w-3xl w-full rounded-3xl p-6 relative border border-gold/40 shadow-2xl max-h-[90vh] overflow-y-auto">
             <button onclick="playSound(); closeDetails()" class="absolute top-4 left-4 text-gray-400 hover:text-white w-8 h-8 rounded-full bg-black/50 flex items-center justify-center"><i class="fa-solid fa-xmark text-lg"></i></button>
@@ -185,7 +166,6 @@
         </div>
     </div>
 
-    <!-- نافذة مشغل الحلقات المتقدم -->
     <div id="playerModal" class="fixed inset-0 bg-black/98 backdrop-blur-xl z-[120] hidden flex-col justify-center items-center p-2 md:p-6">
         <div class="w-full max-w-5xl relative">
             <div class="flex justify-between items-center mb-3 px-2 border-b border-dark-border pb-3">
@@ -207,17 +187,14 @@
         </div>
     </div>
 
-    <!-- نافذة الإعدادات الشاملة -->
     <div id="settingsModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-[115] hidden items-center justify-center p-4">
         <div class="glass-card max-w-md w-full rounded-3xl p-6 relative border border-gold/40 shadow-2xl space-y-4">
             <button onclick="playSound(); closeSettingsModal()" class="absolute top-4 left-4 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
             <h3 class="text-xl font-bold gold-text mb-2"><i class="fa-solid fa-gear ml-2"></i> إعدادات المنصة</h3>
-            
             <div class="flex justify-between items-center bg-dark/60 p-3 rounded-2xl border border-dark-border text-xs">
                 <span>المؤثرات الصوتية النصف تقنية</span>
                 <button onclick="playSound(); toggleSoundSetting()" id="soundToggleBtn" class="bg-gold text-black font-bold px-3 py-1.5 rounded-xl">مفعلة</button>
             </div>
-
             <div class="flex justify-between items-center bg-dark/60 p-3 rounded-2xl border border-dark-border text-xs">
                 <span>مسح كافة بيانات السجل والمفضلة</span>
                 <button onclick="playSound(); clearStorageData()" class="bg-red-600/80 text-white font-bold px-3 py-1.5 rounded-xl hover:bg-red-600 transition">مسح البيانات</button>
@@ -225,7 +202,6 @@
         </div>
     </div>
 
-    <!-- نافذة الجدول الأسبوعي -->
     <div id="scheduleModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-[115] hidden items-center justify-center p-4">
         <div class="glass-card max-w-lg w-full rounded-3xl p-6 relative border border-gold/40 shadow-2xl">
             <button onclick="playSound(); closeScheduleModal()" class="absolute top-4 left-4 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
