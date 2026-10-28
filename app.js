@@ -2,7 +2,7 @@ let favorites = JSON.parse(localStorage.getItem('who_favs')) || [];
 let historyList = JSON.parse(localStorage.getItem('who_history')) || [];
 let soundEnabled = localStorage.getItem('who_sound') !== 'false';
 
-// الصوت التقني الجديد الناعم جداً (Futuristic Click)
+// مؤثر صوتي تقني فاخر وناعم جداً
 function playSound() {
     if(!soundEnabled) return;
     try {
@@ -22,6 +22,7 @@ function playSound() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    if(document.getElementById('totalCount')) document.getElementById('totalCount').innerText = animeDB.length;
     if(document.getElementById('favCount')) document.getElementById('favCount').innerText = favorites.length;
     renderCards('grid-home', animeDB);
     renderCards('grid-latest', animeDB);
@@ -82,6 +83,25 @@ function renderCards(containerId, data) {
     }).join('');
 }
 
+function filterGenre(genre, btn) {
+    document.querySelectorAll('.genre-btn').forEach(b => {
+        b.classList.remove('bg-gold', 'text-black', 'shadow-md');
+        b.classList.add('glass-card', 'text-gray-300');
+    });
+    btn.classList.add('bg-gold', 'text-black', 'shadow-md');
+    btn.classList.remove('glass-card', 'text-gray-300');
+    let filtered = genre === 'الكل' ? animeDB : animeDB.filter(a => a.genre === genre);
+    renderCards('grid-home', filtered);
+}
+
+function sortAnime() {
+    const sortBy = document.getElementById('sortSelect').value;
+    let sorted = [...animeDB];
+    if(sortBy === 'rating') sorted.sort((a,b) => b.rating - a.rating);
+    if(sortBy === 'title') sorted.sort((a,b) => a.title.localeCompare(b.title));
+    renderCards('grid-home', sorted);
+}
+
 function openDetails(id) {
     const anime = animeDB.find(a => a.id === id);
     if(!anime) return;
@@ -110,7 +130,7 @@ function closeDetails() {
 
 function performDedicatedSearch() {
     const q = document.getElementById('dedicatedSearchInput').value.toLowerCase();
-    const filtered = animeDB.filter(a => a.title.toLowerCase().includes(q) || a.genre.toLowerCase().includes(q));
+    const filtered = animeDB.filter(a => a.title.toLowerCase().includes(q) || a.genre.toLowerCase().includes(q) || a.desc.toLowerCase().includes(q));
     renderCards('grid-search', filtered);
 }
 
