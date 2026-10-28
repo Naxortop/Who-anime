@@ -25,7 +25,7 @@ function openPlayer(animeId, seasonIdx = 0, epNum = 1) {
     epList.innerHTML = '';
     for(let i = 1; i <= currentSeason.eps; i++) {
         epList.innerHTML += `
-            <div onclick="openPlayer(${animeId}, ${seasonIdx}, ${i})" class="p-2 rounded-xl bg-dark/60 hover:bg-gold/20 cursor-pointer text-xs flex justify-between items-center transition ${i === currentEp ? 'bg-gold/20 text-gold font-bold border border-gold/40' : 'text-gray-300'}">
+            <div onclick="playSound(); openPlayer(${animeId}, ${seasonIdx}, ${i})" class="p-2 rounded-xl bg-dark/60 hover:bg-gold/20 cursor-pointer text-xs flex justify-between items-center transition ${i === currentEp ? 'bg-gold/20 text-gold font-bold border border-gold/40' : 'text-gray-300'}">
                 <span>الحلقة ${i}</span>
                 <i class="fa-solid fa-play text-[10px]"></i>
             </div>
