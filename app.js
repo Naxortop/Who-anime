@@ -1,16 +1,35 @@
 let favorites = JSON.parse(localStorage.getItem('who_favs')) || [];
 let historyList = JSON.parse(localStorage.getItem('who_history')) || [];
 
+// نظام المؤثرات الصوتية التفاعلية (Sound Effects)
+function playSound() {
+    try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(580, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.08);
+        gain.gain.setValueAtTime(0.03, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.08);
+    } catch(e) {}
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     if(document.getElementById('favCount')) document.getElementById('favCount').innerText = favorites.length;
     renderCards('grid-home', animeDB);
     renderCards('grid-latest', animeDB);
+    renderCards('grid-search', animeDB);
 });
 
 function nav(pageId) {
     document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
     document.getElementById('sec-' + pageId).classList.add('active');
-    ['home', 'latest', 'favorites', 'history'].forEach(p => {
+    ['home', 'latest', 'search', 'favorites', 'history'].forEach(p => {
         const el = document.getElementById('nav-' + p);
         const mobEl = document.getElementById('mob-' + p);
         if(el) el.classList.toggle('text-gold', p === pageId);
@@ -18,6 +37,7 @@ function nav(pageId) {
     });
     if(pageId === 'favorites') renderFavorites();
     if(pageId === 'history') renderHistory();
+    if(pageId === 'search') renderCards('grid-search', animeDB);
     window.scrollTo(0, 0);
 }
 
@@ -32,11 +52,11 @@ function renderCards(containerId, data) {
         const isFav = favorites.includes(a.id);
         const totalEps = a.seasons.reduce((sum, s) => sum + s.eps, 0);
         return `
-            <div class="anime-card group" onclick="openDetails(${a.id})">
+            <div class="anime-card group" onclick="playSound(); openDetails(${a.id})">
                 <div class="relative aspect-[3/4] overflow-hidden">
                     <img src="${a.img}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" loading="lazy">
                     <div class="absolute top-2 left-2 z-10">
-                        <button onclick="event.stopPropagation(); toggleFavorite(${a.id})" class="w-7 h-7 rounded-full bg-black/70 flex items-center justify-center text-gold border border-gold/30">
+                        <button onclick="playSound(); event.stopPropagation(); toggleFavorite(${a.id})" class="w-7 h-7 rounded-full bg-black/70 flex items-center justify-center text-gold border border-gold/30">
                             <i class="${isFav ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
                         </button>
                     </div>
@@ -62,10 +82,9 @@ function openDetails(id) {
     document.getElementById('detGenre').innerText = anime.genre;
     document.getElementById('detDesc').innerText = anime.desc;
 
-    // توليد أزرار المواسم والأجزاء داخل النافذة
     const seasonsContainer = document.getElementById('seasonsContainer');
     seasonsContainer.innerHTML = anime.seasons.map((s, idx) => `
-        <button onclick="closeDetails(); openPlayer(${anime.id}, ${idx}, 1)" class="gold-bg text-black px-4 py-2 rounded-xl text-xs font-bold hover:scale-105 transition shadow">
+        <button onclick="playSound(); closeDetails(); openPlayer(${anime.id}, ${idx}, 1)" class="gold-bg text-black px-4 py-2 rounded-xl text-xs font-bold hover:scale-105 transition shadow">
             <i class="fa-solid fa-play ml-1"></i> ${s.name} (${s.eps} حلقة)
         </button>
     `).join('');
@@ -81,9 +100,20 @@ function closeDetails() {
     modal.classList.add('hidden');
 }
 
-function searchAnime() {
-    const q = document.getElementById('searchInput').value.toLowerCase();
-    renderCards('grid-home', animeDB.filter(a => a.title.toLowerCase().includes(q)));
+// التوجه التلقائي لصفحة البحث عند الكتابة في الهيدر
+function handleSearchInput() {
+    const q = document.getElementById('searchInput').value;
+    if(q.trim().length > 0) {
+        nav('search');
+        document.getElementById('dedicatedSearchInput').value = q;
+        performDedicatedSearch();
+    }
+}
+
+function performDedicatedSearch() {
+    const q = document.getElementById('dedicatedSearchInput').value.toLowerCase();
+    const filtered = animeDB.filter(a => a.title.toLowerCase().includes(q) || a.genre.toLowerCase().includes(q));
+    renderCards('grid-search', filtered);
 }
 
 function toggleFavorite(id) {
@@ -98,3 +128,13 @@ function toggleFavorite(id) {
 
 function renderFavorites() { renderCards('grid-favorites', animeDB.filter(a => favorites.includes(a.id))); }
 function renderHistory() { renderCards('grid-history', animeDB.filter(a => historyList.includes(a.id))); }
+
+function openScheduleModal() { document.getElementById('scheduleModal').classList.remove('hidden'); document.getElementById('scheduleModal').classList.add('flex'); }
+function closeScheduleModal() { document.getElementById('scheduleModal').classList.remove('flex'); document.getElementById('scheduleModal').classList.add('hidden'); }
+
+function openRequestModal() { document.getElementById('requestModal').classList.remove('hidden'); document.getElementById('requestModal').classList.add('flex'); }
+function closeRequestModal() { document.getElementById('requestModal').classList.remove('flex'); document.getElementById('requestModal').classList.add('hidden'); }
+function submitAnimeRequest() {
+    closeRequestModal();
+    alert('تم إرسال طلب الأنمي بنجاح!');
+}
