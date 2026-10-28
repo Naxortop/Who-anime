@@ -1,6 +1,7 @@
 let favorites = JSON.parse(localStorage.getItem('who_favs')) || [];
 let historyList = JSON.parse(localStorage.getItem('who_history')) || [];
 let soundEnabled = localStorage.getItem('who_sound') !== 'false';
+let currentScheduleDay = 'الأحد';
 
 function playSound() {
     if(!soundEnabled) return;
@@ -24,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if(document.getElementById('totalCount')) document.getElementById('totalCount').innerText = animeDB.length;
     if(document.getElementById('favCount')) document.getElementById('favCount').innerText = favorites.length;
     renderCards('grid-home', animeDB);
-    renderCards('grid-latest', animeDB);
+    renderScheduleGrid(currentScheduleDay);
     renderCards('grid-search', animeDB);
     updateSoundBtnUI();
 });
@@ -38,6 +39,7 @@ function nav(pageId) {
         if(el) el.classList.toggle('text-gold', p === pageId);
         if(mobEl) mobEl.classList.toggle('text-gold', p === pageId);
     });
+    if(pageId === 'latest') renderScheduleGrid(currentScheduleDay);
     if(pageId === 'favorites') renderFavorites();
     if(pageId === 'history') renderHistory();
     if(pageId === 'search') {
@@ -48,6 +50,22 @@ function nav(pageId) {
         }, 100);
     }
     window.scrollTo(0, 0);
+}
+
+function filterSchedule(day, btn) {
+    currentScheduleDay = day;
+    document.querySelectorAll('.schedule-btn').forEach(b => {
+        b.classList.remove('bg-gold', 'text-black', 'shadow-md');
+        b.classList.add('glass-card', 'text-gray-300');
+    });
+    btn.classList.add('bg-gold', 'text-black', 'shadow-md');
+    btn.classList.remove('glass-card', 'text-gray-300');
+    renderScheduleGrid(day);
+}
+
+function renderScheduleGrid(day) {
+    const filtered = animeDB.filter(a => a.day === day);
+    renderCards('grid-latest', filtered);
 }
 
 function renderCards(containerId, data) {
