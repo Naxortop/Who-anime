@@ -145,7 +145,7 @@ function submitAnimeRequest() {
 function showToast(msg, icon = 'fa-circle-check') {
     const toast = document.getElementById('toast');
     document.getElementById('toastMsg').innerText = msg;
-    document.getElementById('toastIcon'].className = `fa-solid ${icon}`;
+    document.getElementById('toastIcon').className = `fa-solid ${icon}`;
     toast.classList.add('show');
     setTimeout(() => toast.classList.remove('show'), 3000);
 }
