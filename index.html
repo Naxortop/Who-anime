@@ -25,13 +25,20 @@
 </head>
 <body class="bg-dark text-gray-100 min-h-screen flex flex-col font-sans selection:bg-gold selection:text-black">
 
-    <!-- شريط الإشعارات -->
-    <div id="toast" class="glass-card px-6 py-3 rounded-full text-gold font-bold shadow-2xl flex items-center gap-3 border border-gold/50">
-        <i id="toastIcon" class="fa-solid fa-circle-check"></i>
-        <span id="toastMsg">تمت العملية بنجاح</span>
+    <!-- خلفية سينمائية فخمة -->
+    <div class="fixed inset-0 pointer-events-none z-[-1] overflow-hidden">
+        <div class="absolute -top-40 -right-40 w-96 h-96 bg-gold/10 rounded-full blur-[120px]"></div>
+        <div class="absolute top-1/2 -left-40 w-96 h-96 bg-gold/5 rounded-full blur-[150px]"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(#1f212d_1px,transparent_1px)] [background-size:24px_24px] opacity-25"></div>
     </div>
 
-    <!-- الهيدر العلوي المتناسق والمنظم -->
+    <!-- شريط الإشعارات والتحديثات (معدل ليظهر بوضوح تام في الأسفل) -->
+    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[99999] glass-card px-6 py-3 rounded-2xl text-gold font-bold shadow-2xl flex items-center gap-3 border border-gold/50 translate-y-20 opacity-0 transition-all duration-300">
+        <i id="toastIcon" class="fa-solid fa-circle-check text-base"></i>
+        <span id="toastMsg" class="text-xs">تمت العملية بنجاح</span>
+    </div>
+
+    <!-- الهيدر العلوي المنظم -->
     <header class="fixed top-0 w-full z-50 glass-header px-4 lg:px-10 py-3.5 shadow-2xl">
         <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-4">
             
@@ -50,7 +57,7 @@
                 </nav>
             </div>
 
-            <!-- أزرار التحكم والميزات الإضافية في الهيدر -->
+            <!-- أزرار التحكم والميزات العلوية -->
             <div class="flex items-center gap-2.5">
                 <div class="relative hidden sm:block">
                     <i class="fa-solid fa-magnifying-glass absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
@@ -65,11 +72,8 @@
                 <button onclick="playSound(); openScheduleModal()" title="جدول الحلقات" class="w-8 h-8 rounded-xl glass-card border border-dark-border hover:border-gold hover:text-gold flex items-center justify-center text-xs transition shadow">
                     <i class="fa-solid fa-calendar-days text-gold"></i>
                 </button>
-                <button onclick="playSound(); openRequestModal()" title="طلب أنمي" class="w-8 h-8 rounded-xl glass-card border border-dark-border hover:border-gold hover:text-gold flex items-center justify-center text-xs transition shadow">
-                    <i class="fa-solid fa-film text-gold"></i>
-                </button>
-                <button onclick="playSound(); toggleTheme()" title="تغيير المظهر" class="w-8 h-8 rounded-xl glass-card border border-dark-border hover:border-gold hover:text-gold flex items-center justify-center text-xs transition shadow">
-                    <i class="fa-solid fa-moon text-gold" id="themeIcon"></i>
+                <button onclick="playSound(); openSettingsModal()" title="الإعدادات" class="w-8 h-8 rounded-xl glass-card border border-dark-border hover:border-gold hover:text-gold flex items-center justify-center text-xs transition shadow">
+                    <i class="fa-solid fa-gear text-gold"></i>
                 </button>
             </div>
         </div>
@@ -186,6 +190,24 @@
         </div>
     </div>
 
+    <!-- نافذة الإعدادات -->
+    <div id="settingsModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-[115] hidden items-center justify-center p-4">
+        <div class="glass-card max-w-md w-full rounded-3xl p-6 relative border border-gold/40 shadow-2xl space-y-4">
+            <button onclick="playSound(); closeSettingsModal()" class="absolute top-4 left-4 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <h3 class="text-xl font-bold gold-text mb-2"><i class="fa-solid fa-gear ml-2"></i> إعدادات المنصة</h3>
+            
+            <div class="flex justify-between items-center bg-dark/60 p-3 rounded-2xl border border-dark-border text-xs">
+                <span>المؤثرات الصوتية (Sound Effects)</span>
+                <button onclick="toggleSoundSetting()" id="soundToggleBtn" class="bg-gold text-black font-bold px-3 py-1.5 rounded-xl">مفعلة</button>
+            </div>
+
+            <div class="flex justify-between items-center bg-dark/60 p-3 rounded-2xl border border-dark-border text-xs">
+                <span>مسح سجل المشاهدة والمفضلة</span>
+                <button onclick="clearStorageData()" class="bg-red-600/80 text-white font-bold px-3 py-1.5 rounded-xl hover:bg-red-600 transition">مسح البيانات</button>
+            </div>
+        </div>
+    </div>
+
     <!-- نافذة الجدول الأسبوعي -->
     <div id="scheduleModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-[115] hidden items-center justify-center p-4">
         <div class="glass-card max-w-lg w-full rounded-3xl p-6 relative border border-gold/40 shadow-2xl">
@@ -197,16 +219,6 @@
                 <div class="bg-dark/70 p-2.5 rounded-xl border border-dark-border flex justify-between"><span class="text-gold font-bold">الثلاثاء</span> <span>Jujutsu Kaisen</span></div>
                 <div class="bg-dark/70 p-2.5 rounded-xl border border-dark-border flex justify-between"><span class="text-gold font-bold">الأربعاء</span> <span>Demon Slayer</span></div>
             </div>
-        </div>
-    </div>
-
-    <!-- نافذة طلب الأنمي -->
-    <div id="requestModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-[115] hidden items-center justify-center p-4">
-        <div class="glass-card max-w-md w-full rounded-3xl p-6 relative border border-gold/40 shadow-2xl">
-            <button onclick="playSound(); closeRequestModal()" class="absolute top-4 left-4 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
-            <h3 class="text-xl font-bold gold-text mb-4"><i class="fa-solid fa-film ml-2"></i> طلب أنمي جديد</h3>
-            <input type="text" id="reqAnimeInput" placeholder="اكتب اسم الأنمي..." class="w-full bg-dark border border-dark-border rounded-xl px-4 py-2.5 text-xs text-white mb-4 focus:outline-none focus:border-gold">
-            <button onclick="playSound(); submitAnimeRequest()" class="w-full gold-bg text-black font-bold py-2.5 rounded-xl text-xs shadow-lg">إرسال الطلب</button>
         </div>
     </div>
 
