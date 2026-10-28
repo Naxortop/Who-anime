@@ -44,4 +44,5 @@ function closePlayer() {
 function playRandomAnime() {
     const randAnime = animeDB[Math.floor(Math.random() * animeDB.length)];
     openPlayer(randAnime.id, 0, 1);
+    showToast(`تشغيل عشوائي: ${randAnime.title}`, 'fa-dice');
 }
