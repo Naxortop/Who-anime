@@ -47,7 +47,7 @@
                 </a>
                 <nav class="hidden md:flex gap-5 font-bold text-xs lg:text-sm">
                     <a onclick="playSound(); nav('home')" id="nav-home" class="cursor-pointer hover:text-gold transition text-gold">الرئيسية</a>
-                    <a onclick="playSound(); nav('latest')" id="nav-latest" class="cursor-pointer hover:text-gold transition text-gray-300">أحدث الحلقات</a>
+                    <a onclick="playSound(); nav('latest')" id="nav-latest" class="cursor-pointer hover:text-gold transition text-gray-300">جدول الحلقات</a>
                     <a onclick="playSound(); nav('search')" id="nav-search-link" class="cursor-pointer hover:text-gold transition text-gray-300">البحث المتقدم</a>
                     <a onclick="playSound(); nav('favorites')" id="nav-favorites" class="cursor-pointer hover:text-gold transition text-gray-300">المفضلة (<span id="favCount">0</span>)</a>
                     <a onclick="playSound(); nav('history')" id="nav-history" class="cursor-pointer hover:text-gold transition text-gray-300">السجل</a>
@@ -61,7 +61,7 @@
                 <button onclick="playSound(); playRandomAnime()" title="أنمي عشوائي" class="w-9 h-9 rounded-xl glass-card border border-dark-border hover:border-gold hover:text-gold flex items-center justify-center text-xs transition shadow group">
                     <i class="fa-solid fa-dice text-gold group-hover:rotate-180 transition duration-500"></i>
                 </button>
-                <button onclick="playSound(); openScheduleModal()" title="جدول الحلقات" class="w-9 h-9 rounded-xl glass-card border border-dark-border hover:border-gold hover:text-gold flex items-center justify-center text-xs transition shadow group">
+                <button onclick="playSound(); openScheduleModal()" title="تنبيهات الجدول" class="w-9 h-9 rounded-xl glass-card border border-dark-border hover:border-gold hover:text-gold flex items-center justify-center text-xs transition shadow group">
                     <i class="fa-solid fa-calendar-days text-gold group-hover:scale-110 transition"></i>
                 </button>
                 <button onclick="playSound(); openSettingsModal()" title="الإعدادات الشاملة" class="w-9 h-9 rounded-xl glass-card border border-dark-border hover:border-gold hover:text-gold flex items-center justify-center text-xs transition shadow group">
@@ -73,7 +73,7 @@
 
     <div class="md:hidden flex justify-around bg-dark/95 border-t border-dark-border py-2.5 fixed bottom-0 w-full z-40 text-xs font-bold backdrop-blur-md">
         <a onclick="playSound(); nav('home')" id="mob-home" class="text-gold flex flex-col items-center gap-1"><i class="fa-solid fa-house"></i> الرئيسية</a>
-        <a onclick="playSound(); nav('latest')" id="mob-latest" class="text-gray-400 flex flex-col items-center gap-1"><i class="fa-solid fa-bolt"></i> الأحدث</a>
+        <a onclick="playSound(); nav('latest')" id="mob-latest" class="text-gray-400 flex flex-col items-center gap-1"><i class="fa-solid fa-calendar-days"></i> الجدول</a>
         <a onclick="playSound(); nav('search')" id="mob-search" class="text-gray-400 flex flex-col items-center gap-1"><i class="fa-solid fa-search"></i> البحث</a>
         <a onclick="playSound(); nav('favorites')" id="mob-favorites" class="text-gray-400 flex flex-col items-center gap-1"><i class="fa-solid fa-heart"></i> المفضلة</a>
         <a onclick="playSound(); nav('history')" id="mob-history" class="text-gray-400 flex flex-col items-center gap-1"><i class="fa-solid fa-clock-rotate-left"></i> السجل</a>
@@ -118,8 +118,23 @@
             <div id="grid-home" class="anime-grid"></div>
         </section>
 
+        <!-- جدول الحلقات الأسبوعي (مكان أحدث الحلقات) -->
         <section id="sec-latest" class="page-section">
-            <h2 class="text-lg lg:text-xl font-bold mb-6 flex items-center gap-3"><span class="w-2.5 h-6 gold-bg rounded-full"></span> أحدث الحلقات المضافة</h2>
+            <div class="glass-card p-6 rounded-3xl mb-8 border border-gold/30 shadow-xl">
+                <h2 class="text-xl font-black gold-text flex items-center gap-2"><i class="fa-solid fa-calendar-days"></i> جدول الحلقات الأسبوعي المباشر</h2>
+                <p class="text-gray-400 text-xs mt-1">تتبع مواعيد صدور حلقات أنمياتك المفضلة طوال أيام الأسبوع.</p>
+            </div>
+
+            <div class="flex gap-2 overflow-x-auto pb-4 mb-6 scrollbar-none">
+                <button onclick="playSound(); filterSchedule('السبت', this)" class="schedule-btn px-4 py-2 rounded-xl text-xs font-bold glass-card hover:border-gold transition whitespace-nowrap text-gray-300">السبت</button>
+                <button onclick="playSound(); filterSchedule('الأحد', this)" class="schedule-btn active px-4 py-2 rounded-xl text-xs font-bold bg-gold text-black transition whitespace-nowrap shadow-md">الأحد</button>
+                <button onclick="playSound(); filterSchedule('الإثنين', this)" class="schedule-btn px-4 py-2 rounded-xl text-xs font-bold glass-card hover:border-gold transition whitespace-nowrap text-gray-300">الإثنين</button>
+                <button onclick="playSound(); filterSchedule('الثلاثاء', this)" class="schedule-btn px-4 py-2 rounded-xl text-xs font-bold glass-card hover:border-gold transition whitespace-nowrap text-gray-300">الثلاثاء</button>
+                <button onclick="playSound(); filterSchedule('الأربعاء', this)" class="schedule-btn px-4 py-2 rounded-xl text-xs font-bold glass-card hover:border-gold transition whitespace-nowrap text-gray-300">الأربعاء</button>
+                <button onclick="playSound(); filterSchedule('الخميس', this)" class="schedule-btn px-4 py-2 rounded-xl text-xs font-bold glass-card hover:border-gold transition whitespace-nowrap text-gray-300">الخميس</button>
+                <button onclick="playSound(); filterSchedule('الجمعة', this)" class="schedule-btn px-4 py-2 rounded-xl text-xs font-bold glass-card hover:border-gold transition whitespace-nowrap text-gray-300">الجمعة</button>
+            </div>
+
             <div id="grid-latest" class="anime-grid"></div>
         </section>
 
@@ -192,7 +207,7 @@
             <button onclick="playSound(); closeSettingsModal()" class="absolute top-4 left-4 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
             <h3 class="text-xl font-bold gold-text mb-2"><i class="fa-solid fa-gear ml-2"></i> إعدادات المنصة</h3>
             <div class="flex justify-between items-center bg-dark/60 p-3 rounded-2xl border border-dark-border text-xs">
-                <span>المؤثرات الصوتية النصف تقنية</span>
+                <span>المؤثرات الصوتية التقنية</span>
                 <button onclick="playSound(); toggleSoundSetting()" id="soundToggleBtn" class="bg-gold text-black font-bold px-3 py-1.5 rounded-xl">مفعلة</button>
             </div>
             <div class="flex justify-between items-center bg-dark/60 p-3 rounded-2xl border border-dark-border text-xs">
@@ -207,10 +222,10 @@
             <button onclick="playSound(); closeScheduleModal()" class="absolute top-4 left-4 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
             <h3 class="text-xl font-bold gold-text mb-4"><i class="fa-solid fa-calendar-days ml-2"></i> جدول الحلقات الأسبوعي</h3>
             <div class="space-y-2 text-xs">
+                <div class="bg-dark/70 p-2.5 rounded-xl border border-dark-border flex justify-between"><span class="text-gold font-bold">السبت</span> <span>Demon Slayer</span></div>
                 <div class="bg-dark/70 p-2.5 rounded-xl border border-dark-border flex justify-between"><span class="text-gold font-bold">الأحد</span> <span>Attack on Titan</span></div>
                 <div class="bg-dark/70 p-2.5 rounded-xl border border-dark-border flex justify-between"><span class="text-gold font-bold">الإثنين</span> <span>Solo Leveling</span></div>
                 <div class="bg-dark/70 p-2.5 rounded-xl border border-dark-border flex justify-between"><span class="text-gold font-bold">الثلاثاء</span> <span>Jujutsu Kaisen</span></div>
-                <div class="bg-dark/70 p-2.5 rounded-xl border border-dark-border flex justify-between"><span class="text-gold font-bold">الأربعاء</span> <span>Demon Slayer</span></div>
             </div>
         </div>
     </div>
