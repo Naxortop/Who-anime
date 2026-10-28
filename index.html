@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Who Anime | المنصة الفاخرة للأنمي</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -26,31 +25,51 @@
 </head>
 <body class="bg-dark text-gray-100 min-h-screen flex flex-col font-sans selection:bg-gold selection:text-black">
 
-    <!-- الهيدر العلوي الفاخر -->
-    <header class="fixed top-0 w-full z-50 glass-header px-4 lg:px-10 py-4 shadow-2xl">
-        <div class="max-w-7xl mx-auto flex justify-between items-center gap-4">
-            <div class="flex items-center gap-8">
-                <a class="text-xl lg:text-2xl font-black cursor-pointer gold-text tracking-wider flex items-center gap-2.5" onclick="nav('home')">
-                    <div class="w-9 h-9 rounded-xl bg-gold/15 border border-gold/40 flex items-center justify-center text-gold shadow-lg">
-                        <i class="fa-solid fa-crown text-base"></i>
+    <!-- شريط الإشعارات -->
+    <div id="toast" class="glass-card px-6 py-3 rounded-full text-gold font-bold shadow-2xl flex items-center gap-3 border border-gold/50">
+        <i id="toastIcon" class="fa-solid fa-circle-check"></i>
+        <span id="toastMsg">تمت العملية بنجاح</span>
+    </div>
+
+    <!-- الهيدر العلوي المتناسق والمنظم -->
+    <header class="fixed top-0 w-full z-50 glass-header px-4 lg:px-10 py-3.5 shadow-2xl">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-4">
+            
+            <div class="flex items-center gap-6">
+                <a class="text-xl lg:text-2xl font-black cursor-pointer gold-text tracking-wider flex items-center gap-2" onclick="playSound(); nav('home')">
+                    <div class="w-8 h-8 rounded-xl bg-gold/15 border border-gold/40 flex items-center justify-center text-gold shadow">
+                        <i class="fa-solid fa-crown text-sm"></i>
                     </div>
                     <span>WHO ANIME</span>
                 </a>
-                <nav class="hidden md:flex gap-6 font-bold text-xs lg:text-sm">
-                    <a onclick="nav('home')" id="nav-home" class="cursor-pointer hover:text-gold transition text-gold">الرئيسية</a>
-                    <a onclick="nav('latest')" id="nav-latest" class="cursor-pointer hover:text-gold transition text-gray-300">أحدث الحلقات</a>
-                    <a onclick="nav('favorites')" id="nav-favorites" class="cursor-pointer hover:text-gold transition text-gray-300">المفضلة (<span id="favCount">0</span>)</a>
-                    <a onclick="nav('history')" id="nav-history" class="cursor-pointer hover:text-gold transition text-gray-300">السجل</a>
+                <nav class="hidden md:flex gap-5 font-bold text-xs lg:text-sm">
+                    <a onclick="playSound(); nav('home')" id="nav-home" class="cursor-pointer hover:text-gold transition text-gold">الرئيسية</a>
+                    <a onclick="playSound(); nav('latest')" id="nav-latest" class="cursor-pointer hover:text-gold transition text-gray-300">أحدث الحلقات</a>
+                    <a onclick="playSound(); nav('favorites')" id="nav-favorites" class="cursor-pointer hover:text-gold transition text-gray-300">المفضلة (<span id="favCount">0</span>)</a>
+                    <a onclick="playSound(); nav('history')" id="nav-history" class="cursor-pointer hover:text-gold transition text-gray-300">السجل</a>
                 </nav>
             </div>
 
-            <div class="flex items-center gap-3">
+            <!-- أزرار التحكم والميزات الإضافية في الهيدر -->
+            <div class="flex items-center gap-2.5">
                 <div class="relative hidden sm:block">
                     <i class="fa-solid fa-magnifying-glass absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
-                    <input type="text" id="searchInput" oninput="searchAnime()" placeholder="ابحث في الأنميات والمواسم..." class="bg-dark/80 border border-dark-border rounded-full pr-10 pl-4 py-2 text-xs focus:outline-none focus:border-gold w-48 lg:w-72 text-white shadow-inner transition">
+                    <input type="text" id="searchInput" oninput="handleSearchInput()" placeholder="ابحث عن أنمي..." class="bg-dark/80 border border-dark-border rounded-full pr-9 pl-4 py-1.5 text-xs focus:outline-none focus:border-gold w-40 lg:w-60 text-white shadow-inner transition">
                 </div>
-                <button onclick="playRandomAnime()" title="أنمي عشوائي" class="w-9 h-9 rounded-xl glass-card border border-dark-border hover:border-gold hover:text-gold flex items-center justify-center text-xs transition shadow">
+                <button onclick="playSound(); nav('search')" title="صفحة البحث" class="w-8 h-8 rounded-xl glass-card border border-dark-border hover:border-gold hover:text-gold flex items-center justify-center text-xs transition shadow">
+                    <i class="fa-solid fa-search text-gold"></i>
+                </button>
+                <button onclick="playSound(); playRandomAnime()" title="أنمي عشوائي" class="w-8 h-8 rounded-xl glass-card border border-dark-border hover:border-gold hover:text-gold flex items-center justify-center text-xs transition shadow">
                     <i class="fa-solid fa-dice text-gold"></i>
+                </button>
+                <button onclick="playSound(); openScheduleModal()" title="جدول الحلقات" class="w-8 h-8 rounded-xl glass-card border border-dark-border hover:border-gold hover:text-gold flex items-center justify-center text-xs transition shadow">
+                    <i class="fa-solid fa-calendar-days text-gold"></i>
+                </button>
+                <button onclick="playSound(); openRequestModal()" title="طلب أنمي" class="w-8 h-8 rounded-xl glass-card border border-dark-border hover:border-gold hover:text-gold flex items-center justify-center text-xs transition shadow">
+                    <i class="fa-solid fa-film text-gold"></i>
+                </button>
+                <button onclick="playSound(); toggleTheme()" title="تغيير المظهر" class="w-8 h-8 rounded-xl glass-card border border-dark-border hover:border-gold hover:text-gold flex items-center justify-center text-xs transition shadow">
+                    <i class="fa-solid fa-moon text-gold" id="themeIcon"></i>
                 </button>
             </div>
         </div>
@@ -58,31 +77,32 @@
 
     <!-- شريط الجوال السفلي -->
     <div class="md:hidden flex justify-around bg-dark/95 border-t border-dark-border py-2.5 fixed bottom-0 w-full z-40 text-xs font-bold backdrop-blur-md">
-        <a onclick="nav('home')" id="mob-home" class="text-gold flex flex-col items-center gap-1"><i class="fa-solid fa-house"></i> الرئيسية</a>
-        <a onclick="nav('latest')" id="mob-latest" class="text-gray-400 flex flex-col items-center gap-1"><i class="fa-solid fa-bolt"></i> الأحدث</a>
-        <a onclick="nav('favorites')" id="mob-favorites" class="text-gray-400 flex flex-col items-center gap-1"><i class="fa-solid fa-heart"></i> المفضلة</a>
-        <a onclick="nav('history')" id="mob-history" class="text-gray-400 flex flex-col items-center gap-1"><i class="fa-solid fa-clock-rotate-left"></i> السجل</a>
+        <a onclick="playSound(); nav('home')" id="mob-home" class="text-gold flex flex-col items-center gap-1"><i class="fa-solid fa-house"></i> الرئيسية</a>
+        <a onclick="playSound(); nav('latest')" id="mob-latest" class="text-gray-400 flex flex-col items-center gap-1"><i class="fa-solid fa-bolt"></i> الأحدث</a>
+        <a onclick="playSound(); nav('search')" id="mob-search" class="text-gray-400 flex flex-col items-center gap-1"><i class="fa-solid fa-search"></i> البحث</a>
+        <a onclick="playSound(); nav('favorites')" id="mob-favorites" class="text-gray-400 flex flex-col items-center gap-1"><i class="fa-solid fa-heart"></i> المفضلة</a>
+        <a onclick="playSound(); nav('history')" id="mob-history" class="text-gray-400 flex flex-col items-center gap-1"><i class="fa-solid fa-clock-rotate-left"></i> السجل</a>
     </div>
 
     <!-- المحتوى الرئيسي -->
     <main class="flex-1 pt-28 pb-20 md:pb-12 px-4 lg:px-10 max-w-7xl mx-auto w-full">
+        
+        <!-- الرئيسية -->
         <section id="sec-home" class="page-section active">
-            <!-- بانر الترحيب السينمائي -->
             <div class="relative rounded-3xl overflow-hidden glass-card p-6 lg:p-10 mb-10 flex flex-col md:flex-row items-center justify-between gap-8 border border-gold/30 shadow-2xl">
                 <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-transparent z-0"></div>
                 <div class="relative z-10 md:w-3/5 space-y-4">
                     <span class="bg-gold/20 text-gold px-3.5 py-1 rounded-full text-xs font-bold border border-gold/40 flex items-center w-max gap-2">
-                        <i class="fa-solid fa-fire text-red-500"></i> المنصة العربية الأجمل والأضخم
+                        <i class="fa-solid fa-fire text-red-500"></i> المنصة العربية المتكاملة
                     </span>
                     <h1 class="text-3xl lg:text-5xl font-black leading-tight">مكتبة الأنمي الشاملة <br><span class="gold-text text-2xl lg:text-3xl">مواسم متكاملة وأجزاء مرتبة</span></h1>
-                    <p class="text-gray-400 text-xs lg:text-sm leading-relaxed max-w-xl">استمتع بمشاهدة أعمالك المفضلة بجميع مواسمها وأجزائها داخل صفحة واحدة متكاملة وبجودة خرافية.</p>
+                    <p class="text-gray-400 text-xs lg:text-sm leading-relaxed max-w-xl">استمتع بمشاهدة أعمالك المفضلة بجميع مواسمها وأجزائها داخل صفحة واحدة وبجودة خرافية.</p>
                 </div>
                 <div class="hidden md:block w-48 relative z-10">
                     <img src="https://cdn.myanimelist.net/images/anime/10/47347.jpg" class="rounded-2xl shadow-2xl border-2 border-gold/40 w-full object-cover aspect-[3/4]">
                 </div>
             </div>
 
-            <!-- شبكة الأنميات الرئيسية -->
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-lg lg:text-xl font-bold flex items-center gap-3">
                     <span class="w-2.5 h-6 gold-bg rounded-full"></span> قائمة الأنميات والمواسم
@@ -91,15 +111,41 @@
             <div id="grid-home" class="anime-grid"></div>
         </section>
 
-        <section id="sec-latest" class="page-section"><div id="grid-latest" class="anime-grid"></div></section>
-        <section id="sec-favorites" class="page-section"><div id="grid-favorites" class="anime-grid"></div></section>
-        <section id="sec-history" class="page-section"><div id="grid-history" class="anime-grid"></div></section>
+        <!-- أحدث الحلقات -->
+        <section id="sec-latest" class="page-section">
+            <h2 class="text-lg lg:text-xl font-bold mb-6 flex items-center gap-3"><span class="w-2.5 h-6 gold-bg rounded-full"></span> أحدث الحلقات المضافة</h2>
+            <div id="grid-latest" class="anime-grid"></div>
+        </section>
+
+        <!-- صفحة البحث المستقلة -->
+        <section id="sec-search" class="page-section">
+            <div class="glass-card p-6 rounded-3xl mb-8 border border-gold/30 shadow-xl">
+                <h2 class="text-xl font-black gold-text mb-4 flex items-center gap-2"><i class="fa-solid fa-magnifying-glass"></i> محرك البحث المتقدم في المكتبة</h2>
+                <div class="relative">
+                    <input type="text" id="dedicatedSearchInput" oninput="performDedicatedSearch()" placeholder="اكتب اسم الأنمي أو التصنيف..." class="w-full bg-dark/95 border border-dark-border rounded-2xl pr-12 pl-4 py-3 text-sm text-white focus:outline-none focus:border-gold shadow-inner">
+                    <i class="fa-solid fa-search absolute right-4 top-1/2 -translate-y-1/2 text-gold"></i>
+                </div>
+            </div>
+            <div id="grid-search" class="anime-grid"></div>
+        </section>
+
+        <!-- المفضلة -->
+        <section id="sec-favorites" class="page-section">
+            <h2 class="text-lg lg:text-xl font-bold mb-6 flex items-center gap-3"><span class="w-2.5 h-6 gold-bg rounded-full"></span> قائمة المفضلة</h2>
+            <div id="grid-favorites" class="anime-grid"></div>
+        </section>
+
+        <!-- السجل -->
+        <section id="sec-history" class="page-section">
+            <h2 class="text-lg lg:text-xl font-bold mb-6 flex items-center gap-3"><span class="w-2.5 h-6 gold-bg rounded-full"></span> سجل المشاهدة الأخير</h2>
+            <div id="grid-history" class="anime-grid"></div>
+        </section>
     </main>
 
-    <!-- نافذة تفاصيل الأنمي والمواسم (Modal) -->
+    <!-- نافذة تفاصيل الأنمي والمواسم -->
     <div id="detailsModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-[110] hidden items-center justify-center p-4">
         <div class="glass-card max-w-3xl w-full rounded-3xl p-6 relative border border-gold/40 shadow-2xl max-h-[90vh] overflow-y-auto">
-            <button onclick="closeDetails()" class="absolute top-4 left-4 text-gray-400 hover:text-white w-8 h-8 rounded-full bg-black/50 flex items-center justify-center"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <button onclick="playSound(); closeDetails()" class="absolute top-4 left-4 text-gray-400 hover:text-white w-8 h-8 rounded-full bg-black/50 flex items-center justify-center"><i class="fa-solid fa-xmark text-lg"></i></button>
             <div class="flex flex-col md:flex-row gap-6 items-center md:items-start">
                 <img id="detImg" src="" class="w-44 h-60 object-cover rounded-2xl border border-gold/40 shadow-xl flex-shrink-0">
                 <div class="space-y-3 text-right w-full">
@@ -109,8 +155,6 @@
                         <span id="detGenre" class="bg-gold/15 px-2.5 py-1 rounded-lg text-gold font-bold"></span>
                     </div>
                     <p id="detDesc" class="text-gray-300 text-xs leading-relaxed"></p>
-                    
-                    <!-- قسم اختيار المواسم والأجزاء داخل الأنمي الواحد -->
                     <div class="pt-2">
                         <h4 class="text-xs font-bold text-gold mb-2"><i class="fa-solid fa-layer-group ml-1"></i> اختر الموسم أو الجزء:</h4>
                         <div id="seasonsContainer" class="flex flex-wrap gap-2"></div>
@@ -125,7 +169,7 @@
         <div class="w-full max-w-5xl relative">
             <div class="flex justify-between items-center mb-3 px-2 border-b border-dark-border pb-3">
                 <h3 id="playerTitle" class="text-lg md:text-xl font-black gold-text"></h3>
-                <button onclick="closePlayer()" class="text-white bg-red-600/80 hover:bg-red-600 px-4 py-1.5 rounded-xl text-xs font-bold transition">إغلاق <i class="fa-solid fa-xmark ml-1"></i></button>
+                <button onclick="playSound(); closePlayer()" class="text-white bg-red-600/80 hover:bg-red-600 px-4 py-1.5 rounded-xl text-xs font-bold transition">إغلاق <i class="fa-solid fa-xmark ml-1"></i></button>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
                 <div class="lg:col-span-2 aspect-video bg-black rounded-2xl overflow-hidden border border-gold/40 shadow-2xl">
@@ -142,9 +186,33 @@
         </div>
     </div>
 
+    <!-- نافذة الجدول الأسبوعي -->
+    <div id="scheduleModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-[115] hidden items-center justify-center p-4">
+        <div class="glass-card max-w-lg w-full rounded-3xl p-6 relative border border-gold/40 shadow-2xl">
+            <button onclick="playSound(); closeScheduleModal()" class="absolute top-4 left-4 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <h3 class="text-xl font-bold gold-text mb-4"><i class="fa-solid fa-calendar-days ml-2"></i> جدول الحلقات الأسبوعي</h3>
+            <div class="space-y-2 text-xs">
+                <div class="bg-dark/70 p-2.5 rounded-xl border border-dark-border flex justify-between"><span class="text-gold font-bold">الأحد</span> <span>Attack on Titan</span></div>
+                <div class="bg-dark/70 p-2.5 rounded-xl border border-dark-border flex justify-between"><span class="text-gold font-bold">الإثنين</span> <span>Solo Leveling</span></div>
+                <div class="bg-dark/70 p-2.5 rounded-xl border border-dark-border flex justify-between"><span class="text-gold font-bold">الثلاثاء</span> <span>Jujutsu Kaisen</span></div>
+                <div class="bg-dark/70 p-2.5 rounded-xl border border-dark-border flex justify-between"><span class="text-gold font-bold">الأربعاء</span> <span>Demon Slayer</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة طلب الأنمي -->
+    <div id="requestModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-[115] hidden items-center justify-center p-4">
+        <div class="glass-card max-w-md w-full rounded-3xl p-6 relative border border-gold/40 shadow-2xl">
+            <button onclick="playSound(); closeRequestModal()" class="absolute top-4 left-4 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <h3 class="text-xl font-bold gold-text mb-4"><i class="fa-solid fa-film ml-2"></i> طلب أنمي جديد</h3>
+            <input type="text" id="reqAnimeInput" placeholder="اكتب اسم الأنمي..." class="w-full bg-dark border border-dark-border rounded-xl px-4 py-2.5 text-xs text-white mb-4 focus:outline-none focus:border-gold">
+            <button onclick="playSound(); submitAnimeRequest()" class="w-full gold-bg text-black font-bold py-2.5 rounded-xl text-xs shadow-lg">إرسال الطلب</button>
+        </div>
+    </div>
+
     <footer class="text-center py-6 border-t border-dark-border text-gray-500 text-xs mt-auto bg-dark/60">
         <p class="gold-text font-bold mb-1">WHO ANIME</p>
-        <p>جميع الحقوق محفوظة &copy; 2026 - الإصدار الفاخر</p>
+        <p>جميع الحقوق محفوظة &copy; 2026 - الإصدار الفاخر المتناسق</p>
     </footer>
 
     <script src="anime-data.js"></script>
