@@ -2,7 +2,6 @@ let favorites = JSON.parse(localStorage.getItem('who_favs')) || [];
 let historyList = JSON.parse(localStorage.getItem('who_history')) || [];
 let soundEnabled = localStorage.getItem('who_sound') !== 'false';
 
-// مؤثر صوتي تقني فاخر وناعم جداً
 function playSound() {
     if(!soundEnabled) return;
     try {
