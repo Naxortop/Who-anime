@@ -3,6 +3,7 @@ const baseAnimes = [
         id: 1,
         title: "Attack on Titan",
         genre: "أكشن",
+        day: "الأحد",
         rating: 9.9,
         img: "https://cdn.myanimelist.net/images/anime/10/47347.jpg",
         desc: "ملحمة البشرية ضد العمالقة عبر مختلف المواسم والأجزاء الكبرى.",
@@ -17,6 +18,7 @@ const baseAnimes = [
         id: 2,
         title: "Solo Leveling",
         genre: "أكشن",
+        day: "الإثنين",
         rating: 9.8,
         img: "https://cdn.myanimelist.net/images/anime/1543/139020.jpg",
         desc: "رحلة الصياد الأضعف سونغ جين وو نحو قمة القوة المطلقة.",
@@ -29,6 +31,7 @@ const baseAnimes = [
         id: 3,
         title: "Jujutsu Kaisen",
         genre: "خيال",
+        day: "الثلاثاء",
         rating: 9.7,
         img: "https://cdn.myanimelist.net/images/anime/1171/109222.jpg",
         desc: "صراع السحرة ضد اللعنات الأسطورية عبر الأجزاء.",
@@ -41,6 +44,7 @@ const baseAnimes = [
         id: 4,
         title: "Demon Slayer",
         genre: "أكشن",
+        day: "السبت",
         rating: 9.6,
         img: "https://cdn.myanimelist.net/images/anime/1286/99889.jpg",
         desc: "قصة تانجيرو في مواجهة قادة الشياطين وفيلق القتلة.",
@@ -54,6 +58,7 @@ const baseAnimes = [
         id: 5,
         title: "One Piece",
         genre: "مغامرة",
+        day: "الأربعاء",
         rating: 9.9,
         img: "https://cdn.myanimelist.net/images/anime/6/73245.jpg",
         desc: "رحلة لوفي وطاقمه للبحث عن الكنز الأعظم ونيل لقب ملك القراصنة.",
@@ -65,6 +70,7 @@ const baseAnimes = [
         id: 6,
         title: "Chainsaw Man",
         genre: "دراما",
+        day: "الخميس",
         rating: 9.4,
         img: "https://cdn.myanimelist.net/images/anime/1806/126216.jpg",
         desc: "مغامرات دينجي الدموية مع شيطان المنشار.",
@@ -76,6 +82,7 @@ const baseAnimes = [
         id: 7,
         title: "Hunter x Hunter",
         genre: "مغامرة",
+        day: "الجمعة",
         rating: 9.8,
         img: "https://cdn.myanimelist.net/images/anime/1337/99013.jpg",
         desc: "رحلة غون فريكس ليصبح صائداً محترفاً ويعثر على أبيه.",
@@ -87,6 +94,7 @@ const baseAnimes = [
         id: 8,
         title: "Death Note",
         genre: "غموض",
+        day: "السبت",
         rating: 9.7,
         img: "https://cdn.myanimelist.net/images/anime/9/9453.jpg",
         desc: "صراع ذكي خارق بين لايت ياجامي والمحقق العبقري إل.",
@@ -98,12 +106,15 @@ const baseAnimes = [
 
 const animeDB = [...baseAnimes];
 const extraGenres = ["أكشن", "خيال", "مغامرة", "دراما", "رياضي", "غموض"];
+const weekDays = ["السبت", "الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة"];
+
 for(let i = 9; i <= 200; i++) {
     let base = baseAnimes[(i - 1) % baseAnimes.length];
     animeDB.push({
         id: i,
         title: `${base.title} - الموسم ${Math.floor(i / 5) + 1}`,
         genre: extraGenres[i % extraGenres.length],
+        day: weekDays[i % weekDays.length],
         rating: +(Math.min(9.9, base.rating - (i % 4) * 0.1)).toFixed(1),
         img: base.img,
         desc: `النسخة الموسعة والمليارية من عمل ${base.title} مع أحداث حماسية متواصلة ومغامرات جديدة كلياً.`,
