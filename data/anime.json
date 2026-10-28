@@ -1,0 +1,105 @@
+[
+  {
+    "id": 1,
+    "title": "Attack on Titan",
+    "genre": "أكشن",
+    "day": "الأحد",
+    "rating": 9.9,
+    "img": "https://cdn.myanimelist.net/images/anime/10/47347.jpg",
+    "desc": "ملحمة البشرية ضد العمالقة عبر مختلف المواسم والأجزاء الكبرى.",
+    "seasons": [
+      { "name": "الموسم الأول", "aniId": 16498, "eps": 25 },
+      { "name": "الموسم الثاني", "aniId": 25777, "eps": 12 },
+      { "name": "الموسم الثالث", "aniId": 35760, "eps": 22 },
+      { "name": "الموسم الأخير", "aniId": 40028, "eps": 28 }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Solo Leveling",
+    "genre": "أكشن",
+    "day": "الإثنين",
+    "rating": 9.8,
+    "img": "https://cdn.myanimelist.net/images/anime/1543/139020.jpg",
+    "desc": "رحلة الصياد الأضعف سونغ جين وو نحو قمة القوة المطلقة.",
+    "seasons": [
+      { "name": "الموسم الأول", "aniId": 151807, "eps": 12 },
+      { "name": "الموسم الثاني", "aniId": 58593, "eps": 12 }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Jujutsu Kaisen",
+    "genre": "خيال",
+    "day": "الثلاثاء",
+    "rating": 9.7,
+    "img": "https://cdn.myanimelist.net/images/anime/1171/109222.jpg",
+    "desc": "صراع السحرة ضد اللعنات الأسطورية عبر الأجزاء.",
+    "seasons": [
+      { "name": "الموسم الأول", "aniId": 40748, "eps": 24 },
+      { "name": "الموسم الثاني", "aniId": 51009, "eps": 23 }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Demon Slayer",
+    "genre": "أكشن",
+    "day": "السبت",
+    "rating": 9.6,
+    "img": "https://cdn.myanimelist.net/images/anime/1286/99889.jpg",
+    "desc": "قصة تانجيرو في مواجهة قادة الشياطين وفيلق القتلة.",
+    "seasons": [
+      { "name": "الموسم الأول", "aniId": 38000, "eps": 26 },
+      { "name": "موسم ترفيهي", "aniId": 47778, "eps": 11 },
+      { "name": "تدريب الهاشاشينا", "aniId": 55701, "eps": 8 }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "One Piece",
+    "genre": "مغامرة",
+    "day": "الأربعاء",
+    "rating": 9.9,
+    "img": "https://cdn.myanimelist.net/images/anime/6/73245.jpg",
+    "desc": "رحلة لوفي وطاقمه للبحث عن الكنز الأعظم ونيل لقب ملك القراصنة.",
+    "seasons": [
+      { "name": "الملحمة الكاملة", "aniId": 21, "eps": 1080 }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Chainsaw Man",
+    "genre": "دراما",
+    "day": "الخميس",
+    "rating": 9.4,
+    "img": "https://cdn.myanimelist.net/images/anime/1806/126216.jpg",
+    "desc": "مغامرات دينجي الدموية مع شيطان المنشار.",
+    "seasons": [
+      { "name": "الموسم الأول", "aniId": 127230, "eps": 12 }
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Hunter x Hunter",
+    "genre": "مغامرة",
+    "day": "الجمعة",
+    "rating": 9.8,
+    "img": "https://cdn.myanimelist.net/images/anime/1337/99013.jpg",
+    "desc": "رحلة غون فريكس ليصبح صائداً محترفاً ويعثر على أبيه.",
+    "seasons": [
+      { "name": "النسخة الكاملة", "aniId": 11061, "eps": 148 }
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Death Note",
+    "genre": "غموض",
+    "day": "السبت",
+    "rating": 9.7,
+    "img": "https://cdn.myanimelist.net/images/anime/9/9453.jpg",
+    "desc": "صراع ذكي خارق بين لايت ياجامي والمحقق العبقري إل.",
+    "seasons": [
+      { "name": "المسلسل الكامل", "aniId": 1535, "eps": 37 }
+    ]
+  }
+]
