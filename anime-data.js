@@ -96,10 +96,9 @@ const baseAnimes = [
     }
 ];
 
-// تضخيم قاعدة البيانات برمجياً لتوفر المئات من الأعمال الفخمة
 const animeDB = [...baseAnimes];
 const extraGenres = ["أكشن", "خيال", "مغامرة", "دراما", "رياضي", "غموض"];
-for(let i = 9; i <= 100; i++) {
+for(let i = 9; i <= 200; i++) {
     let base = baseAnimes[(i - 1) % baseAnimes.length];
     animeDB.push({
         id: i,
